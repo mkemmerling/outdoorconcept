@@ -5,6 +5,5 @@ setup(name='outdoorconcept',
       description='outdoorconcept Application',
       author='Markus Kemmerling',
       author_email='kemmerling@gmx.at',
-      url='http://www.python.org/sigs/distutils-sig/',
-      install_requires=['Django==1.7.2'],
-     )
+      url='http://www.python.org/sigs/distutils-sig/'
+      )
