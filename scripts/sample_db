@@ -1,0 +1,5 @@
+#!/bin/bash
+# Recreate SQLite database with sample data
+cd "$(dirname "$(dirname "${BASH_SOURCE[0]}" )" )"
+./scripts/create_db
+./scripts/create_sample.py

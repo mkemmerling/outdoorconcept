@@ -1,0 +1,9 @@
+#!/bin/bash
+# Recreate SQLite database with superuser and configuration
+cd "$(dirname "$(dirname "${BASH_SOURCE[0]}" )" )"
+rm -f db.sqlite3
+rm -fr media/*
+./manage.py migrate --noinput
+echo "from main.factories import create_superuser; create_superuser()" | ./manage.py shell
+echo "from main.factories import create_staff; create_staff()" | ./manage.py shell
+echo "from ropeelements.factories import create_config; create_config()" | ./manage.py shell
