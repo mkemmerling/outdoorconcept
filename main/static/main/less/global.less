@@ -1,0 +1,87 @@
+@brand-primary: #8e85b7;
+
+@text-color: @gray-base;
+@font-family-sans-serif: Arial, Verdana, Helvetica, sans-serif;
+@font-size-base: 12px;
+@font-size-h1: 16px;
+@line-height-base:        1.2;
+
+@headings-font-weight: bold;
+@headings-color: #808080;
+
+@icon-font-path: "../../bootstrap/fonts/";
+
+@state-info-text: darken(@brand-primary, 30%);
+@state-info-bg: #ccf;
+
+@alert-padding: 10px;
+
+h1 {
+	margin: 15px 0;
+}
+
+.container-fluid {
+	max-width: 700px;
+}
+
+a.jslink {
+	cursor: pointer;
+}
+
+.modal-backdrop.in {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.modal-dialog {
+  	margin: 15px 13px 10px 10px;
+}
+
+@media (min-width: @screen-sm-min) {
+  .modal-dialog {
+    margin: 30px auto;
+  }
+}
+
+.modal-header {
+	border: none;
+	.close {
+	    position: absolute;
+	    right: -12px;
+	    top: -12px;
+		width: 30px;
+		height: 30px;
+		background-color: #fff;
+		border: 2px solid darken(@link-color, 15%);;
+		border-radius: 15px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+		color: darken(@link-color, 15%);;
+		opacity: .85;
+	    cursor: pointer;
+		&:hover, &:focus {
+			opacity: 1;
+		}
+    }
+}
+
+.modal-body {
+	padding: 0 15px;
+}
+
+.ui-datepicker-trigger {
+	height: 28px;
+    padding: 5px 10px;
+}
+.ui-datepicker table {
+  font-size: .7em;
+}
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+  font-size: .8em;
+  font-weight: normal;
+}
+
+form[name=set_language] {
+	margin-top:	10px;
+	text-align: right;
+}

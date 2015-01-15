@@ -1,0 +1,71 @@
+.header {
+	font-weight: bold;
+	div:first-child {
+		float: right;
+		img {
+			display: block;
+			width: 200px;
+			&.logo {
+				margin-bottom: 5px;
+			}
+		}
+	}
+	img.formula {
+		width: 350px;
+		margin-top: 30px;
+	}
+}
+
+form[name=Siebert] {
+	.form-horizontal {
+		@media (max-width: 499px) {
+			.col-sm-7 {
+				width: 100%;
+			}
+		}
+		@media (min-width: 500px) {
+			.make-grid(sm);
+
+		    .control-label {
+		      text-align: right;
+		      margin-bottom: 0;
+		      padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+		    }
+		}
+	}
+	.form-group.variable {
+		label {
+			text-align: left;
+		}
+		.input-group {
+			float: left;
+			min-width: 130px;
+			margin-bottom: 5px;
+			margin-left: 5px;
+			margin-right: 5px;
+			@media (min-width: 500px) {
+				margin-left: 0;
+				margin-right: 0;
+			}
+			input {
+				border-bottom-left-radius: 4px;
+				border-top-left-radius: 4px;
+			}
+		}
+		.variable-label {
+			background-color: inherit;
+			border: none;
+			font-family: @font-family-serif;
+			font-weight: bold;
+			font-style: italic;
+		}
+		.variable-help {
+			display: table;
+			min-height: 28px;
+			p {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+	}
+}

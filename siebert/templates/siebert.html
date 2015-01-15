@@ -1,0 +1,146 @@
+{% load staticfiles %}
+<div class="header">
+  <div>
+    <a href="http://www.outdoorconcept.at/overhead/index.htm"><img class="logo" src="{% static 'siebert/images/oc_logo.jpeg' %}"/></a>
+    <img class="schema" src="{% static 'siebert/images/siebert_schema.jpeg' %}"/>
+  </div>
+  <div>
+    <h1>Berechnung der Seilzugkraft bei horizontal gespannten Seiten</h1>
+    <p>Auf Basis der Siebert-Formel<br />
+    Überarbeitet unter Berücksichtigung der EN 15567:2013</p>
+    <img class="formula" src="{% static 'siebert/images/siebert_formula.jpeg' %}"/>
+  </div>
+</div>
+
+<br clear="both" />
+
+<form name="Siebert">
+  <fieldset>
+    <div class="form-group">
+      <p style="margin-bottom: 5px; font-weight: bold;>">Handelt es sich um einen Flying Fox (Zipline)?</p>
+      <label class="radio-inline">
+        <input type="radio" name="flyingFox" id="isFlyingFox" style="margin-top: 0;"> ja
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="flyingFox" id="isNotFlyingFox" style="margin-top: 0;"> nein
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="nrPersons" style="margin-bottom: 0;">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?</label>
+      <p class="help-block" style="margin-bottom: 5px;">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
+      <input type="number" id="nrPersons" class="form-control" min="1" max="100" style="width: 100px;">
+    </div>
+  </fieldset>
+  <fieldset class="form-horizontal" style="margin-top: 20px;">
+    <div class="form-group variable">
+      <label for="load" class="col-sm-2 control-label">Personenlast</label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">p</span>
+        <input type="text" id="load" class="form-control" readonly>
+        <span class="input-group-addon">kg</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden.
+Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
+        </div>
+    </div>
+    <div class="form-group variable">
+      <label for="weight" class="col-sm-2 control-label">Seilgewicht</label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">q</span>
+        <input type="number" id="weight" class="form-control" min="1" max="100">
+        <span class="input-group-addon">g/m</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil.</p>
+      </div>
+    </div>
+    <div class="form-group variable">
+      <label for="slack" class="col-sm-2 control-label">Durchhang</label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">f</span>
+        <input type="number" id="slack" class="form-control" min="1" max="100">
+        <span class="input-group-addon">m</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung.</p>
+      </div>
+    </div>
+    <div class="form-group variable">
+      <label for="length" class="col-sm-2 control-label">Spannweite</label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">l</span>
+        <input type="number" id="length" class="form-control" min="1" max="100">
+        <span class="input-group-addon">m</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne).</p>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset class="form-horizontal" style="margin-top: 20px;">
+    <div class="form-group variable">
+      <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br /><span style="font-weight:normal; white-space: nowrap;">(exklusive Faktor)</span></label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">Fz</span>
+        <input type="text" id="tensionForceExl" class="form-control" readonly>
+        <span class="input-group-addon">kN</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume, Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor multipliziert werden.</p>
+      </div>
+    </div>
+    <div class="form-group variable">
+      <label for="tensionForceIncl" class="col-sm-2 control-label">Seilzugkraft<br /><span style="font-weight:normal; white-space: nowrap;">(inklusive Faktor)</span></label>
+      <div class="col-sm-3 input-group">
+        <span class="input-group-addon variable-label">Fz</span>
+        <input type="text" id="tensionForceIncl" class="form-control" readonly>
+        <span class="input-group-addon">kN</span>
+      </div>
+      <div class="col-sm-7 variable-help">
+        <p>Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil, Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc.</p>
+      </div>
+    </div>
+  </fieldset>
+  <hr style="border-color: #000; margin-bottom: 5px;" />
+  <p>Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung ausdrucken und zur Zertifizierung einreichen.</p>
+  <fieldset class="form-horizontal" style="margin-top: 20px;">
+    <div class="form-group">
+      <label for="developer" class="col-sm-2 control-label">Bauträger</label>
+      <div class="col-sm-10">
+        <input type="text" id="developer" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="location" class="col-sm-2 control-label">Standort des Seilgartens</label>
+      <div class="col-sm-10">
+        <input type="text" id="location" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-sm-2 control-label">Bezeichnung der Übung</label>
+      <div class="col-sm-10">
+        <input type="text" id="description" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="number" class="col-sm-2 control-label">Nummer der Übung</label>
+      <div class="col-sm-2">
+        <input type="number" id="number" class="form-control" min="1">
+      </div>
+      <label for="date" class="col-sm-2 control-label">Datum</label>
+      <div class="col-sm-3">
+        <input ng-if="modernizr.inputtypes.date" ng-model="date" type="date" id="date" class="form-control">
+        <div ng-if="!modernizr.inputtypes.date" class="input-group">
+          <input date-picker="{changeYear: true, changeMonth: true, yearRange: 'c-2:c+2'}"
+                 ng-model="date" type="date" id="date" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default ui-datepicker-trigger" tabindex="-1" type="button">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </button>
+          </span>
+        </div>
+
+      </div>
+    </div>
+</form>

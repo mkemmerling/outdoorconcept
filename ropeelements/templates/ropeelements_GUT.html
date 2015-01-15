@@ -1,0 +1,114 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% include "switch_language.html" %}
+
+<h1>{% trans "Ropes Course Elements" %}</h1>
+
+<div class="ropeelements-filter form-inline">
+  <div class="form-group">
+    <label for="filter_kind">{% trans "Kind" %}:</label>
+    <select id="filter_kind"
+            class="form-control"
+            ng-model="filter.kind"
+            ng-options="kind.title for kind in kinds">
+      <option value="">{% trans '––– all –––' %}</option>
+    </select>
+  </div>
+  <label class="checkbox">
+    <input type="checkbox" id="filter_child_friendly" ng-model="filter.child_friendly"> {% trans "best for kids" %}
+  </label>
+  <label class="checkbox">
+    <input type="checkbox" id="filter_accessible" ng-model="filter.accessible"> {% trans "best for handicapped" %}
+  </label>
+  <label class="checkbox">
+    <input type="checkbox" id="filter_canope" ng-model="filter.canope"> {% trans "Canope walk" %}
+  </label>
+</div>
+
+<table class="ropeelements" ng-if="ropeelements.length">
+  <tbody>
+    <tr ng-repeat-start="ropeelement in ropeelements">
+      <td class="kind">
+        <div class="links"><a class="jslink" data-toggle="modal" data-target="#legendPopUp">{% trans "Legend" %}</a></div>
+        <div>{$ ropeelement.kind $}</div>
+      </td>
+    </tr>
+    <tr ng-repeat-end ng-repeat="element in ropeelement.elements">
+      <td>
+        <div class="title">{$ element.title $}</div>
+        <div class="details">
+          <div class="thumb">
+            <a data-toggle="modal" data-target="#imagePopUp"
+               data-image="{$ element.image $}" data-width="{$ element.image_width $}"><img
+               ng-src="{$ element.thumbnail $}"
+               width="50" height="60"
+               title="{% trans "Enlarge image" %}"/></a></div>
+          <div class="icons">
+            <div>
+              <span class="icon" ng-class="'{$ element.direction $}'" title="{$ element.direction_title $}"></span>
+              <span ng-if="element.accessible" class="icon accessible" title="{% trans "best for handicapped" %}"></span>
+              <span ng-if="!element.accessible" class="icon not_accessible"></span>
+              <span ng-if="element.child_friendly" class="icon child_friendly" title="{% trans "best for kids" %}"></span>
+              <span ng-if="!element.child_friendly" class="icon not_child_friendly"></span>
+            </div>
+            <div>
+              <span span class="icon" ng-show="{$ element.ssb === 'no' $}"></span>
+              <a ng-show="{$ element.ssb === 'yes' $}"
+                 href="{{ ssb_url }}" title="{{ ssb_title }}" class="icon ssb"></a>
+              <a ng-show="{$ element.ssb === 'powerfan' $}"
+                 href="{{ powerfan_url }}" title="{{ powerfan_title }}" class="icon powerfan"></a>
+              <canvas difficulty-plot ng-model="element.difficulty" width="60" height="34"
+                      title="{% trans "Grade of difficulty in use" %}"></canvas>
+            </div>
+          </div>
+          <div ng-bind-html="element.description" class="description"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="alert alert-info" role="alert" ng-if="!ropeelements.length">
+  {% trans "No rope course elements for selected filter." %}
+</p>
+
+<div class="modal fade" id="imagePopUp" tabindex="-1" role="dialog"
+     aria-labelledby="legendLabel" aria-hidden="true">
+  <div class="modal-dialog" movable>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" title="{% trans "Close" %}"
+                data-dismiss="modal" aria-label="{% trans "Close" %}"><span
+                aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+      </div>
+      <div class="modal-body">
+        <img src="http://localhost:8000/media/powerfan.jpg" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="legendPopUp" tabindex="-1" role="dialog"
+     aria-labelledby="legendLabel" aria-hidden="true">
+  <div class="modal-dialog" movable drag-handle=".modal-header">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" title="{% trans "Close" %}"
+                data-dismiss="modal"
+                aria-label="{% trans "Close" %}"><span
+                aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h1 class="modal-title text-center" id="legendLabel">{% trans "Legend" %}</h1>
+      </div>
+      <div class="modal-body">
+        {% if LANGUAGE_CODE == 'de' %}
+          {% include "legend_de.html" %}
+        {% else %}
+          {% include "legend_en.html" %}
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Close" %}</button>
+      </div>
+    </div>
+  </div>
+</div>

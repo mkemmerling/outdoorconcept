@@ -8,11 +8,7 @@ from django.utils import translation
 
 def index_view(request, **kwargs):
     """Redirect application root to rope elements."""
-    # return redirect('ropeelements')
-    return render_to_response(
-        'app.html', {
-            # 'ropeelements_urls': get_ropeelement_urls()
-        }, RequestContext(request))
+    return redirect('ropeelements')
 
 
 def get_ropeelement_urls():
@@ -35,5 +31,5 @@ def app_view(request, **kwargs):
     """App template view."""
     return render_to_response(
         'app.html', {
-            # 'ropeelements_urls': get_ropeelement_urls()
+            'ropeelements_urls': get_ropeelement_urls()
         }, RequestContext(request))

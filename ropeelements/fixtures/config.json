@@ -1,0 +1,21 @@
+[
+    {
+        "variable": "contact",
+        "url_en": "http://www.outdoorconcept.at/overhead/e_contact.htm",
+        "url_de": "http://www.outdoorconcept.at/overhead/kontakt.htm"
+    },
+    {
+        "variable": "ssb",
+        "url_en": "http://www.outdoorconcept.at/ssb/e_function.htm",
+        "url_de": "http://www.outdoorconcept.at/ssb/funktion.htm",
+        "text_en": "can be continuously secured with the ssb System",
+        "text_de": "kann mit ssb kontinuierlich gesichert werden"
+        },
+    {
+        "variable": "powerfan",
+        "url_en": "http://www.outdoorconcept.at/powerfan/index.htm",
+        "url_de": "http://www.outdoorconcept.at/powerfan/index.htm",
+        "text_en": "can be continuously secured with the ssb System and slowed down with the POWERFAN",
+        "text_de": "kann mit ssb kontinierlich gesichert und mit dem POWERFAN gebremst werden"
+    }
+]
