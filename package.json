@@ -1,0 +1,10 @@
+{
+    "name": "outdoorconcept",
+    "description": "continously secure in rope courses",
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "devDependencies": {
+        "less": "^1.7.0"
+    }
+}
