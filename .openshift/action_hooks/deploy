@@ -13,8 +13,13 @@ python "$OPENSHIFT_REPO_DIR"/manage.py migrate --noinput
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
 python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
 
-# TODO: Not needed in the end
+# TODO: Not needed in the end?
+echo "Configuring npm cache"
+node --version
+npm --version
+export NPM_CONFIG_USERCONFIG=$OPENSHIFT_HOMEDIR/app-root/build-dependencies/.npmrc
+cd $OPENSHIFT_HOMEDIR/app-root/build-dependencies
+npm config set cache ${OPENSHIFT_HOMEDIR}app-root/build-dependencies/.npm
+
 echo "Executing 'npm install less'"
-#touch $OPENSHIFT_DATA_DIR/.env
-#echo $NPM_CONFIG_USERCONFIG
-NPM_CONFIG_USERCONFIG="$OPENSHIFT_HOMEDIR"/app-root/build-dependencies/.npmrc npm install less
+npm install less
