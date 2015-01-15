@@ -6,7 +6,6 @@
 
 echo "---> ACTION HOOK: deploy <---"
 source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
-source $OPENSHIFT_DATA_DIR/.env
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py migrate --noinput'"
 python "$OPENSHIFT_REPO_DIR"/manage.py migrate --noinput
@@ -16,4 +15,6 @@ python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
 
 # TODO: Not needed in the end
 echo "Executing 'npm install less'"
+touch $OPENSHIFT_DATA_DIR/.env
+echo $NPM_CONFIG_USERCONFIG
 npm install less
