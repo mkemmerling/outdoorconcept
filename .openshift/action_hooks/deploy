@@ -5,7 +5,7 @@
 # ruby, etc.
 
 echo "---> ACTION HOOK: deploy <---"
-source $OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate
+# source $OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py migrate --noinput'"
 python "$OPENSHIFT_REPO_DIR"/manage.py migrate --noinput
