@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^media/(.+)$ /static/$1 [L]
+RewriteRule ^application/media/(.+)$ /static/media/$1 [L]
