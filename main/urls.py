@@ -32,11 +32,11 @@ urlpatterns += i18n_patterns(
 )
 
 # Serve media files in debug mode or if explicitely requested
-if settings.DEBUG or getattr(settings, 'SERVE_MEDIA', False):
-    prefix = re.escape(settings.MEDIA_URL.lstrip('/'))
-    urlpatterns += patterns(
-        '',
-        url(r'^%s(?P<path>.*)$' % prefix,
-            'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT}),
-    )
+# if settings.DEBUG or getattr(settings, 'SERVE_MEDIA', False):
+#     prefix = re.escape(settings.MEDIA_URL.lstrip('/'))
+#     urlpatterns += patterns(
+#         '',
+#         url(r'^%s(?P<path>.*)$' % prefix,
+#             'django.views.static.serve',
+#             {'document_root': settings.MEDIA_ROOT}),
+#     )
