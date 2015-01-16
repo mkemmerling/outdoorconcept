@@ -191,7 +191,7 @@ else:
 
 
 # ----- Media files ----- #
-MEDIA_URL = '/media/'
+MEDIA_URL = '/static/media/'
 
 if ON_OPENSHIFT:
     MEDIA_ROOT = os.path.join(OPENSHIFT_DATA_DIR, 'media')
