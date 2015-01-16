@@ -12,4 +12,4 @@ django.setup()
 from ropeelements.factories import create_kinds, create_elements
 
 create_kinds()
-# create_elements()
+create_elements()
