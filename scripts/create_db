@@ -1,13 +1,11 @@
 #!/bin/bash
 # Recreate SQLite database with superuser and configuration
-
 if [ ${OPENSHIFT_REPO_DIR:+x} ]
 then
 	APP_DIR=$OPENSHIFT_REPO_DIR
 else
-	APP_DIR="$(dirname "$(dirname "${BASH_SOURCE[0]}" )" )"
+	APP_DIR="$(dirname "$(cd "$(dirname "$0" )"; pwd)" )"
 fi
-
 cd $APP_DIR
 
 rm -f db.sqlite3

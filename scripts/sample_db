@@ -1,5 +1,11 @@
 #!/bin/bash
 # Recreate SQLite database with sample data
-cd "$(dirname "$(dirname "${BASH_SOURCE[0]}" )" )"
+if [ ${OPENSHIFT_REPO_DIR:+x} ]
+then
+	APP_DIR=$OPENSHIFT_REPO_DIR
+else
+	APP_DIR="$(dirname "$(cd "$(dirname "$0" )"; pwd)" )"
+fi
+cd $APP_DIR
 ./scripts/create_db
 ./scripts/create_sample.py
