@@ -23,19 +23,25 @@ class Command(BaseCommand):
     leave_locale_alone = True
 
     def handle(self, *args, **options):
-        if len(args) > 1:
-            raise CommandError("Too may arguments")
-        try:
-            envrionment = args[0]
-        except IndexError:
-            envrionment = 'production'
+        # if len(args) > 1:
+        #     raise CommandError("Too may arguments")
+        # try:
+        #     envrionment = args[0]
+        # except IndexError:
+        #     envrionment = 'production'
 
-        module_name = 'main.settings.' + envrionment
+        # module_name = 'main.settings.' + envrionment
+        # try:
+        #     self._settings = importlib.import_module(module_name)
+        # except ImportError:
+        #     raise CommandError(
+        #         "Settings module '{0}' does not exist".format(module_name))
+
         try:
-            self._settings = importlib.import_module(module_name)
+            self._settings = importlib.import_module('main.settings')
         except ImportError:
             raise CommandError(
-                "Settings module '{0}' does not exist".format(module_name))
+                "Settings module 'main.settings' does not exist")
 
         return self.handle_noargs(**options)
 
