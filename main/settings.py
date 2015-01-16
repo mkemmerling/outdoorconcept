@@ -7,8 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-ON_OPENSHIFT = 'OPENSHIFT_REPO_DIR' in os.environ
+OPENSHIFT_REPO_DIR = os.environ.get('OPENSHIFT_REPO_DIR', '')
+ON_OPENSHIFT = OPENSHIFT_REPO_DIR != ''
 
 
 # ----- Base configuration ----- #
@@ -120,11 +120,13 @@ USE_TZ = True
 
 
 # ----- Static files ----- #
-# Absolute path to the directory static files will be collected to
-STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
-
-# URL prefix for static files
 STATIC_URL = '/static/'
+
+if ON_OPENSHIFT:
+    STATIC_ROOT = os.path.join(OPENSHIFT_REPO_DIR, 'wsgi', 'static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL.strip('/'))
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -187,9 +189,12 @@ else:
 
 
 # ----- Media files ----- #
-MEDIA_ROOT = os.path.join(BASE_DIR, 'wsgi', 'media')
 MEDIA_URL = '/media/'
-if not ON_OPENSHIFT:
+
+if ON_OPENSHIFT:
+    MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR'), 'media')
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip('/').split('/'))
     SERVE_MEDIA = True
 
 
