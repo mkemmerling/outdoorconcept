@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 OPENSHIFT_REPO_DIR = os.environ.get('OPENSHIFT_REPO_DIR', '')
+OPENSHIFT_DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', '')
 ON_OPENSHIFT = OPENSHIFT_REPO_DIR != ''
 
 
@@ -87,10 +88,11 @@ REST_FRAMEWORK = {
 
 
 # ----- Database configuration ----- #
+DB_DIR = OPENSHIFT_DATA_DIR if ON_OPENSHIFT else BASE_DIR
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DB_DIR, 'db.sqlite3'),
     }
 }
 
@@ -192,7 +194,7 @@ else:
 MEDIA_URL = '/media/'
 
 if ON_OPENSHIFT:
-    MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR'), 'media')
+    MEDIA_ROOT = os.path.join(OPENSHIFT_DATA_DIR, 'media')
 else:
     MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip('/').split('/'))
     SERVE_MEDIA = True
