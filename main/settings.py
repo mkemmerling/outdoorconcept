@@ -59,7 +59,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'main.urls'
 
-WSGI_APPLICATION = 'wsgi.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 # Angular's $resource provider removes trailing slashes
 APPEND_SLASH = False
