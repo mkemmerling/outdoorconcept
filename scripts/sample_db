@@ -6,6 +6,6 @@ then
 else
 	APP_DIR="$(dirname "$(cd "$(dirname "$0" )"; pwd)" )"
 fi
-cd $APP_DIR
-./scripts/create_db
-./scripts/create_sample.py
+
+$APP_DIR/scripts/create_db
+$APP_DIR/scripts/create_sample.py
