@@ -17,7 +17,8 @@ python "${OPENSHIFT_REPO_DIR}"/manage.py migrate --noinput
 
 ${OPENSHIFT_REPO_DIR}/scripts/os_install_less
 
-# echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
-# python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
-# echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compressstatic'"
-# python "$OPENSHIFT_REPO_DIR"/manage.py compressstatic
+echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
+python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
+
+echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compressstatic'"
+python "$OPENSHIFT_REPO_DIR"/manage.py compressstatic
