@@ -24,6 +24,8 @@ else:
     TEMPLATE_DEBUG = True
     SECRET_KEY = '+*^#b1@rvl_t!3xrb2tz!vuaho9t+ieou)fmm1*i3!9$=nc6#g'
     ALLOWED_HOSTS = []
+
+DEBUG = DEBUG or 'DEBUG' in os.environ
 # ----- END Base configuration ----- #
 
 
