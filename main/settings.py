@@ -174,12 +174,11 @@ _less_paths = (
     os.path.join(BASE_DIR, 'ropeelements', 'static', 'ropeelements',
                            'less'),
     os.path.join(BASE_DIR, 'siebert', 'static', 'siebert', 'less'),
-    # If DEBUG is True
     os.path.join(BASE_DIR, 'bower_components', 'bootstrap', 'less'),
-    # If DEBUG is False
-    os.path.join(STATIC_ROOT, 'bootstrap', 'less'),
 )
+
 _lessc_options = '--include-path=' + os.pathsep.join(_less_paths)
+
 COMPRESS_PRECOMPILERS = (
     ('text/less',
      '{0} {1} {{infile}} {{outfile}}'.format(_lessc_cmd, _lessc_options)),

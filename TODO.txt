@@ -1,0 +1,10 @@
+TO DO
+=====
+
+* Avoid no results message on filtering.
+
+* Make legend content configurable?
+
+* Include only required bootstrap js and css.
+* Clean up app.html.
+* Remove unused libraries.

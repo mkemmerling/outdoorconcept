@@ -15,6 +15,7 @@ ln -sf ${OPENSHIFT_DATA_DIR}media ${OPENSHIFT_REPO_DIR}wsgi/static/media
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py migrate --noinput'"
 python ${OPENSHIFT_REPO_DIR}manage.py migrate --noinput
 
+# Not needed since installed less is pushed
 # ${OPENSHIFT_REPO_DIR}/scripts/os_install_less
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
