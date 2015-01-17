@@ -21,7 +21,7 @@ python ${OPENSHIFT_REPO_DIR}manage.py migrate --noinput
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
 python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput
 
-rm -fr ${OPENSHIFT_REPO_DIR}wsgi/static/CACHE
+# rm -fr ${OPENSHIFT_REPO_DIR}wsgi/static/CACHE
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compressstatic'"
 # python ${OPENSHIFT_REPO_DIR}manage.py compressstatic
