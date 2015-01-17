@@ -13,12 +13,14 @@ fi
 ln -sf ${OPENSHIFT_DATA_DIR}media ${OPENSHIFT_REPO_DIR}wsgi/static/media
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py migrate --noinput'"
-python "${OPENSHIFT_REPO_DIR}"/manage.py migrate --noinput
+python ${OPENSHIFT_REPO_DIR}manage.py migrate --noinput
 
 ${OPENSHIFT_REPO_DIR}/scripts/os_install_less
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
-python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
+python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput
+
+rm -fr ${OPENSHIFT_REPO_DIR}wsgi/static/CACHE
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compressstatic'"
-python "$OPENSHIFT_REPO_DIR"/manage.py compressstatic
+python ${OPENSHIFT_REPO_DIR}manage.py compressstatic
