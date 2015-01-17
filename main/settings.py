@@ -166,32 +166,32 @@ COLLECT_STATIC_APP_FILES = [
 
 
 # ----- django-compresor ----- #
+# JS and CSS files are compressed only if DEBUG is False, whereas the less
+# precompiler is always applied.
+_lessc_cmd = os.path.join(BASE_DIR, 'node_modules', 'less', 'bin', 'lessc')
+
+_less_paths = (
+    os.path.join(BASE_DIR, 'ropeelements', 'static', 'ropeelements',
+                           'less'),
+    os.path.join(BASE_DIR, 'siebert', 'static', 'siebert', 'less'),
+    # If DEBUG is True
+    os.path.join(BASE_DIR, 'bower_components', 'bootstrap', 'less'),
+    # If DEBUG is False
+    os.path.join(STATIC_ROOT, 'bootstrap', 'less'),
+)
+_lessc_options = '--include-path=' + os.pathsep.join(_less_paths)
+COMPRESS_PRECOMPILERS = (
+    ('text/less',
+     '{0} {1} {{infile}} {{outfile}}'.format(_lessc_cmd, _lessc_options)),
+)
+COMPRESS_CSS_FILTERS = (
+    # Normalize URLs in url() statements
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+)
+
 if ON_OPENSHIFT:
     COMPRESS_OFFLINE = True
-else:
-    # JS and CSS files are compressed only if DEBUG is False, whereas the less
-    # precompiler is always applied.
-    _lessc_cmd = os.path.join(BASE_DIR, 'node_modules', 'less', 'bin', 'lessc')
-
-    _less_paths = (
-        os.path.join(BASE_DIR, 'ropeelements', 'static', 'ropeelements',
-                               'less'),
-        os.path.join(BASE_DIR, 'siebert', 'static', 'siebert', 'less'),
-        # If DEBUG is True
-        os.path.join(BASE_DIR, 'bower_components', 'bootstrap', 'less'),
-        # If DEBUG is False
-        os.path.join(STATIC_ROOT, 'bootstrap', 'less'),
-    )
-    _lessc_options = '--include-path=' + os.pathsep.join(_less_paths)
-    COMPRESS_PRECOMPILERS = (
-        ('text/less',
-         '{0} {1} {{infile}} {{outfile}}'.format(_lessc_cmd, _lessc_options)),
-    )
-    COMPRESS_CSS_FILTERS = (
-        # Normalize URLs in url() statements
-        'compressor.filters.css_default.CssAbsoluteFilter',
-        'compressor.filters.cssmin.CSSMinFilter',
-    )
 # ----- END django-compresor ----- #
 
 
