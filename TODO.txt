@@ -1,9 +1,7 @@
 TO DO
 =====
 
-* Fix compressstatic script
-
-  - jQuery UI CSS
+* Log config for OS
 
 * Avoid no results message on filtering.
 
