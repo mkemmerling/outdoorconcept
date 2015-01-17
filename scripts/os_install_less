@@ -1,17 +1,13 @@
 #!/bin/bash
 echo "Install JavaScript dependencies"
 
-node --version
-npm --version
+echo "node `node --version`"
+echo "npm `npm --version`"
 
 echo "Configuring npm cache"
 export NPM_CONFIG_USERCONFIG=${OPENSHIFT_HOMEDIR}app-root/build-dependencies/.npmrc
 cd ${OPENSHIFT_HOMEDIR}app-root/build-dependencies
 npm config set cache ${OPENSHIFT_HOMEDIR}app-root/build-dependencies/.npm
-npm cache clean
 
 echo "Executing 'npm install less@1.7.0 --prefix $OPENSHIFT_REPO_DIR'"
 npm install less@1.7.0 --prefix $OPENSHIFT_REPO_DIR
-
-echo "Executing 'npm install bower@0.6 --prefix $OPENSHIFT_REPO_DIR'"
-npm install bower@0.6 --prefix $OPENSHIFT_REPO_DIR
