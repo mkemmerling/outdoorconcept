@@ -5,16 +5,19 @@
 # ruby, etc.
 
 echo "---> ACTION HOOK: deploy <---"
-# source $OPENSHIFT_HOMEDIR/python/virtenv/venv/bin/activate
 
 echo "Symlink media directory"
-if [ ! -d $OPENSHIFT_DATA_DIR/media ]; then
-mkdir $OPENSHIFT_DATA_DIR/media
+if [ ! -d ${OPENSHIFT_DATA_DIR}media ]; then
+mkdir ${OPENSHIFT_DATA_DIR}media
 fi
-ln -sf ${OPENSHIFT_DATA_DIR}media $OPENSHIFT_REPO_DIR/wsgi/static/media
+ln -sf ${OPENSHIFT_DATA_DIR}media ${OPENSHIFT_REPO_DIR}wsgi/static/media
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py migrate --noinput'"
-python "$OPENSHIFT_REPO_DIR"/manage.py migrate --noinput
+python "${OPENSHIFT_REPO_DIR}"/manage.py migrate --noinput
+
+${OPENSHIFT_REPO_DIR}/scripts/os_install_less
 
 # echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py collectstatic --noinput'"
 # python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
+# echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compressstatic'"
+# python "$OPENSHIFT_REPO_DIR"/manage.py compressstatic
