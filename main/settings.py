@@ -153,7 +153,7 @@ STATICFILES_FINDERS = (
 # Since js and css files are precompressed they need not be included.
 COLLECT_STATIC_FILES = [
     'bootstrap/fonts/?*.*',
-    'jquery-ui/themes/smoothness/theme.css',
+    # 'jquery-ui/themes/smoothness/theme.css',
     'jquery-ui/themes/smoothness/images/?*.*',
 ]
 
