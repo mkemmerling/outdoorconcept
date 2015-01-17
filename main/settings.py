@@ -158,6 +158,7 @@ COLLECT_STATIC_FILES = [
 COLLECT_STATIC_APP_FILES = [
     'main/images/?*.*',
     'ropeelements/images/?*.*',
+    'siebert/images/?*.*',
     'modeltranslation/**/?*.*',
     'ordered_model/?*.*',
     'admin/**/?*.*',

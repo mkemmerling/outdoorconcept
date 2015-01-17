@@ -1,6 +1,10 @@
 TO DO
 =====
 
+* Fix compressstatic script
+
+  - jQuery UI CSS
+
 * Avoid no results message on filtering.
 
 * Make legend content configurable?
