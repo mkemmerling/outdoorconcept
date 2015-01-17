@@ -6,14 +6,15 @@ from django.utils.translation import ugettext_lazy as _
 
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
+# ----- Base configuration ----- #
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 OPENSHIFT_REPO_DIR = os.environ.get('OPENSHIFT_REPO_DIR', '')
-OPENSHIFT_DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', '')
+
 ON_OPENSHIFT = OPENSHIFT_REPO_DIR != ''
 
-
-# ----- Base configuration ----- #
 if ON_OPENSHIFT:
+    OPENSHIFT_DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR')
+    OPENSHIFT_LOG_DIR = os.environ.get('OPENSHIFT_LOG_DIR')
     DEBUG = False
     TEMPLATE_DEBUG = False
     SECRET_KEY = os.environ['OPENSHIFT_SECRET_TOKEN']
@@ -201,62 +202,63 @@ else:
 
 
 # ----- Logging ----- #
-if not ON_OPENSHIFT:
-    LOGGING = {
-        'version': 1,
-        # The default is True, which would disable gunicorn loggers
-        'disable_existing_loggers': False,
-        'formatters': {
-            'standard': {
-                'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] "
-                          "%(message)s",
-                'datefmt': "%d/%b/%Y %H:%M:%S"
-            },
-        },
-        'handlers': {
-            'null': {
-                'level': 'DEBUG',
-                'class': 'django.utils.log.NullHandler',
-            },
-            'console': {
-                'level': 'DEBUG',
-                'class': 'logging.StreamHandler',
-            },
-            'logfile': {
-                'level': 'DEBUG',
-                'class': 'logging.handlers.RotatingFileHandler',
-                'maxBytes': 500000,
-                'backupCount': 9,
-                'formatter': 'standard',
-            },
-            'db_logfile': {
-                'level': 'DEBUG',
-                'class': 'logging.handlers.RotatingFileHandler',
-                'maxBytes': 500000,
-            },
-        }
-    }
-
+if ON_OPENSHIFT:
+    LOG_DIR = OPENSHIFT_LOG_DIR
+else:
     LOG_DIR = os.path.join(os.path.join(BASE_DIR, 'logs'))
     if not os.path.exists(LOG_DIR):
         os.makedirs(LOG_DIR)
 
-    LOGGING['handlers']['logfile']['filename'] = os.path.join(
-        LOG_DIR, 'django.log')
-
-    LOGGING['handlers']['db_logfile']['filename'] = os.path.join(
-        LOG_DIR, 'db.log')
-
-    LOGGING['loggers'] = {
-        'django': {
-            'handlers': ['logfile', 'console'],
-            'propagate': True,
-            'level': 'WARNING',
+LOGGING = {
+    'version': 1,
+    # The default is True, which would disable gunicorn loggers
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] "
+                      "%(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
         },
-        'django.db': {
-            'handlers': ['db_logfile'],
-            'propagate': False,
+    },
+    'handlers': {
+        'null': {
             'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 500000,
+            'backupCount': 9,
+            'formatter': 'standard',
+        },
+        'db_logfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 500000,
         },
     }
+}
+
+LOGGING['handlers']['logfile']['filename'] = os.path.join(
+    LOG_DIR, 'django.log')
+
+LOGGING['handlers']['db_logfile']['filename'] = os.path.join(LOG_DIR, 'db.log')
+
+LOGGING['loggers'] = {
+    'django': {
+        'handlers': ['logfile', 'console'],
+        'propagate': True,
+        'level': 'WARNING',
+    },
+    'django.db': {
+        'handlers': ['db_logfile'],
+        'propagate': False,
+        'level': 'DEBUG',
+    },
+}
 # ----- END Logging ----- #
