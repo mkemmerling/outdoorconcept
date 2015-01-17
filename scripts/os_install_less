@@ -10,7 +10,7 @@ cd ${OPENSHIFT_HOMEDIR}app-root/build-dependencies
 npm config set cache ${OPENSHIFT_HOMEDIR}app-root/build-dependencies/.npm
 
 echo "Executing 'npm install less@1.7.0 --prefix $OPENSHIFT_REPO_DIR'"
-npm install less@1.7.0 --prefix $OPENSHIFT_REPO_DIR
+npm install less@1.7.5 --prefix $OPENSHIFT_REPO_DIR
 
 # Installing less returns with an error, but lessc is working anyway.
 exit 0
