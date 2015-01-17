@@ -26,6 +26,8 @@ else:
     ALLOWED_HOSTS = []
 
 DEBUG = DEBUG or 'DEBUG' in os.environ
+if ON_OPENSHIFT and DEBUG:
+    print("*** Warning - Debug mode is on ***")
 # ----- END Base configuration ----- #
 
 
