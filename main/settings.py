@@ -184,14 +184,14 @@ COMPRESS_PRECOMPILERS = (
     ('text/less',
      '{0} {1} {{infile}} {{outfile}}'.format(_lessc_cmd, _lessc_options)),
 )
+
 COMPRESS_CSS_FILTERS = (
     # Normalize URLs in url() statements
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
 )
 
-if ON_OPENSHIFT:
-    COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = True if ON_OPENSHIFT else False
 # ----- END django-compresor ----- #
 
 
