@@ -73,6 +73,7 @@ angular.module('outdoorconcept.ropeelement.controllers', [])
                 });
                 RopeElement.query(params).$promise.then(function (result) {
                     $scope.ropeelements = result;
+                    // Prevent display of no results message on first load
                     $scope.loaded = true;
                 });
                 current_filter = angular.copy($scope.filter);

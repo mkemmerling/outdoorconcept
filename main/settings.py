@@ -229,7 +229,7 @@ else:
 LOGGING = {
     'version': 1,
     # The default is True, which would disable gunicorn loggers
-    'disable_existing_loggers': False,
+    # 'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] "
@@ -249,6 +249,7 @@ LOGGING = {
         'logfile': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'django.log'),
             'maxBytes': 500000,
             'backupCount': 9,
             'formatter': 'standard',
@@ -256,26 +257,31 @@ LOGGING = {
         'db_logfile': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'db.log'),
             'maxBytes': 500000,
         },
     }
 }
 
-LOGGING['handlers']['logfile']['filename'] = os.path.join(
-    LOG_DIR, 'django.log')
-
-LOGGING['handlers']['db_logfile']['filename'] = os.path.join(LOG_DIR, 'db.log')
-
-LOGGING['loggers'] = {
-    'django': {
-        'handlers': ['logfile', 'console'],
-        'propagate': True,
-        'level': 'WARNING',
-    },
-    'django.db': {
-        'handlers': ['db_logfile'],
-        'propagate': False,
-        'level': 'DEBUG',
-    },
-}
+if ON_OPENSHIFT:
+    LOGGING['loggers'] = {
+        'django': {
+            'handlers': ['logfile'],
+            'propagate': True,
+            'level': 'WARNING',
+        },
+        'django.db': {
+            'handlers': ['db_logfile'],
+            'propagate': False,
+            'level': 'WARNING',
+        },
+    }
+else:
+    LOGGING['loggers'] = {
+        'django': {
+            'handlers': ['logfile', 'console'],
+            'propagate': True,
+            'level': 'WARNING',
+        }
+    }
 # ----- END Logging ----- #
