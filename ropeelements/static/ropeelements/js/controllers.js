@@ -3,15 +3,14 @@
 angular.module('outdoorconcept.ropeelement.controllers', [])
 
     .controller('RopeElementListController',
-        ['$scope', '$window', 'urls', 'kinds', 'ropeelements', 'RopeElement',
-        function ($scope, $window, urls, kinds, ropeelements, RopeElement) {
+        ['$scope', '$window', 'urls', 'Kind', 'RopeElement',
+        function ($scope, $window, urls, Kind, RopeElement) {
             var screen_sm = 768,
                 boolean_filters, filters, current_filter;
 
             $scope.i18n_urls = urls.ropeelements;
 
-            $scope.kinds = kinds;
-            $scope.ropeelements = ropeelements;
+            $scope.kinds = Kind.query();
 
             $scope.difficulty_legend = {from: 1, to: 10};
 
@@ -72,7 +71,10 @@ angular.module('outdoorconcept.ropeelement.controllers', [])
                         params[name] = 'True';
                     }
                 });
-                $scope.ropeelements = RopeElement.query(params);
+                RopeElement.query(params).$promise.then(function (result) {
+                    $scope.ropeelements = result;
+                    $scope.loaded = true;
+                });
                 current_filter = angular.copy($scope.filter);
             }
 
@@ -84,6 +86,8 @@ angular.module('outdoorconcept.ropeelement.controllers', [])
                     }
                 });
             });
+
+            queryRopeElements();
         }
     ]);
 

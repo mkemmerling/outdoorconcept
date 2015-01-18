@@ -1,27 +1,12 @@
 (function ($, undefined) {'use strict';
 
-angular.module('outdoorconcept.routes',
-    ['ngRoute', 'outdoorconcept.config', 'outdoorconcept.ropeelement.resources'])
+angular.module('outdoorconcept.routes', ['ngRoute', 'outdoorconcept.config'])
     .config(['$routeProvider', 'urls', function ($routeProvider, urls) {
         var getRopeKinds, getRopeElements, ropeelement_options;
 
-        getRopeKinds = function (Kind) {
-            return Kind.query();
-        };
-        getRopeKinds.$inject = ['Kind'];
-
-        getRopeElements = function (RopeElement) {
-            return RopeElement.query();
-        };
-        getRopeElements.$inject = ['RopeElement'];
-
         ropeelement_options = {
             templateUrl: urls.ng.ropelement_list,
-            controller: 'RopeElementListController',
-            resolve: {
-                kinds: getRopeKinds,
-                ropeelements: getRopeElements
-            }
+            controller: 'RopeElementListController'
         };
 
         $routeProvider
