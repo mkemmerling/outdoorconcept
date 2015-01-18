@@ -254,34 +254,34 @@ LOGGING = {
             'backupCount': 9,
             'formatter': 'standard',
         },
-        'db_logfile': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, 'db.log'),
-            'maxBytes': 500000,
-        },
     }
 }
 
 if ON_OPENSHIFT:
     LOGGING['loggers'] = {
         'django': {
-            'handlers': ['logfile', 'console'],
+            'handlers': ['logfile'],
             'propagate': True,
             'level': 'WARNING',
         }
     }
 else:
+    LOGGING['handlers']['db_logfile'] = {
+        'level': 'DEBUG',
+        'class': 'logging.handlers.RotatingFileHandler',
+        'filename': os.path.join(LOG_DIR, 'db.log'),
+        'maxBytes': 500000,
+    }
     LOGGING['loggers'] = {
         'django': {
-            'handlers': ['logfile'],
+            'handlers': ['logfile', 'console'],
             'propagate': True,
             'level': 'WARNING',
         },
         'django.db': {
             'handlers': ['db_logfile'],
             'propagate': False,
-            'level': 'WARNING',
+            'level': 'DEBUG',
         },
     }
 # ----- END Logging ----- #
