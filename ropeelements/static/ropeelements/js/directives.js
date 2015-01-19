@@ -57,6 +57,46 @@ angular.module('outdoorconcept.ropeelement.directives', [])
             }
         }
     };
-});
+})
+.directive('imagePopup', ['$window', function ($window) {
+    return {
+        link: function (scope, $element, attrs) {
+            var screen_sm = 768;
+
+            $element.on('shown.bs.modal', function (event) {
+                var trigger = $(event.relatedTarget),
+                    row = trigger.parents('tr'),
+                    thumb = trigger.children('img'),
+                    modal = $(this),
+                    dialog = modal.children('.modal-dialog'),
+                    // Position pop up right of thumbnail ...
+                    left = thumb.offset().left + thumb.outerWidth() + 5,
+                    // ... and centered relative to the element row
+                    row_center = row.offset().top + row.outerHeight() / 2 - $window.scrollY,
+                    dialog_height, top;
+
+                $('.modal-body img', modal).attr('src', trigger.data('image'));
+                $('.modal-dialog', modal).width(trigger.data('width') + 12);
+
+                // On desktop position pop up right of icons
+                if ($window.innerWidth >= screen_sm) {
+                    left += row.find('.icons').outerWidth() + 5;
+                }
+
+                // Position pop up (must be temporarly visible)
+                dialog_height = dialog.outerHeight();
+                top = row_center - dialog_height / 2 - 10;
+                // Ensure pop up does not exceed neither viewport bottom nor top
+                top += Math.min($window.innerHeight - top - dialog_height - 25, 0);
+                top = Math.max(top, 0);
+
+                dialog.css({
+                    left: left + 'px',
+                    top: top + 'px',
+                });
+            });
+        }
+    };
+}]);
 
 })(jQuery);
