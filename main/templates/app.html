@@ -41,13 +41,19 @@
   .constant('urls', {
       root: "{% url 'app' %}",
       ropeelements: {
-            en: "{{ ropeelements_urls.en }}",
-            de: "{{ ropeelements_urls.de }}",
+          en: {
+              'index': "{{ ropeelements_urls.en.index }}",
+              'offline': "{{ ropeelements_urls.en.offline }}"
+          },
+          de: {
+              'index': "{{ ropeelements_urls.de.index }}",
+              'offline': "{{ ropeelements_urls.de.offline }}"
+          },
       },
       siebert: "{% url 'siebert' %}",
       ng: {
-        ropelement_list: "{% url 'ropeelement_list' %}",
-        siebert_form: "{% url 'siebert_form' %}"
+          ropelement_list: "{% url 'ropeelement_list' %}",
+          siebert_form: "{% url 'siebert_form' %}"
       },
       api: {
           ropeelement: "{% url 'ropeelement-list' %}",
