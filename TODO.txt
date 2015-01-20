@@ -1,6 +1,8 @@
 TO DO
 =====
 
+* Fix language switch
+
 * Make legend content configurable?
 
 * Include only required bootstrap js and css.
