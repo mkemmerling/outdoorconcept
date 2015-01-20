@@ -143,6 +143,8 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             canope: false
         };
 
+        current_filter = angular.copy($scope.filter);
+
         function queryRopeElements() {
             db.transaction('r', db.elements, function () {
                 var query = db.elements.where('kind');
@@ -187,6 +189,7 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 
                     addElements(current_kind, elements);
                     $scope.$apply();
+                    current_filter = angular.copy($scope.filter);
                 });
 
             }).catch(function(err) {
@@ -196,7 +199,10 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 
         angular.forEach(filters, function (name) {
             $scope.$watch('filter.' + name, function () {
-                queryRopeElements();
+                // Prevent query on first watch
+                if (!angular.equals($scope.filter, current_filter)) {
+                    queryRopeElements();
+                }
             });
         });
     }
