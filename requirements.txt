@@ -4,7 +4,6 @@
 django==1.7.3
 djangorestframework==3.0.3
 django-ordered-model==0.4.0
-django-filter==0.9.1
 django-modeltranslation==0.8
 django-compressor==1.4
 Pillow==2.7.0
