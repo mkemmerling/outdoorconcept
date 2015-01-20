@@ -7,13 +7,15 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
     );
 }])
 .controller('RopeElementListController',
-    ['$scope', '$window', 'urls', 'RopeElement',
-    function ($scope, $window, urls, RopeElement) {
-        var boolean_filters, filters, current_filter;
+    ['$scope', '$location', '$window', 'urls', 'RopeElement',
+    function ($scope, $location, $window, urls, RopeElement) {
+        var page, boolean_filters, filters, current_filter;
+
+        page = ($location.path().indexOf('offline') > -1) ? 'offline' : 'index';
 
         $scope.i18n_urls = {
-            'en': urls.ropeelements.en.offline,
-            'de': urls.ropeelements.de.offline
+            'en': urls.ropeelements.en[page],
+            'de': urls.ropeelements.de[page]
         };
 
         $scope.difficulty_legend = {from: 1, to: 10};
