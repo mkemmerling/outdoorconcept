@@ -10,12 +10,6 @@ from . import models
 from . import serializers
 
 
-class KindListView(generics.ListAPIView):
-    """API endpoint to list rope element kinds."""
-    queryset = models.Kind.objects.all()
-    serializer_class = serializers.KindSerializer
-
-
 class ElementFilter(django_filters.FilterSet):
     """Rope element filter set."""
 

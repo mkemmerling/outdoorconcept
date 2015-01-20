@@ -10,6 +10,4 @@ urlpatterns = patterns(
         name='ropeelement_list'),
     url(r'^api/ropeelements$', views.ElementListView.as_view(),
         name='ropeelement-list'),
-    url(r'^api/kinds$', views.KindListView.as_view(),
-        name='kind-list'),
 )

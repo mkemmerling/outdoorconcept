@@ -28,7 +28,6 @@ angular.module('outdoorconcept.app', [
     'outdoorconcept.directives',
     'outdoorconcept.routes',
     'outdoorconcept.ropeelement.directives',
-    'outdoorconcept.ropeelement.resources',
     'outdoorconcept.ropeelement.controllers',
     'outdoorconcept.siebert.controllers'
 ]);
