@@ -82,11 +82,17 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 
         // TODO: test for indexeddb, polyfill?
 
-        db = new Dexie('outdoorconcept');
-        db.version(1).stores({
-            elements: 'id, kind, position, child_friendly, accessible, canope'
+        // (Re-)create database
+        Dexie.getDatabaseNames(function (databases) {
+            if (databases.indexOf('outdoorconcept') > -1) {
+                new Dexie('outdoorconcept').delete();
+            }
+            db = new Dexie('outdoorconcept');
+            db.version(1).stores({
+                elements: 'id, kind'
+            });
+            db.open();
         });
-        db.open();
 
         $scope.kinds = [];
 
