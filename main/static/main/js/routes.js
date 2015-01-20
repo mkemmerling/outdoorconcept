@@ -8,16 +8,16 @@ angular.module('outdoorconcept.routes', ['ngRoute', 'outdoorconcept.config'])
             templateUrl: urls.ng.ropelement_list,
             controller: 'RopeElementListController'
         };
-        ropeelement_offline_options = {
-            templateUrl: urls.ng.ropelement_list,
-            controller: 'RopeElementOfflineListController'
-        };
+        // ropeelement_offline_options = {
+        //     templateUrl: urls.ng.ropelement_list,
+        //     controller: 'RopeElementOfflineListController'
+        // };
 
         $routeProvider
             .when(urls.ropeelements.en.index, ropeelement_options)
-            .when(urls.ropeelements.en.offline, ropeelement_offline_options)
+            .when(urls.ropeelements.en.offline, ropeelement_options)
             .when(urls.ropeelements.de.index, ropeelement_options)
-            .when(urls.ropeelements.de.offline, ropeelement_offline_options)
+            .when(urls.ropeelements.de.offline, ropeelement_options)
             .when(urls.siebert, {
                 templateUrl: urls.ng.siebert_form,
                 controller: 'SiebertFormController'
