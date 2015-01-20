@@ -4,14 +4,16 @@ if [ ${OPENSHIFT_REPO_DIR:+x} ]
 then
 	APP_DIR=$OPENSHIFT_REPO_DIR
 	DATA_DIR=$OPENSHIFT_DATA_DIR
+	MEDIA_DIR=$DATA_DIR
 else
 	APP_DIR="$(dirname "$(cd "$(dirname "$0" )"; pwd)" )"
 	DATA_DIR=$APP_DIR
+	MEDIA_DIR=$DATA_DIR/static
 fi
 cd $APP_DIR
 
 rm -f $DATA_DIR/db.sqlite3
-rm -fr $DATA_DIR/media/*
+rm -fr $MEDIA_DIR/media/*
 
 $APP_DIR/manage.py migrate --noinput
 
