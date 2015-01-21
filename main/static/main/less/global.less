@@ -52,14 +52,15 @@ a.jslink {
 		width: 30px;
 		height: 30px;
 		background-color: #fff;
-		border: 2px solid darken(@link-color, 15%);;
+		border: 2px solid @link-color;
 		border-radius: 15px;
 		box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-		color: darken(@link-color, 15%);;
-		opacity: .85;
+		color: @link-color;
+		opacity: 1;
 	    cursor: pointer;
 		&:hover, &:focus {
-			opacity: 1;
+			color: darken(@link-color, 15%);
+			border-color: darken(@link-color, 15%);
 		}
     }
 }
