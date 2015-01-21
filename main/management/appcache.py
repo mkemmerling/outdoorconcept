@@ -5,10 +5,12 @@ from django.conf import settings
 
 import main
 import ropeelements
+import siebert
 
 MAIN_STATIC_DIR = os.path.join(os.path.dirname(main.__file__), 'static')
 MANIFEST_FILE = os.path.join(MAIN_STATIC_DIR, 'main', 'cache.manifest')
 RE_STATIC_DIR = os.path.join(os.path.dirname(ropeelements.__file__), 'static')
+SIEBERT_STATIC_DIR = os.path.join(os.path.dirname(siebert.__file__), 'static')
 CACHE_DIR = os.path.join(settings.STATIC_ROOT, 'CACHE')
 
 join = os.path.join
@@ -34,6 +36,10 @@ def create_manifest():
     if settings.COMPRESS_ENABLED:
         pass  # TODO: CACHE
     else:
+        subpath = join('jquery-ui', 'themes')
+        manifest += static_file_entry(join(subpath, 'base', 'core.css'))
+        manifest += static_file_entry(join(subpath, 'base', 'datepicker.css'))
+        manifest += static_file_entry(join(subpath, 'smoothness', 'theme.css'))
         for name in os.listdir(join(CACHE_DIR, 'css')):
             if name.startswith('app.'):
                 manifest += static_file_entry(join('CACHE', 'css', name))
@@ -58,6 +64,7 @@ def create_manifest():
             join('angular-sanitize', 'angular-sanitize.js'))
         manifest += static_file_entry(join('bootstrap', 'js', 'modal.js'))
         manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'js'))
+        manifest += collect_static(SIEBERT_STATIC_DIR, join('siebert', 'js'))
         manifest += collect_static(MAIN_STATIC_DIR, join('main', 'js'))
 
     # Fonts

@@ -10,6 +10,9 @@ CACHE MANIFEST
 /api/ropeelements
 
 # Static files
+/static/jquery-ui/themes/base/core.css
+/static/jquery-ui/themes/base/datepicker.css
+/static/jquery-ui/themes/smoothness/theme.css
 /static/CACHE/css/app.b6074e6c2e61.css
 /static/modernizr/modernizr.js
 /static/jquery/dist/jquery.js
@@ -23,6 +26,7 @@ CACHE MANIFEST
 /static/bootstrap/js/modal.js
 /static/ropeelements/js/controllers.js
 /static/ropeelements/js/directives.js
+/static/siebert/js/controllers.js
 /static/main/js/app.js
 /static/main/js/directives.js
 /static/main/js/routes.js
