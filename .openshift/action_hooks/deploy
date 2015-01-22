@@ -23,3 +23,6 @@ python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput
 
 echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py compress'"
 python ${OPENSHIFT_REPO_DIR}manage.py compress
+
+echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py create_appcache_manifest'"
+python ${OPENSHIFT_REPO_DIR}manage.py create_appcache_manifest
