@@ -1,4 +1,5 @@
 """Create appcache manifest."""
+import datetime
 import os
 
 from django.conf import settings
@@ -18,7 +19,7 @@ join = os.path.join
 
 def create_manifest():
     manifest = 'CACHE MANIFEST\n'
-    manifest += '# v1 TODO\n\n'
+    manifest += '# Created {}\n\n'.format(datetime.datetime.now().isoformat())
 
     manifest += '# Templates\n'
     manifest += '/en/ropeelements\n'
