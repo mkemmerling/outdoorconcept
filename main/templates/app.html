@@ -34,11 +34,10 @@
   <script src="{% static 'siebert/js/controllers.js' %}"></script>
   <script src="{% static 'main/js/routes.js' %}"></script>
   <script src="{% static 'main/js/app.js' %}"></script>
-  {% endcompress %}
   <script>
   angular.module('outdoorconcept.config', [])
   .constant('urls', {
-      root: "{% url 'app' %}",
+      root: "/",
       siebert: "{% url 'siebert' %}",
       en: {
           ropeelements: "{{ ropeelements_url.en }}",
@@ -58,4 +57,5 @@
       }
     });
   </script>
+  {% endcompress %}
 </body>
