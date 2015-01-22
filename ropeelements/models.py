@@ -1,11 +1,14 @@
 """Rope element models."""
 from django.core.exceptions import ValidationError
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from ordered_model.models import OrderedModel
+
+from main.management.appcache import create_manifest
 
 
 class Config(models.Model):
@@ -43,8 +46,12 @@ class ImageField(models.ImageField):
     """
 
     def save_form_data(self, instance, data):
+        # Mark instance if image added, updated, or deleted, inspectec by
+        # the 'rebuild_appcache' post_save signal handler.
+        if data is False or isinstance(data, (InMemoryUploadedFile)):
+            instance._image_modified = True
         image = getattr(instance, self.name)
-        if image is not data:
+        if image and image is not data:
             image.delete(False)
         super(ImageField, self).save_form_data(instance, data)
 
@@ -125,5 +132,14 @@ class Element(OrderedModel):
 @receiver(post_delete, sender=Element)
 def delete_element_images(sender, instance, **kwargs):
     """Delete rope element images when element itself is deleted."""
-    instance.image.delete(False)
-    instance.thumbnail.delete(False)
+    if instance.image or instance.thumbnail:
+        instance.image.delete(False)
+        instance.thumbnail.delete(False)
+        create_manifest()
+
+
+@receiver(post_save, sender=Element)
+def rebuild_appcache(sender, instance, **kwargs):
+    """Rebuild app cache manifest if an image was added, updated or deleted."""
+    if getattr(instance, '_image_modified', False):
+        create_manifest()
