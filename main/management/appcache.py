@@ -35,7 +35,8 @@ def create_manifest():
 
     # CSS
     if settings.COMPRESS_ENABLED:
-        pass  # TODO: CACHE
+        for name in os.listdir(join(CACHE_DIR, 'css')):
+            manifest += static_file_entry(join('CACHE', 'css', name))
     else:
         subpath = join('jquery-ui', 'themes')
         manifest += static_file_entry(join(subpath, 'base', 'core.css'))
@@ -47,7 +48,8 @@ def create_manifest():
 
     # JavaScripts
     if settings.COMPRESS_ENABLED:
-        pass  # TODO: CACHE
+        for name in os.listdir(join(CACHE_DIR, 'js')):
+            manifest += static_file_entry(join('CACHE', 'js', name))
     else:
         manifest += static_file_entry(join('modernizr', 'modernizr.js'))
         manifest += static_file_entry(join('jquery', 'dist', 'jquery.js'))

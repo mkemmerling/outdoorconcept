@@ -1,6 +1,11 @@
 TO DO
 =====
 
+* Appcache
+
+  - Fallback for Siebert
+  - Switch language
+
 * Make legend content configurable?
 
 * Include only required bootstrap js and css.
