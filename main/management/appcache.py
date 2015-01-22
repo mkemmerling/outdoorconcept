@@ -8,11 +8,12 @@ import main
 import ropeelements
 import siebert
 
+MANIFEST_FILE = os.path.join(settings.STATIC_ROOT, 'cache.manifest')
+
+CACHE_DIR = os.path.join(settings.STATIC_ROOT, 'CACHE')
 MAIN_STATIC_DIR = os.path.join(os.path.dirname(main.__file__), 'static')
-MANIFEST_FILE = os.path.join(MAIN_STATIC_DIR, 'main', 'cache.manifest')
 RE_STATIC_DIR = os.path.join(os.path.dirname(ropeelements.__file__), 'static')
 SIEBERT_STATIC_DIR = os.path.join(os.path.dirname(siebert.__file__), 'static')
-CACHE_DIR = os.path.join(settings.STATIC_ROOT, 'CACHE')
 
 join = os.path.join
 
