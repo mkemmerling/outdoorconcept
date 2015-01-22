@@ -34,6 +34,7 @@
   <script src="{% static 'siebert/js/controllers.js' %}"></script>
   <script src="{% static 'main/js/routes.js' %}"></script>
   <script src="{% static 'main/js/app.js' %}"></script>
+  {% endcompress %}
   <script>
   angular.module('outdoorconcept.config', [])
   .constant('urls', {
@@ -57,5 +58,4 @@
       }
     });
   </script>
-  {% endcompress %}
 </body>
