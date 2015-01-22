@@ -5,20 +5,25 @@ from django.template import RequestContext
 from django.utils import translation
 
 
-def get_ropeelement_url():
+def get_ropeelement_urls():
     """Map language to rope elements view urls."""
+    def get_urls():
+        return {
+            'index': reverse('ropeelements'),
+            'offline': reverse('ropeelements_offline'),
+        }
     cur_language = translation.get_language()
     try:
         translation.activate('en')
-        url_en = reverse('ropeelements')
+        urls_en = get_urls()
         translation.activate('de')
-        url_de = reverse('ropeelements')
+        urls_de = get_urls()
     finally:
         translation.activate(cur_language)
     return {
-        'ropeelements_url': {
-            'en': url_en,
-            'de': url_de,
+        'ropeelements_urls': {
+            'en': urls_en,
+            'de': urls_de,
         }
     }
 
@@ -26,4 +31,4 @@ def get_ropeelement_url():
 def app_view(request, **kwargs):
     """App template view."""
     return render_to_response(
-        'app.html', get_ropeelement_url(), RequestContext(request))
+        'app.html', get_ropeelement_urls(), RequestContext(request))

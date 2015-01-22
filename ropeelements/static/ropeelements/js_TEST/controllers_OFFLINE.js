@@ -9,11 +9,13 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 .controller('RopeElementListController',
     ['$scope', '$location', '$window', 'urls', 'RopeElement',
     function ($scope, $location, $window, urls, RopeElement) {
-        var boolean_filters, filters, current_filter;
+        var page, boolean_filters, filters, current_filter;
+
+        page = ($location.path().indexOf('offline') > -1) ? 'offline' : 'index';
 
         $scope.i18n_urls = {
-            'en': urls.en.ropeelements,
-            'de': urls.de.ropeelements
+            'en': urls.ropeelements.en[page],
+            'de': urls.ropeelements.de[page]
         };
 
         $scope.difficulty_legend = {from: 1, to: 10};

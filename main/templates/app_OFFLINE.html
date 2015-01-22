@@ -38,19 +38,20 @@
   angular.module('outdoorconcept.config', [])
   .constant('urls', {
       root: "{% url 'app' %}",
-      siebert: "{% url 'siebert' %}",
-      en: {
-          ropeelements: "{{ ropeelements_url.en }}",
-          ng: {
-              ropelement_list: "{% url 'ropeelement_list_en' %}",
-          }
+      ropeelements: {
+          en: {
+              'index': "{{ ropeelements_urls.en.index }}",
+              'offline': "{{ ropeelements_urls.en.offline }}"
+          },
+          de: {
+              'index': "{{ ropeelements_urls.de.index }}",
+              'offline': "{{ ropeelements_urls.de.offline }}"
+          },
       },
-      de: {
-          ropeelements: "{{ ropeelements_url.de }}",
-          ng: {
-              ropelement_list: "{% url 'ropeelement_list_de' %}",
-              siebert_form: "{% url 'siebert_form' %}"
-          }
+      siebert: "{% url 'siebert' %}",
+      ng: {
+          ropelement_list: "{% url 'ropeelement_list' %}",
+          siebert_form: "{% url 'siebert_form' %}"
       },
       api: {
           ropeelement: "{% url 'ropeelement-list' %}"

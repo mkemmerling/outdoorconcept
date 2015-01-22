@@ -4,17 +4,18 @@ angular.module('outdoorconcept.routes', ['ngRoute', 'outdoorconcept.config'])
     .config(['$routeProvider', 'urls', function ($routeProvider, urls) {
         var ropeelement_options, ropeelement_offline_options;
 
+        ropeelement_options = {
+            templateUrl: urls.ng.ropelement_list,
+            controller: 'RopeElementListController'
+        };
+
         $routeProvider
-            .when(urls.en.ropeelements, {
-                templateUrl: urls.en.ng.ropelement_list,
-                controller: 'RopeElementListController'
-            })
-            .when(urls.de.ropeelements, {
-                templateUrl: urls.de.ng.ropelement_list,
-                controller: 'RopeElementListController'
-            })
+            .when(urls.ropeelements.en.index, ropeelement_options)
+            .when(urls.ropeelements.en.offline, ropeelement_options)
+            .when(urls.ropeelements.de.index, ropeelement_options)
+            .when(urls.ropeelements.de.offline, ropeelement_options)
             .when(urls.siebert, {
-                templateUrl: urls.de.ng.siebert_form,
+                templateUrl: urls.ng.siebert_form,
                 controller: 'SiebertFormController'
             })
             .otherwise({

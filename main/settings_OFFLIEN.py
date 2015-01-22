@@ -195,11 +195,17 @@ COMPRESS_CSS_FILTERS = (
 
 COMPRESS_OFFLINE_CONTEXT = {
     # Note These must equal the URLs for the 'ropeelements' view as
-    # determined by main.views.get_ropeelement_url(). We can not determine
+    # determined by main.views.get_ropeelement_urls(). We can not determine
     # these in the settings via reverse().
-    'ropeelements_url': {
-        'en': '/en/ropeelements',
-        'de': '/de/seilelemente',
+    'ropeelements_urls': {
+        'en': {
+            'index': "/en/ropeelements",
+            'offline': "/en/offline/ropeelements"
+            },
+        'de': {
+            'index': "/de/seilelemente",
+            'offline': "/de/offline/seilelemente"
+            },
     }
 }
 

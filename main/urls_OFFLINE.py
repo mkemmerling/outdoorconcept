@@ -8,13 +8,13 @@ from django.conf.urls import url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-# from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 
 from main import views
 
 urlpatterns = patterns(
     '',
+    url(r'^$', RedirectView.as_view(url=_('ropeelements')), name='app'),
     # Single age application, routing handled by Angular
     url(r'^de/siebert$', views.app_view, name='siebert'),
     url(r'', include('ropeelements.urls')),
@@ -24,10 +24,11 @@ urlpatterns = patterns(
 
 urlpatterns += i18n_patterns(
     '',
-    url(r'^$', RedirectView.as_view(url=_('ropeelements')), name='app'),
     # Single age application, routing handled by Angular
-    # url(_(r'^ropeelements$'), views.app_view, name='ropeelements'),
     url(_(r'^ropeelements$'), views.app_view, name='ropeelements'),
+    url(r'^offline/?$', RedirectView.as_view(url=_('offline/ropeelements'))),
+    url(_(r'^offline/ropeelements$'), views.app_view,
+        name='ropeelements_offline'),
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin', RedirectView.as_view(url='admin/')),

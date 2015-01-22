@@ -1,6 +1,7 @@
 """Rope element views."""
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils import translation
 
 from rest_framework import generics
 
@@ -19,6 +20,10 @@ def ropeelements(request, **kwargs):
     contact = models.Config.objects.get(variable='contact')
     ssb_config = models.Config.objects.get(variable='ssb')
     powerfan_config = models.Config.objects.get(variable='powerfan')
+
+    language = kwargs.get('language', None)
+    if language:
+        translation.activate(language)
     return render_to_response(
         'ropeelements.html', {
             'contact_url': contact.url,

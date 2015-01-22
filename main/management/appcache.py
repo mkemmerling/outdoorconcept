@@ -25,7 +25,8 @@ def create_manifest():
     manifest += '# Templates\n'
     manifest += '/en/ropeelements\n'
     manifest += '/de/seilelemente\n'
-    manifest += '/ng/ropeelements\n'
+    manifest += '/en/ng/ropeelements\n'
+    manifest += '/de/ng/ropeelements\n'
     manifest += '\n'
 
     manifest += '# Data\n'

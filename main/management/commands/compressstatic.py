@@ -28,7 +28,7 @@ class Command(BaseCommand):
         settings.COMPRESS_ENABLED = True
         settings.COMPRESS_OFFLINE = True
         settings.COMPRESS_OFFLINE_CONTEXT = {
-            'ropeelements_urls': get_ropeelement_urls()
+            'ropeelements_url': get_ropeelement_urls()
         }
         settings.COMPRESS_URL = settings.STATIC_URL
 
