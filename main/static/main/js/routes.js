@@ -8,10 +8,6 @@ angular.module('outdoorconcept.routes', ['ngRoute', 'outdoorconcept.config'])
             templateUrl: urls.ng.ropelement_list,
             controller: 'RopeElementListController'
         };
-        // ropeelement_offline_options = {
-        //     templateUrl: urls.ng.ropelement_list,
-        //     controller: 'RopeElementOfflineListController'
-        // };
 
         $routeProvider
             .when(urls.ropeelements.en.index, ropeelement_options)
