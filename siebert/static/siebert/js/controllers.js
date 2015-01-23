@@ -2,7 +2,7 @@
 
 angular.module('outdoorconcept.siebert.controllers', [])
 
-    .controller('SiebertFormController', ['$scope', 'urls', function ($scope, urls) {
+    .controller('SiebertFormController', ['$scope', function ($scope) {
 
 
 

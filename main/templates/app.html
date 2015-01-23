@@ -34,28 +34,5 @@
   <script src="{% static 'siebert/js/controllers.js' %}"></script>
   <script src="{% static 'main/js/routes.js' %}"></script>
   <script src="{% static 'main/js/app.js' %}"></script>
-  <script>
-  angular.module('outdoorconcept.config', [])
-  .constant('urls', {
-      root: "/",
-      siebert: "{% url 'siebert' %}",
-      en: {
-          ropeelements: "{{ ropeelements_url.en }}",
-          ng: {
-              ropelement_list: "{% url 'ropeelement_list_en' %}",
-          }
-      },
-      de: {
-          ropeelements: "{{ ropeelements_url.de }}",
-          ng: {
-              ropelement_list: "{% url 'ropeelement_list_de' %}",
-              siebert_form: "{% url 'siebert_form' %}"
-          }
-      },
-      api: {
-          ropeelement: "{% url 'ropeelement-list' %}"
-      }
-    });
-  </script>
   {% endcompress %}
 </body>

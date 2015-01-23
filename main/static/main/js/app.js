@@ -1,6 +1,6 @@
 (function ($, Modernizr, undefined) {'use strict';
 
-angular.module('outdoorconcept.base', ['outdoorconcept.config'])
+angular.module('outdoorconcept.base', [])
    .config(['$interpolateProvider', function ($interpolateProvider) {
         $interpolateProvider.startSymbol('{$');
         $interpolateProvider.endSymbol('$}');
@@ -18,7 +18,20 @@ angular.module('outdoorconcept.base', ['outdoorconcept.config'])
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     }])
-    .controller('AppController', ['$scope', function($scope) {
+    .factory('language', ['$window', function ($window) {
+        if ($window.localStorage.getItem('language') === null) {
+            $window.localStorage.setItem('language', ($window.navigator.language === 'de') ? 'de' : 'en');
+        }
+        return {
+            getLanguage: function () {
+                return $window.localStorage.getItem('language');
+            },
+            setLanguage: function (language) {
+                $window.localStorage.setItem('language', language);
+            }
+        };
+    }])
+    .controller('AppController', ['$scope', 'language', function($scope, language) {
         $scope.modernizr = Modernizr;
     }]);
 

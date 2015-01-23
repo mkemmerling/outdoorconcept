@@ -30,7 +30,8 @@ def create_manifest():
     manifest += '\n'
 
     manifest += '# Data\n'
-    manifest += '/api/ropeelements\n'
+    manifest += '/en/api/ropeelements\n'
+    manifest += '/de/api/ropeelements\n'
     manifest += '\n'
 
     manifest += '# Static files\n'

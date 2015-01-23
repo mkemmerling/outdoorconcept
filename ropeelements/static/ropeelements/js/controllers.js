@@ -1,29 +1,27 @@
 (function ($, undefined) {'use strict';
 
 angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
-.factory('RopeElement', ['$resource', 'urls', function ($resource, urls) {
+.factory('RopeElement', ['$resource', function ($resource) {
     return $resource(
-        urls.api.ropeelement
+        '/:language/api/ropeelements'
     );
 }])
 .controller('RopeElementListController',
-    ['$scope', '$location', '$window', 'urls', 'RopeElement',
-    function ($scope, $location, $window, urls, RopeElement) {
-        var boolean_filters, filters, current_filter;
+    ['$scope', '$window', 'RopeElement', 'language',
+    function ($scope, $window, RopeElement, language) {
+        var elements_by_kind = {},
+            boolean_filters, filters, current_filter;
 
         $scope.i18n_urls = {
-            'en': urls.en.ropeelements,
-            'de': urls.de.ropeelements
+            'en': '/en/ropeelements',
+            'de': '/de/seilelemente'
         };
 
         $scope.difficulty_legend = {from: 1, to: 10};
 
         $scope.kinds = [];
 
-        var elements_by_kind = {};
-
-        // TODO: If offline get from local storage to allow for reload
-        RopeElement.query().$promise.then(function (result) {
+        RopeElement.query({language: language.getLanguage()}).$promise.then(function (result) {
             $scope.ropeelements = result;
             angular.forEach(result, function (kind_elements) {
                 $scope.kinds.push(kind_elements.kind);

@@ -1,24 +1,42 @@
 (function ($, undefined) {'use strict';
 
-angular.module('outdoorconcept.routes', ['ngRoute', 'outdoorconcept.config'])
-    .config(['$routeProvider', 'urls', function ($routeProvider, urls) {
-        var ropeelement_options, ropeelement_offline_options;
+angular.module('outdoorconcept.routes', ['ngRoute'])
+    .config(['$routeProvider', function ($routeProvider) {
+        var en, de;
+
+        en = function (language) {
+            language.setLanguage('en');
+            return language;
+        };
+        en.$inject = ['language'];
+
+        de = function (language) {
+            language.setLanguage('de');
+            return language;
+        };
+        de.$inject = ['language'];
 
         $routeProvider
-            .when(urls.en.ropeelements, {
-                templateUrl: urls.en.ng.ropelement_list,
-                controller: 'RopeElementListController'
+            .when('/en/ropeelements', {
+                templateUrl: '/en/ng/ropeelements',
+                controller: 'RopeElementListController',
+                resolve: {
+                    language: en
+                }
             })
-            .when(urls.de.ropeelements, {
-                templateUrl: urls.de.ng.ropelement_list,
-                controller: 'RopeElementListController'
+            .when('/de/seilelemente', {
+                templateUrl: '/de/ng/ropeelements',
+                controller: 'RopeElementListController',
+                resolve: {
+                    language: de
+                }
             })
-            .when(urls.siebert, {
-                templateUrl: urls.de.ng.siebert_form,
+            .when('/de/siebert', {
+                templateUrl: '/ng/siebert',
                 controller: 'SiebertFormController'
             })
             .otherwise({
-                redirectTo: urls.root,
+                redirectTo: '/',
             });
     }]);
 

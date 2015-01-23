@@ -8,16 +8,16 @@ from django.conf.urls import url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-# from django.core.urlresolvers import reverse_lazy
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
-from main import views
+from ropeelements.views import ropeelements, ElementListView
+
+app_view = TemplateView.as_view(template_name='app.html')
 
 urlpatterns = patterns(
     '',
     # Single age application, routing handled by Angular
-    url(r'^de/siebert$', views.app_view, name='siebert'),
-    url(r'', include('ropeelements.urls')),
+    url(r'^de/siebert$', app_view, name='siebert'),
     url(r'', include('siebert.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )
@@ -26,8 +26,10 @@ urlpatterns += i18n_patterns(
     '',
     url(r'^$', RedirectView.as_view(url=_('ropeelements')), name='app'),
     # Single age application, routing handled by Angular
-    # url(_(r'^ropeelements$'), views.app_view, name='ropeelements'),
-    url(_(r'^ropeelements$'), views.app_view, name='ropeelements'),
+    url(_(r'^ropeelements$'), app_view, name='ropeelements'),
+    url(r'^ng/ropeelements$', ropeelements, name='ropeelement_list'),
+    url(r'^api/ropeelements$', ElementListView.as_view(),
+        name='ropeelement-list'),
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin', RedirectView.as_view(url='admin/')),

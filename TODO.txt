@@ -3,8 +3,11 @@ TO DO
 
 * Appcache
 
-  - Fallback for Siebert
+  - Redirect / in route.js?
   - Switch language
+  - Fallback for Siebert
+
+* favicon
 
 * Make legend content configurable?
 

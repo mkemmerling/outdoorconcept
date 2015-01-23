@@ -14,6 +14,10 @@ class ElementListView(generics.ListAPIView):
     queryset = models.Element.objects.all()
     serializer_class = serializers.ElementSerializer
 
+    def get(self, request, *args, **kwargs):
+        translation.activate(request.path.split('/')[1])
+        return self.list(request, *args, **kwargs)
+
 
 def ropeelements(request, **kwargs):
     """Rope elements template view."""
@@ -21,9 +25,8 @@ def ropeelements(request, **kwargs):
     ssb_config = models.Config.objects.get(variable='ssb')
     powerfan_config = models.Config.objects.get(variable='powerfan')
 
-    language = kwargs.get('language', None)
-    if language:
-        translation.activate(language)
+    translation.activate(request.path.split('/')[1])
+
     return render_to_response(
         'ropeelements.html', {
             'contact_url': contact.url,
