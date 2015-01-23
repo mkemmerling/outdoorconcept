@@ -3,7 +3,6 @@ TO DO
 
 * Appcache
 
-  - Redirect / in route.js?
   - Switch language
   - Fallback for Siebert
 
@@ -12,5 +11,5 @@ TO DO
 * Make legend content configurable?
 
 * Include only required bootstrap js and css.
-* Clean up app.html.
-* Remove unused libraries.
+* Remove unused libraries:
+  - angular-ui-bootstrap
