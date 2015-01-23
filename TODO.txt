@@ -3,7 +3,7 @@ TO DO
 
 * Appcache
 
-  - Switch language
+  - Need to recreate manifest whenever a ropelement was added, updated, or deleted
   - Fallback for Siebert
 
 * favicon

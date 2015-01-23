@@ -19,7 +19,6 @@ urlpatterns = patterns(
     # Single age application, routing handled by Angular
     url(r'^de/siebert$', app_view, name='siebert'),
     url(r'', include('siebert.urls')),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
 )
 
 urlpatterns += i18n_patterns(

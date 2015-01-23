@@ -1,7 +1,5 @@
 {% load i18n %}
-<form switch-language="{$ i18n_urls $}" name="set_language" action="{% url 'set_language' %}" method="post">
-  {% csrf_token %}
-  <input name="next" type="hidden" value="/" />
+<div switch-language="{$ i18n_urls $}" name="set_language">
   <select name="language">
     {% get_language_info_list for LANGUAGES as languages %}
     {% for language in languages %}
@@ -10,4 +8,4 @@
     </option>
   {% endfor %}
   </select>
-</form>
+</div>

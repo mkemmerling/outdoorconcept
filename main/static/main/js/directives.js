@@ -1,21 +1,22 @@
 (function ($, undefined) {'use strict';
 
-angular.module('outdoorconcept.directives', [])
-.directive('switchLanguage', function () {
+angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
+.directive('switchLanguage', ['$location', 'language', function ($location, language) {
     return {
         restrict: 'A',
-        link: function (scope, form, attrs) {
-            var select = form.find("select[name='language']"),
-                next = form.find("input[name='next']"),
+        link: function (scope, element, attrs) {
+            var select = element.find("select[name='language']"),
                 urls = angular.fromJson(attrs.switchLanguage);
 
             select.change(function () {
-                next.val(urls[select.val()]);
-                form.submit();
+                var lang = select.val();
+                language.setLanguage(lang);
+                $location.path(urls[lang]);
+                scope.$apply();
             });
         }
     };
-})
+}])
 .directive('movable', ['$document', function ($document) {
     return {
         restrict: 'A',
