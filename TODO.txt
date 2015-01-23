@@ -4,8 +4,12 @@ TO DO
 * Appcache
 
   - Fallback for Siebert
+  - MIME type?
+  - Chrome iOS
+  - http Safari/iOS
 
 * favicon
+* Icon for Home Bildschirm
 
 * Make legend content configurable?
 
