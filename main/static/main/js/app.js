@@ -19,20 +19,59 @@ angular.module('outdoorconcept.base', [])
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     }])
     .factory('language', ['$window', function ($window) {
-        if ($window.localStorage.getItem('language') === null) {
-            $window.localStorage.setItem('language', ($window.navigator.language === 'de') ? 'de' : 'en');
+        var storage = $window.localStorage;
+
+        if (storage.getItem('language') === null) {
+            storage.setItem('language', ($window.navigator.language === 'de') ? 'de' : 'en');
         }
         return {
             getLanguage: function () {
-                return $window.localStorage.getItem('language');
+                return storage.getItem('language');
             },
             setLanguage: function (language) {
-                $window.localStorage.setItem('language', language);
+                storage.setItem('language', language);
             }
         };
     }])
-    .controller('AppController', ['$scope', 'language', function($scope, language) {
+    .controller('AppController', ['$scope', '$window', 'language', function($scope, $window, language) {
         $scope.modernizr = Modernizr;
+
+        var cacheStatusValues = [],
+            cache = window.applicationCache;
+
+        cacheStatusValues[0] = 'uncached';
+        cacheStatusValues[1] = 'idle';
+        cacheStatusValues[2] = 'checking';
+        cacheStatusValues[3] = 'downloading';
+        cacheStatusValues[4] = 'updateready';
+        cacheStatusValues[5] = 'obsolete';
+
+        $scope.debug_msg = "–––";
+
+        cache.addEventListener('checking', function () {
+            if (cache.status == 3) {
+                // console.warn("Download manifest");
+                $scope.debug_msg = "Download manifest";
+                $scope.$apply();
+            } else {
+                // console.warn("No manifest download, status: ", cacheStatusValues[cache.status]);
+                $scope.debug_msg = "No manifest download, status: " + cacheStatusValues[cache.status];
+                $scope.$apply();
+            }
+        }, false);
+
+        cache.addEventListener('cached', function () {
+            console.warn("manifest cached");
+            $scope.debug_msg = "manifest cached";
+            $scope.$apply();
+        }, false);
+
+        cache.addEventListener('updateready', function () {
+            // console.warn("manifest redownloaded");
+            $scope.debug_msg = "manifest redownloaded";
+            $scope.$apply();
+        }, false);
+
     }]);
 
 angular.module('outdoorconcept.app', [

@@ -15,8 +15,9 @@
   {% endcompress %}
   <title>outdoorconcept</title>
 </head>
-<body ng-controller="AppController" ng-cloak>
-  <div class="container-fluid" ng-view></div>
+<body ng-controller="AppController">
+  <div ng-cloak>DEBUG: {$ debug_msg $}</div>
+  <div class="container-fluid" ng-view ng-cloak></div>
   {% compress js %}
   <script src="{% static 'modernizr/modernizr.js' %}"></script>
   <script src="{% static 'jquery/dist/jquery.js' %}"></script>
@@ -28,10 +29,10 @@
   <script src="{% static 'angular-resource/angular-resource.js' %}"></script>
   <script src="{% static 'angular-sanitize/angular-sanitize.js' %}"></script>
   <script src="{% static 'bootstrap/js/modal.js' %}"></script>
-  <script src="{% static 'main/js/directives.js' %}"></script>
   <script src="{% static 'ropeelements/js/directives.js' %}"></script>
   <script src="{% static 'ropeelements/js/controllers.js' %}"></script>
   <script src="{% static 'siebert/js/controllers.js' %}"></script>
+  <script src="{% static 'main/js/directives.js' %}"></script>
   <script src="{% static 'main/js/routes.js' %}"></script>
   <script src="{% static 'main/js/app.js' %}"></script>
   {% endcompress %}
