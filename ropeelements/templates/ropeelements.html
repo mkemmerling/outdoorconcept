@@ -26,7 +26,7 @@
   </label>
 </div>
 
-<table class="ropeelements" ng-if="ropeelements.length">
+<table class="ropeelements" ng-if="ropeelements.length" ng-cloak>
   <tbody>
     <tr ng-repeat-start="ropeelement in ropeelements">
       <td class="kind">
@@ -36,7 +36,7 @@
     </tr>
     <tr ng-repeat-end ng-repeat="element in ropeelement.elements">
       <td>
-        <div class="title" ng-cloak>{$ element.title $}</div>
+        <div class="title">{$ element.title $}</div>
         <div class="details">
           <div class="thumb">
             <a data-toggle="modal" data-target="#imagePopUp"
