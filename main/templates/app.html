@@ -15,7 +15,7 @@
   {% endcompress %}
   <title>outdoorconcept</title>
 </head>
-<body ng-controller="AppController">
+<body ng-controller="AppController" ng-cloak>
   <div class="container-fluid" ng-view></div>
   {% compress js %}
   <script src="{% static 'modernizr/modernizr.js' %}"></script>
