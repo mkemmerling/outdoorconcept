@@ -48,16 +48,16 @@ angular.module('outdoorconcept.base', [])
 
         $scope.debug_msg = "–––";
 
-        cache.addEventListener('checking', function () {
-            if (cache.status == 3) {
-                // console.warn("Download manifest");
-                $scope.debug_msg = "Download manifest";
-                $scope.$apply();
-            } else {
-                // console.warn("No manifest download, status: ", cacheStatusValues[cache.status]);
-                $scope.debug_msg = "No manifest download, status: " + cacheStatusValues[cache.status];
-                $scope.$apply();
-            }
+        cache.addEventListener('noupdate', function () {
+            console.warn("No manifest update");
+            $scope.debug_msg = "No manifest update";
+            $scope.$apply();
+        }, false);
+
+        cache.addEventListener('downloading', function () {
+            console.warn("Downloading manifest");
+            $scope.debug_msg = "downloading manifest";
+            $scope.$apply();
         }, false);
 
         cache.addEventListener('cached', function () {
@@ -67,7 +67,7 @@ angular.module('outdoorconcept.base', [])
         }, false);
 
         cache.addEventListener('updateready', function () {
-            // console.warn("manifest redownloaded");
+            console.warn("manifest redownloaded");
             $scope.debug_msg = "manifest redownloaded";
             $scope.$apply();
         }, false);
