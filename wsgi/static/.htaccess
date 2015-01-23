@@ -1,1 +1,5 @@
-ExpiresByType text/cache-manifest "access plus 0 seconds"
+#ExpiresByType text/cache-manifest "access plus 0 seconds"
+<Files "cache.manifest">
+    ExpiresActive On
+    ExpiresDefault "access"
+</Files>
