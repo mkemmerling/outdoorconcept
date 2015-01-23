@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ordered_model.models import OrderedModel
 
-from main.management.appcache import create_manifest
+from main.management.appcache import update_manifest
 
 
 class Config(models.Model):
@@ -130,16 +130,24 @@ class Element(OrderedModel):
 
 
 @receiver(post_delete, sender=Element)
-def delete_element_images(sender, instance, **kwargs):
-    """Delete rope element images when element itself is deleted."""
-    if instance.image or instance.thumbnail:
-        instance.image.delete(False)
-        instance.thumbnail.delete(False)
-        create_manifest()
+def cleanup_after_element_delete(sender, instance, **kwargs):
+    """Cleanup after deleting a rope element.
+
+    For an element with images the images are deleted, too, and the appcache
+    manifest is recreated.
+    Otherwise only the manifest's timestamp is updated.
+    """
+    recreate_appcache = instance.image or instance.thumbnail
+    instance.image.delete(False)
+    instance.thumbnail.delete(False)
+    update_manifest(recreate_appcache)
 
 
 @receiver(post_save, sender=Element)
-def rebuild_appcache(sender, instance, **kwargs):
-    """Rebuild app cache manifest if an image was added, updated or deleted."""
-    if getattr(instance, '_image_modified', False):
-        create_manifest()
+def update_appcache_on_element_save(sender, instance, **kwargs):
+    """Rebuild or touch app cache manifest after saving a rope element.
+
+    If an image was added, updated or deleted, the manifest is recreated,
+    otherwise only its timestamp is updated.
+    """
+    update_manifest(getattr(instance, '_image_modified', False))

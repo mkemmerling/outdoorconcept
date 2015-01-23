@@ -1,6 +1,7 @@
 """Create appcache manifest."""
 import datetime
 import os
+import re
 
 from django.conf import settings
 
@@ -19,8 +20,9 @@ join = os.path.join
 
 
 def create_manifest():
+    """Create appcache manifest."""
     manifest = 'CACHE MANIFEST\n'
-    manifest += '# Created {}\n\n'.format(datetime.datetime.now().isoformat())
+    manifest += created() + '\n\n'
 
     manifest += '# Templates\n'
     manifest += '/en/ropeelements\n'
@@ -115,3 +117,24 @@ def collect_files(base, files):
     if not entries:
         return ''
     return entries + '\n'
+
+
+def created():
+    return '# Created {}'.format(datetime.datetime.now().isoformat())
+
+
+create_pattern = re.compile(r'# Created .+')
+
+
+def touch_manifest():
+    """Update timestamp in appcache manifest."""
+
+    with open(MANIFEST_FILE, 'r+t') as fd:
+        manifest = fd.read()
+        manifest = create_pattern.sub(created(), manifest)
+        fd.seek(0)
+        fd.write(manifest)
+
+
+def update_manifest(recreate=False):
+    create_manifest() if recreate else touch_manifest()

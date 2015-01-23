@@ -3,7 +3,6 @@ TO DO
 
 * Appcache
 
-  - Need to recreate manifest whenever a ropelement was added, updated, or deleted
   - Fallback for Siebert
 
 * favicon
@@ -11,5 +10,6 @@ TO DO
 * Make legend content configurable?
 
 * Include only required bootstrap js and css.
+
 * Remove unused libraries:
   - angular-ui-bootstrap
