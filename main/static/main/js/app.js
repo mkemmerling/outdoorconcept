@@ -48,8 +48,6 @@ angular.module('outdoorconcept.base', [])
 
         $scope.debug_msg = "–––";
 
-        // TEST Comment
-
         cache.addEventListener('noupdate', function () {
             console.warn("No manifest update");
             $scope.debug_msg = "No manifest update";
