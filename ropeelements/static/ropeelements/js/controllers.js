@@ -10,6 +10,7 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
     ['$scope', '$window', '$timeout', 'RopeElement', 'language',
     function ($scope, $window, $timeout, RopeElement, language) {
         var storage = $window.sessionStorage,
+            kinds_by_id = {},
             elements_by_kind = {},
             boolean_filters, filters, empty_filter;
 
@@ -35,7 +36,8 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             $scope.ropeelements = result;
             angular.forEach(result, function (kind_elements) {
                 $scope.kinds.push(kind_elements.kind);
-                elements_by_kind[kind_elements.kind] = kind_elements.elements;
+                kinds_by_id[kind_elements.kind.id] = kind_elements.kind;
+                elements_by_kind[kind_elements.kind.id] = kind_elements.elements;
             });
 
             $scope.filter = angular.fromJson(storage.getItem('elementFilter'));
@@ -52,8 +54,6 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             $timeout(function () {
                 $scope.loaded = true;
             });
-
-
         });
 
         function queryRopeElements() {
@@ -64,16 +64,18 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             });
 
             function getElements(kind) {
-                return $.grep(elements_by_kind[kind], function (element) {
+                return $.grep(elements_by_kind[kind.id], function (element) {
                     return ($.grep(set_boolean_filters, function (name) {
                         return element[name];
                     }).length === set_boolean_filters.length) && element;
                 });
             }
 
-            // In rare cases a kind might be gone after reload
-            if ($scope.filter.kind !== null && $scope.kinds.indexOf($scope.filter.kind) > -1) {
-                kinds = [$scope.filter.kind];
+            // We track kinds by their ids to ensure that the selected kind is
+            // preserved on language switch. Also note that in rare cases
+            // a kind might be gone after reload.
+            if ($scope.filter.kind !== null && kinds_by_id[$scope.filter.kind.id] !== undefined) {
+                kinds = [kinds_by_id[$scope.filter.kind.id]];
             } else {
                 kinds = $scope.kinds;
             }

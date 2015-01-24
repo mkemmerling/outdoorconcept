@@ -11,7 +11,7 @@
     <select id="filter_kind"
             class="form-control"
             ng-model="filter.kind"
-            ng-options="kind for kind in kinds">
+            ng-options="kind.title for kind in kinds track by kind.id">
       <option value="">{% trans '––– all –––' %}</option>
     </select>
   </div>
@@ -31,7 +31,7 @@
     <tr ng-repeat-start="ropeelement in ropeelements">
       <td class="kind">
         <div class="links"><a class="jslink" data-toggle="modal" data-target="#legendPopUp">{% trans "Legend" %}</a></div>
-        <div>{$ ropeelement.kind $}</div>
+        <div>{$ ropeelement.kind.title $}</div>
       </td>
     </tr>
     <tr ng-repeat-end ng-repeat="element in ropeelement.elements">
