@@ -33,7 +33,7 @@ angular.module('outdoorconcept.base', [])
             }
         };
     }])
-    .controller('AppController', ['$scope', '$window', 'language', function($scope, $window, language) {
+    .controller('AppController', ['$scope', '$window', '$route', 'language', function($scope, $window, $route, language) {
         $scope.modernizr = Modernizr;
 
         var cacheStatusValues = [],
@@ -69,7 +69,10 @@ angular.module('outdoorconcept.base', [])
         cache.addEventListener('updateready', function () {
             console.warn("manifest redownloaded");
             $scope.debug_msg = "manifest redownloaded";
-            $scope.$apply();
+            $window.applicationCache.swapCache();
+            $route.reload();
+            // $scope.$apply();
+            // $scope.$broadcast('appcache.reloaded');
         }, false);
 
     }]);
