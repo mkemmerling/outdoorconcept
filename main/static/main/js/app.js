@@ -56,7 +56,7 @@ angular.module('outdoorconcept.base', [])
 
         cache.addEventListener('downloading', function () {
             console.warn("Downloading manifest");
-            $scope.debug_msg = "downloading manifest";
+            $scope.debug_msg = "Downloading manifest";
             $scope.$apply();
         }, false);
 
@@ -71,8 +71,6 @@ angular.module('outdoorconcept.base', [])
             $scope.debug_msg = "manifest redownloaded";
             $window.applicationCache.swapCache();
             $route.reload();
-            // $scope.$apply();
-            // $scope.$broadcast('appcache.reloaded');
         }, false);
 
     }]);

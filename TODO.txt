@@ -3,10 +3,11 @@ TO DO
 
 * Appcache
 
-  - Fallback for Siebert
-  - MIME type?
+  - debug script
+  - if online regularly update?
   - Chrome iOS
   - http Safari/iOS
+  - Fallback for Siebert
 
 * favicon
 * Icon for Home Bildschirm

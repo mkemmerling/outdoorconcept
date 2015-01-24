@@ -19,7 +19,6 @@ function logEvent(e) {
     message += ', status: ' + status;
     if (type == 'error' && navigator.onLine) {
         message += ' (prolly a syntax error in manifest)';
-        alert(e);
     }
     console.log(message);
 }
