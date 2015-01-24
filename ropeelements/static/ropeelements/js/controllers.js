@@ -18,7 +18,6 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
         filters = angular.copy(boolean_filters);
         filters.push('kind');
         empty_filter = {
-            kind: null,
             child_friendly: false,
             accessible: false,
             canope: false
@@ -74,7 +73,7 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             // We track kinds by their ids to ensure that the selected kind is
             // preserved on language switch. Also note that in rare cases
             // a kind might be gone after reload.
-            if ($scope.filter.kind !== null && kinds_by_id[$scope.filter.kind.id] !== undefined) {
+            if ($scope.filter.kind && kinds_by_id[$scope.filter.kind.id] !== undefined) {
                 kinds = [kinds_by_id[$scope.filter.kind.id]];
             } else {
                 kinds = $scope.kinds;

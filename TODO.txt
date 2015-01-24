@@ -5,6 +5,7 @@ TO DO
 
   - debug script
   - if online regularly update?
+  - Safari: problem with manifest reload due to cached js, css; need to preserve last version.
   - Chrome iOS
   - http Safari/iOS
   - Fallback for Siebert
