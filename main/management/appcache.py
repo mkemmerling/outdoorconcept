@@ -38,18 +38,18 @@ def create_manifest():
 
     # manifest += '# Static files\n'
 
-    # # CSS
-    # if settings.COMPRESS_ENABLED:
-    #     for name in os.listdir(join(CACHE_DIR, 'css')):
-    #         manifest += static_file_entry(join('CACHE', 'css', name))
-    # else:
-    #     subpath = join('jquery-ui', 'themes')
-    #     manifest += static_file_entry(join(subpath, 'base', 'core.css'))
-    #     manifest += static_file_entry(join(subpath, 'base', 'datepicker.css'))
-    #     manifest += static_file_entry(join(subpath, 'smoothness', 'theme.css'))
-    #     for name in os.listdir(join(CACHE_DIR, 'css')):
-    #         if name.startswith('app.'):
-    #             manifest += static_file_entry(join('CACHE', 'css', name))
+    # CSS
+    if settings.COMPRESS_ENABLED:
+        for name in os.listdir(join(CACHE_DIR, 'css')):
+            manifest += static_file_entry(join('CACHE', 'css', name))
+    else:
+        subpath = join('jquery-ui', 'themes')
+        manifest += static_file_entry(join(subpath, 'base', 'core.css'))
+        manifest += static_file_entry(join(subpath, 'base', 'datepicker.css'))
+        manifest += static_file_entry(join(subpath, 'smoothness', 'theme.css'))
+        for name in os.listdir(join(CACHE_DIR, 'css')):
+            if name.startswith('app.'):
+                manifest += static_file_entry(join('CACHE', 'css', name))
 
     # # JavaScripts
     # if settings.COMPRESS_ENABLED:
@@ -76,10 +76,10 @@ def create_manifest():
     #     manifest += collect_static(MAIN_STATIC_DIR, join('main', 'js'))
 
     # Fonts
-    # files = ('glyphicons-halflings-regular.' + ext
-    #          for ext in ('ttf', 'woff', 'woff2'))
-    # manifest += collect_static(
-    #     settings.STATIC_ROOT, join('bootstrap', 'fonts'), files)
+    files = ('glyphicons-halflings-regular.' + ext
+             for ext in ('ttf', 'woff', 'woff2'))
+    manifest += collect_static(
+        settings.STATIC_ROOT, join('bootstrap', 'fonts'), files)
 
     # Images
     manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
