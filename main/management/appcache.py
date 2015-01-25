@@ -24,17 +24,23 @@ def create_manifest():
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
 
+    manifest += '# Data\n'
+    manifest += '/en/api/ropeelements\n'
+    # manifest += '/de/api/ropeelements\n'
+
+    manifest += '\n'
+    manifest += 'NETWORK:\n'
+    manifest += '*\n'
+
+    manifest += '\n'
+    manifest += 'CACHE:\n'
+
     manifest += '# Templates\n'
     manifest += '/en/ropeelements\n'
     manifest += '/de/seilelemente\n'
     manifest += '/en/ng/ropeelements\n'
     manifest += '/de/ng/ropeelements\n'
     manifest += '\n'
-
-    manifest += '# Data\n'
-    manifest += '/en/api/ropeelements\n'
-    # manifest += '/de/api/ropeelements\n'
-    # manifest += '\n'
 
     manifest += '# Static files\n'
 
@@ -95,10 +101,6 @@ def create_manifest():
         names = '\n'.join(join(base, name) for name in files)
         if names:
             manifest += names + '\n'
-
-    manifest += '\n'
-    manifest += 'NETWORK:\n'
-    manifest += '*\n'
 
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
