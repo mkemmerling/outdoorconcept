@@ -11,13 +11,14 @@ class Command(NoArgsCommand):
             'save current one.')
 
     def handle_noargs(self, **options):
+        current_cache = os.path.join(settings.STATIC_ROOT, 'CACHE')
         previous_cache = os.path.join(settings.DATA_DIR, 'PREVIOUS_CACHE')
-        cache_dir = os.path.join(settings.STATIC_ROOT, 'CACHE')
         tempdir = tempfile.TemporaryDirectory(prefix='oc_')
+        new_cache = os.path.join(tempdir.name, 'CACHE')
 
         def copy_previous(fype):
             src_dir = os.path.join(previous_cache, fype)
-            dest_dir = os.path.join(cache_dir, fype)
+            dest_dir = os.path.join(current_cache, fype)
             if os.path.exists(src_dir):
                 for name in os.listdir(src_dir):
                     if name.endswith('.' + fype):
@@ -26,10 +27,9 @@ class Command(NoArgsCommand):
                         if not os.path.exists(dst):
                             shutil.copy(src, dst)
 
-        shutil.copytree(cache_dir, tempdir.name)
+        shutil.copytree(current_cache, new_cache)
         if os.path.exists(previous_cache):
             copy_previous('css')
             copy_previous('js')
             shutil.rmtree(previous_cache)
-            new_cache = os.path.join(tempdir.name, 'CACHE')
             shutil.copytree(new_cache, previous_cache)
