@@ -81,20 +81,20 @@ def create_manifest():
     # manifest += collect_static(
     #     settings.STATIC_ROOT, join('bootstrap', 'fonts'), files)
 
-    # # Images
-    # manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
-    # manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'images'))
+    # Images
+    manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
+    manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'images'))
 
-    # manifest += '\n'
+    manifest += '\n'
 
-    # manifest += '# Media files\n'
-    # len_media_root = len(settings.MEDIA_ROOT)
-    # for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-    #     base = join(
-    #         settings.MEDIA_URL, root[len_media_root:].strip('/')).rstrip('/')
-    #     names = '\n'.join(join(base, name) for name in files)
-    #     if names:
-    #         manifest += names + '\n'
+    manifest += '# Media files\n'
+    len_media_root = len(settings.MEDIA_ROOT)
+    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+        base = join(
+            settings.MEDIA_URL, root[len_media_root:].strip('/')).rstrip('/')
+        names = '\n'.join(join(base, name) for name in files)
+        if names:
+            manifest += names + '\n'
 
     manifest += '\n'
     manifest += 'NETWORK:\n'
