@@ -23,58 +23,57 @@ def create_manifest():
     """Create appcache manifest."""
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
-    manifest += created() + '\n'
 
-    manifest += '# Templates\n'
-    manifest += '/en/ropeelements\n'
-    manifest += '/de/seilelemente\n'
-    manifest += '/en/ng/ropeelements\n'
-    manifest += '/de/ng/ropeelements\n'
-    manifest += '\n'
+    # manifest += '# Templates\n'
+    # manifest += '/en/ropeelements\n'
+    # manifest += '/de/seilelemente\n'
+    # manifest += '/en/ng/ropeelements\n'
+    # manifest += '/de/ng/ropeelements\n'
+    # manifest += '\n'
 
-    manifest += '# Data\n'
-    manifest += '/en/api/ropeelements\n'
-    manifest += '/de/api/ropeelements\n'
-    manifest += '\n'
+    # manifest += '# Data\n'
+    # manifest += '/en/api/ropeelements\n'
+    # manifest += '/de/api/ropeelements\n'
+    # manifest += '\n'
 
-    manifest += '# Static files\n'
+    # manifest += '# Static files\n'
 
-    # CSS
-    if settings.COMPRESS_ENABLED:
-        for name in os.listdir(join(CACHE_DIR, 'css')):
-            manifest += static_file_entry(join('CACHE', 'css', name))
-    else:
-        subpath = join('jquery-ui', 'themes')
-        manifest += static_file_entry(join(subpath, 'base', 'core.css'))
-        manifest += static_file_entry(join(subpath, 'base', 'datepicker.css'))
-        manifest += static_file_entry(join(subpath, 'smoothness', 'theme.css'))
-        for name in os.listdir(join(CACHE_DIR, 'css')):
-            if name.startswith('app.'):
-                manifest += static_file_entry(join('CACHE', 'css', name))
+    # # CSS
+    # if settings.COMPRESS_ENABLED:
+    #     for name in os.listdir(join(CACHE_DIR, 'css')):
+    #         manifest += static_file_entry(join('CACHE', 'css', name))
+    # else:
+    #     subpath = join('jquery-ui', 'themes')
+    #     manifest += static_file_entry(join(subpath, 'base', 'core.css'))
+    #     manifest += static_file_entry(join(subpath, 'base', 'datepicker.css'))
+    #     manifest += static_file_entry(join(subpath, 'smoothness', 'theme.css'))
+    #     for name in os.listdir(join(CACHE_DIR, 'css')):
+    #         if name.startswith('app.'):
+    #             manifest += static_file_entry(join('CACHE', 'css', name))
 
-    # JavaScripts
-    if settings.COMPRESS_ENABLED:
-        for name in os.listdir(join(CACHE_DIR, 'js')):
-            manifest += static_file_entry(join('CACHE', 'js', name))
-    else:
-        manifest += static_file_entry(join('modernizr', 'modernizr.js'))
-        manifest += static_file_entry(join('jquery', 'dist', 'jquery.js'))
-        subpath = join('jquery-ui', 'ui')
-        manifest += static_file_entry(join(subpath, 'core.js'))
-        manifest += static_file_entry(join(subpath, 'datepicker.js'))
-        manifest += static_file_entry(
-            join(subpath, 'i18n', 'datepicker-de.js'))
-        manifest += static_file_entry(join('angular', 'angular.js'))
-        manifest += static_file_entry(
-            join('angular-route', 'angular-route.js'))
-        manifest += static_file_entry(
-            join('angular-resource', 'angular-resource.js'))
-        manifest += static_file_entry(
-            join('angular-sanitize', 'angular-sanitize.js'))
-        manifest += static_file_entry(join('bootstrap', 'js', 'modal.js'))
-        manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'js'))
-        manifest += collect_static(SIEBERT_STATIC_DIR, join('siebert', 'js'))
-        manifest += collect_static(MAIN_STATIC_DIR, join('main', 'js'))
+    # # JavaScripts
+    # if settings.COMPRESS_ENABLED:
+    #     for name in os.listdir(join(CACHE_DIR, 'js')):
+    #         manifest += static_file_entry(join('CACHE', 'js', name))
+    # else:
+    #     manifest += static_file_entry(join('modernizr', 'modernizr.js'))
+    #     manifest += static_file_entry(join('jquery', 'dist', 'jquery.js'))
+    #     subpath = join('jquery-ui', 'ui')
+    #     manifest += static_file_entry(join(subpath, 'core.js'))
+    #     manifest += static_file_entry(join(subpath, 'datepicker.js'))
+    #     manifest += static_file_entry(
+    #         join(subpath, 'i18n', 'datepicker-de.js'))
+    #     manifest += static_file_entry(join('angular', 'angular.js'))
+    #     manifest += static_file_entry(
+    #         join('angular-route', 'angular-route.js'))
+    #     manifest += static_file_entry(
+    #         join('angular-resource', 'angular-resource.js'))
+    #     manifest += static_file_entry(
+    #         join('angular-sanitize', 'angular-sanitize.js'))
+    #     manifest += static_file_entry(join('bootstrap', 'js', 'modal.js'))
+    #     manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'js'))
+    #     manifest += collect_static(SIEBERT_STATIC_DIR, join('siebert', 'js'))
+    #     manifest += collect_static(MAIN_STATIC_DIR, join('main', 'js'))
 
     # Fonts
     # files = ('glyphicons-halflings-regular.' + ext
