@@ -24,12 +24,12 @@ def create_manifest():
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
 
-    # manifest += '# Templates\n'
-    # manifest += '/en/ropeelements\n'
-    # manifest += '/de/seilelemente\n'
-    # manifest += '/en/ng/ropeelements\n'
-    # manifest += '/de/ng/ropeelements\n'
-    # manifest += '\n'
+    manifest += '# Templates\n'
+    manifest += '/en/ropeelements\n'
+    manifest += '/de/seilelemente\n'
+    manifest += '/en/ng/ropeelements\n'
+    manifest += '/de/ng/ropeelements\n'
+    manifest += '\n'
 
     # manifest += '# Data\n'
     # manifest += '/en/api/ropeelements\n'
