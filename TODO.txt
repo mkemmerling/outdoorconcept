@@ -6,7 +6,6 @@ TO DO
   - http Safari/iOS
   - language switch iOS/Chrome
   - manifest donwload info
-  - if online regularly update?
   - debug script
   - Chrome iOS
   - FF
