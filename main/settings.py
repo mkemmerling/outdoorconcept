@@ -13,13 +13,15 @@ OPENSHIFT_REPO_DIR = os.environ.get('OPENSHIFT_REPO_DIR', '')
 ON_OPENSHIFT = OPENSHIFT_REPO_DIR != ''
 
 if ON_OPENSHIFT:
-    OPENSHIFT_DATA_DIR = os.environ['OPENSHIFT_DATA_DIR']
-    OPENSHIFT_LOG_DIR = os.environ['OPENSHIFT_LOG_DIR']
+    DATA_DIR = os.environ['OPENSHIFT_DATA_DIR']
+    LOG_DIR = os.environ['OPENSHIFT_LOG_DIR']
     DEBUG = False
     TEMPLATE_DEBUG = False
     SECRET_KEY = os.environ['OPENSHIFT_SECRET_TOKEN']
     ALLOWED_HOSTS = [os.environ['OPENSHIFT_APP_DNS'], socket.gethostname()]
 else:
+    DATA_DIR = BASE_DIR
+    LOG_DIR = os.path.join(os.path.join(BASE_DIR, 'logs'))
     DEBUG = True
     TEMPLATE_DEBUG = True
     SECRET_KEY = '+*^#b1@rvl_t!3xrb2tz!vuaho9t+ieou)fmm1*i3!9$=nc6#g'
@@ -93,11 +95,10 @@ REST_FRAMEWORK = {
 
 
 # ----- Database configuration ----- #
-DB_DIR = OPENSHIFT_DATA_DIR if ON_OPENSHIFT else BASE_DIR
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(DB_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
     }
 }
 
@@ -201,19 +202,15 @@ COMPRESS_OFFLINE = True if ON_OPENSHIFT else False
 MEDIA_URL = '/static/media/'
 
 if ON_OPENSHIFT:
-    MEDIA_ROOT = os.path.join(OPENSHIFT_DATA_DIR, 'media')
+    MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 else:
     MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip('/').split('/'))
     SERVE_MEDIA = True
 
 
 # ----- Logging ----- #
-if ON_OPENSHIFT:
-    LOG_DIR = OPENSHIFT_LOG_DIR
-else:
-    LOG_DIR = os.path.join(os.path.join(BASE_DIR, 'logs'))
-    if not os.path.exists(LOG_DIR):
-        os.makedirs(LOG_DIR)
+if not ON_OPENSHIFT and not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
 
 LOGGING = {
     'version': 1,
