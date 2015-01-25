@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "---> ACTION HOOK: build <---"
+echo "CACHE dir:"
+ls -la ${OPENSHIFT_REPO_DIR}wsgi/static/CACHE
+
