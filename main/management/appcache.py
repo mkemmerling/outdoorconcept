@@ -26,7 +26,7 @@ def create_manifest():
 
     manifest += '# Data\n'
     manifest += '/en/api/ropeelements\n'
-    # manifest += '/de/api/ropeelements\n'
+    manifest += '/de/api/ropeelements\n'
 
     manifest += '\n'
     manifest += 'NETWORK:\n'
