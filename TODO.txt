@@ -3,11 +3,6 @@ TO DO
 
 * Appcache
 
-  - Safari: problem with manifest reload due to cached js, css; need to preserve last version:
-
-    - Before compress: delete the files not in manifest.json and copy CACHE to data dir
-    - After compress: move files from data dir back to CACHE and delete copy
-
   - http Safari/iOS
   - language switch iOS/Chrome
   - manifest donwload info
