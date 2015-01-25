@@ -97,6 +97,10 @@ def create_manifest():
     #     if names:
     #         manifest += names + '\n'
 
+    manifest += '\n'
+    manifest += 'NETWORK:\n'
+    manifest += '*\n'
+
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
 
