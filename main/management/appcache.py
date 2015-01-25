@@ -22,20 +22,8 @@ join = os.path.join
 def create_manifest():
     """Create appcache manifest."""
     manifest = 'CACHE MANIFEST\n'
-    # manifest += created() + '\n\n'
+    manifest += created() + '\n\n'
     manifest += created() + '\n'
-
-    manifest += '# Templates\n'
-    manifest += '/en/ropeelements\n'
-    manifest += '/de/seilelemente\n'
-    manifest += '/en/ng/ropeelements\n'
-    manifest += '/de/ng/ropeelements\n'
-    # manifest += '\n'
-
-    manifest += '# Data\n'
-    manifest += '/en/api/ropeelements\n'
-    manifest += '/de/api/ropeelements\n'
-    # manifest += '\n'
 
     manifest += '# Static files\n'
 
@@ -86,7 +74,7 @@ def create_manifest():
     manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
     manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'images'))
 
-    # manifest += '\n'
+    manifest += '\n'
 
     manifest += '# Media files\n'
     len_media_root = len(settings.MEDIA_ROOT)
@@ -97,8 +85,20 @@ def create_manifest():
         if names:
             manifest += names + '\n'
 
+    manifest += '# Templates\n'
+    manifest += '/en/ropeelements\n'
+    manifest += '/de/seilelemente\n'
+    manifest += '/en/ng/ropeelements\n'
+    manifest += '/de/ng/ropeelements\n'
+    manifest += '\n'
+
+    manifest += '# Data\n'
+    manifest += '/en/api/ropeelements\n'
+    manifest += '/de/api/ropeelements\n'
+    manifest += '\n'
+
     with open(MANIFEST_FILE, 'w') as fd:
-        fd.write(manifest[:-1])
+        fd.write(manifest)
 
 
 def static_file_entry(subpath):
