@@ -25,6 +25,18 @@ def create_manifest():
     manifest += created() + '\n\n'
     manifest += created() + '\n'
 
+    manifest += '# Templates\n'
+    manifest += '/en/ropeelements\n'
+    manifest += '/de/seilelemente\n'
+    manifest += '/en/ng/ropeelements\n'
+    manifest += '/de/ng/ropeelements\n'
+    manifest += '\n'
+
+    manifest += '# Data\n'
+    manifest += '/en/api/ropeelements\n'
+    manifest += '/de/api/ropeelements\n'
+    manifest += '\n'
+
     manifest += '# Static files\n'
 
     # CSS
@@ -65,37 +77,25 @@ def create_manifest():
         manifest += collect_static(MAIN_STATIC_DIR, join('main', 'js'))
 
     # Fonts
-    files = ('glyphicons-halflings-regular.' + ext
-             for ext in ('ttf', 'woff', 'woff2'))
-    manifest += collect_static(
-        settings.STATIC_ROOT, join('bootstrap', 'fonts'), files)
+    # files = ('glyphicons-halflings-regular.' + ext
+    #          for ext in ('ttf', 'woff', 'woff2'))
+    # manifest += collect_static(
+    #     settings.STATIC_ROOT, join('bootstrap', 'fonts'), files)
 
-    # Images
-    manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
-    manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'images'))
+    # # Images
+    # manifest += collect_static(MAIN_STATIC_DIR, join('main', 'images'))
+    # manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'images'))
 
-    manifest += '\n'
+    # manifest += '\n'
 
-    manifest += '# Media files\n'
-    len_media_root = len(settings.MEDIA_ROOT)
-    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-        base = join(
-            settings.MEDIA_URL, root[len_media_root:].strip('/')).rstrip('/')
-        names = '\n'.join(join(base, name) for name in files)
-        if names:
-            manifest += names + '\n'
-
-    manifest += '# Templates\n'
-    manifest += '/en/ropeelements\n'
-    manifest += '/de/seilelemente\n'
-    manifest += '/en/ng/ropeelements\n'
-    manifest += '/de/ng/ropeelements\n'
-    manifest += '\n'
-
-    manifest += '# Data\n'
-    manifest += '/en/api/ropeelements\n'
-    manifest += '/de/api/ropeelements\n'
-    manifest += '\n'
+    # manifest += '# Media files\n'
+    # len_media_root = len(settings.MEDIA_ROOT)
+    # for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+    #     base = join(
+    #         settings.MEDIA_URL, root[len_media_root:].strip('/')).rstrip('/')
+    #     names = '\n'.join(join(base, name) for name in files)
+    #     if names:
+    #         manifest += names + '\n'
 
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
