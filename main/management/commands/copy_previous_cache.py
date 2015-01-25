@@ -15,12 +15,13 @@ class Command(NoArgsCommand):
         def copy_files(fype):
             src_dir = os.path.join(previous_cache, fype)
             dest_dir = os.path.join(cache_dir, fype)
-            for name in os.listdir(src_dir):
-                if name.endswith('.' + fype):
-                    src = os.path.join(src_dir, name)
-                    dst = os.path.join(dest_dir, name)
-                    if not os.path.exists(dst):
-                        shutil.copy(src, dst)
+            if os.path.exists(src_dir):
+                for name in os.listdir(src_dir):
+                    if name.endswith('.' + fype):
+                        src = os.path.join(src_dir, name)
+                        dst = os.path.join(dest_dir, name)
+                        if not os.path.exists(dst):
+                            shutil.copy(src, dst)
 
         copy_files('css')
         copy_files('js')

@@ -18,4 +18,4 @@ class Command(compress.Command):
         previous_cache = os.path.join(settings.DATA_DIR, 'PREVIOUS_CACHE')
         cache_dir = os.path.join(settings.STATIC_ROOT, 'CACHE')
         shutil.rmtree(previous_cache, ignore_errors=True)
-        shutil.copytree(cache_dir, self.previous_cache)
+        shutil.copytree(cache_dir, previous_cache)
