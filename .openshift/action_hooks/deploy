@@ -21,8 +21,11 @@ python ${OPENSHIFT_REPO_DIR}manage.py migrate --noinput
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput'"
 python ${OPENSHIFT_REPO_DIR}manage.py collectstatic --noinput
 
-echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py compress'"
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py compress_appcache_save'"
 python ${OPENSHIFT_REPO_DIR}manage.py compress_appcache_save
 
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py create_appcache_manifest'"
 python ${OPENSHIFT_REPO_DIR}manage.py create_appcache_manifest
+
+echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py copy_previous_cache'"
+python ${OPENSHIFT_REPO_DIR}manage.py copy_previous_cache
