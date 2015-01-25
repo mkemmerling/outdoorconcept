@@ -1,4 +1,5 @@
 #!/bin/bash
 echo "---> ACTION HOOK: pre_build <---"
 echo "CACHE dir:"
-ls -la ${OPENSHIFT_REPO_DIR}wsgi/static/CACHE
+ls -la ${OPENSHIFT_REPO_DIR}wsgi/static
+
