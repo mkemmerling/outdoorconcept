@@ -30,6 +30,7 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
         $scope.difficulty_legend = {from: 1, to: 10};
 
         $scope.kinds = [];
+        $scope.ropeelements = [];
 
         function queryRopeElements() {
             var set_boolean_filters, kinds;
