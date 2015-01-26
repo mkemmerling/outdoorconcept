@@ -48,8 +48,6 @@ angular.module('outdoorconcept.base', [])
 
         $scope.debug_msg = "–––";
 
-        console.log("TEST");
-
         cache.addEventListener('noupdate', function () {
             console.warn("No manifest update");
             $scope.debug_msg = "No manifest update";
@@ -72,6 +70,10 @@ angular.module('outdoorconcept.base', [])
             console.warn("manifest redownloaded");
             $scope.debug_msg = "manifest redownloaded";
             $window.applicationCache.swapCache();
+
+            $window.localStorage.removeItem('ropeelements_en');
+            $window.localStorage.removeItem('ropeelements_de');
+
             $route.reload();
         }, false);
 

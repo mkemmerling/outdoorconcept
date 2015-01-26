@@ -68,7 +68,10 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             });
         }
 
-        RopeElement.query({language: language.getLanguage()}).$promise.then(function (result) {
+
+        var storage = $window.localStorage;
+
+        function init(result) {
             $scope.ropeelements = result;
             angular.forEach(result, function (kind_elements) {
                 $scope.kinds.push(kind_elements.kind);
@@ -89,10 +92,10 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             angular.forEach(filters, function (name) {
                 $scope.$watch('filter.' + name, function () {
                     // Prevent query on first watch
-                    // if ($scope.loaded) {
+                    if ($scope.loaded) {
                         queryRopeElements();
                         storage.setItem('elementFilter', angular.toJson($scope.filter));
-                    // }
+                    }
                 });
             });
 
@@ -100,7 +103,62 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             $timeout(function () {
                 $scope.loaded = true;
             });
-        });
+        }
+
+        var lang = language.getLanguage(),
+            ropeelements = storage.getItem('ropeelements_' + lang);
+
+        if (ropeelements === null) {
+            console.log("QUERY ropeelements");
+            RopeElement.query({language: lang}).$promise.then(function (result) {
+                // TODO:
+                // - do in resource/resolve to avoid JSONizing again
+                // - need to empty storage on appcache swap
+                // - could also store elements_by_kind?
+                storage.setItem('ropeelements_' + lang, angular.toJson(result));
+                init(result);
+            });
+       } else {
+            console.log("ropeelements from local storage");
+            init(angular.fromJson(ropeelements));
+       }
+
+
+
+
+        // RopeElement.query({language: language.getLanguage()}).$promise.then(function (result) {
+        //     $scope.ropeelements = result;
+        //     angular.forEach(result, function (kind_elements) {
+        //         $scope.kinds.push(kind_elements.kind);
+        //         kinds_by_id[kind_elements.kind.id] = kind_elements.kind;
+        //         elements_by_kind[kind_elements.kind.id] = kind_elements.elements;
+        //     });
+
+        //     $scope.filter = angular.fromJson(storage.getItem('elementFilter'));
+        //     if (!$scope.filter) {
+        //         $scope.filter = empty_filter;
+        //         storage.setItem('elementFilter', angular.toJson($scope.filter));
+        //     }
+
+        //     if (!angular.equals($scope.filter, empty_filter)) {
+        //         queryRopeElements();
+        //     }
+
+        //     angular.forEach(filters, function (name) {
+        //         $scope.$watch('filter.' + name, function () {
+        //             // Prevent query on first watch
+        //             if ($scope.loaded) {
+        //                 queryRopeElements();
+        //                 storage.setItem('elementFilter', angular.toJson($scope.filter));
+        //             }
+        //         });
+        //     });
+
+        //     // Prevent filtering and display of no results message until loaded
+        //     $timeout(function () {
+        //         $scope.loaded = true;
+        //     });
+        // });
     }
 ]);
 
