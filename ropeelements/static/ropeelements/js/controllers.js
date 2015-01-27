@@ -3,7 +3,15 @@
 angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 .factory('RopeElement', ['$resource', function ($resource) {
     return $resource(
-        '/:language/api/ropeelements'
+        '/:language/api/ropeelements',
+        {},
+        {
+            'query':  {
+                method: 'GET',
+                isArray: true,
+                cache: true
+            }
+        }
     );
 }])
 .controller('RopeElementListController',
@@ -69,7 +77,7 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
         }
 
 
-        var storage = $window.localStorage;
+        var lstorage = $window.localStorage;
 
         function init(result) {
             $scope.ropeelements = result;
@@ -106,16 +114,18 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
         }
 
         var lang = language.getLanguage(),
-            ropeelements = storage.getItem('ropeelements_' + lang);
+            ropeelements = lstorage.getItem('ropeelements_' + lang);
 
         if (ropeelements === null) {
             console.log("QUERY ropeelements");
+
             RopeElement.query({language: lang}).$promise.then(function (result) {
                 // TODO:
                 // - do in resource/resolve to avoid JSONizing again
                 // - need to empty storage on appcache swap
                 // - could also store elements_by_kind?
-                storage.setItem('ropeelements_' + lang, angular.toJson(result));
+                console.warn("RESULT", result);
+                lstorage.setItem('ropeelements_' + lang, angular.toJson(result));
                 init(result);
             });
        } else {
