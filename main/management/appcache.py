@@ -144,7 +144,7 @@ def create_manifest():
 
     manifest += '\n'
     manifest += 'FALLBACK:\n'
-    # TODO: Handled by 'otherwise' route
+    # TODO: Handled by 'otherwise' route? NOT WORKING
     manifest += '/ /en/ropeelements\n'
 
     with open(MANIFEST_FILE, 'w') as fd:
