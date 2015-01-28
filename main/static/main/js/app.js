@@ -33,7 +33,8 @@ angular.module('outdoorconcept.base', [])
             }
         };
     }])
-    .controller('AppController', ['$scope', '$window', '$route', 'language', function($scope, $window, $route, language) {
+    .controller('AppController', ['$scope', '$window', '$route', 'language',
+            function($scope, $window, $route, language) {
         $scope.modernizr = Modernizr;
 
         var cacheStatusValues = [],
@@ -51,30 +52,33 @@ angular.module('outdoorconcept.base', [])
         cache.addEventListener('noupdate', function () {
             console.warn("No manifest update");
             $scope.debug_msg = "No manifest update";
-            $scope.$apply();
+            // $scope.$apply();
         }, false);
 
         cache.addEventListener('downloading', function () {
             console.warn("Downloading manifest");
             $scope.debug_msg = "Downloading manifest";
-            $scope.$apply();
+            // $scope.$apply();
         }, false);
 
         cache.addEventListener('cached', function () {
             console.warn("manifest cached");
             $scope.debug_msg = "manifest cached";
-            $scope.$apply();
+            // $scope.$apply();
         }, false);
 
         cache.addEventListener('updateready', function () {
-            console.warn("manifest redownloaded");
+            console.warn("manifest redownloaded RELOAD ROUTE");
             $scope.debug_msg = "manifest redownloaded";
-            $window.applicationCache.swapCache();
+            // $window.applicationCache.swapCache();
 
-            $window.localStorage.removeItem('ropeelements_en');
-            $window.localStorage.removeItem('ropeelements_de');
+            // $window.localStorage.removeItem('ropeelements_en');
+            // $window.localStorage.removeItem('ropeelements_de');
 
-            $route.reload();
+            $window.location.reload();
+
+            // $route.reload();
+
         }, false);
 
     }]);

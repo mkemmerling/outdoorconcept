@@ -1,10 +1,10 @@
 from django.core.management.base import NoArgsCommand
 
-from main.management.appcache import create_manifest
+from main.management.appcache import update_appcache
 
 
 class Command(NoArgsCommand):
     help = 'Create application cache manifest file.'
 
     def handle_noargs(self, **options):
-        create_manifest()
+        update_appcache(True)

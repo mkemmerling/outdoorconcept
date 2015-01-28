@@ -8,8 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from ordered_model.models import OrderedModel
 
-from main.management.appcache import update_manifest
-
 
 class Config(models.Model):
     """Rope element configuration."""
@@ -137,10 +135,12 @@ def cleanup_after_element_delete(sender, instance, **kwargs):
     manifest is recreated.
     Otherwise only the manifest's timestamp is updated.
     """
-    recreate_appcache = instance.image or instance.thumbnail
+    recreate_manifest = instance.image or instance.thumbnail
     instance.image.delete(False)
     instance.thumbnail.delete(False)
-    update_manifest(recreate_appcache)
+    from main.management import appcache
+    appcache.create_js_data
+    appcache.update_appcache(recreate_manifest)
 
 
 @receiver(post_save, sender=Element)
@@ -150,4 +150,6 @@ def update_appcache_on_element_save(sender, instance, **kwargs):
     If an image was added, updated or deleted, the manifest is recreated,
     otherwise only its timestamp is updated.
     """
-    update_manifest(getattr(instance, '_image_modified', False))
+    from main.management import appcache
+    appcache.create_js_data
+    appcache.update_appcache(getattr(instance, '_image_modified', False))

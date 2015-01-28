@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load i18n %}
 {% load compress %}
 <!DOCTYPE html>
@@ -13,11 +13,12 @@
   <link rel="stylesheet" type="text/css" href="{% static 'jquery-ui/themes/smoothness/theme.css' %}">
   <link rel="stylesheet" type="text/less" href="{% static 'main/less/app.less' %}">
   {% endcompress %}
+  <script src="{% static 'ropeelements.js' %}"></script>
   <title>outdoorconcept</title>
 </head>
 <body ng-controller="AppController">
   <div ng-cloak>DEBUG: {$ debug_msg $}</div>
-  <div class="container-fluid" ng-view ng-cloak></div>
+  <div class="container-fluid" ng-view></div>
   {% compress js %}
   <script src="{% static 'modernizr/modernizr.js' %}"></script>
   <script src="{% static 'jquery/dist/jquery.js' %}"></script>

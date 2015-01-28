@@ -1,12 +1,17 @@
-"""Create appcache manifest."""
+"""Create application cache."""
 import datetime
 import os
 import re
 
 from django.conf import settings
+from django.utils import translation
+
+from rest_framework.renderers import JSONRenderer
 
 import main
 import ropeelements
+from ropeelements.models import Element
+from ropeelements.serializers import ElementSerializer, ElementListSerializer
 import siebert
 
 MANIFEST_FILE = os.path.join(settings.STATIC_ROOT, 'cache.manifest')
@@ -19,8 +24,42 @@ SIEBERT_STATIC_DIR = os.path.join(os.path.dirname(siebert.__file__), 'static')
 join = os.path.join
 
 
+def create_js_data():
+    """Create JavaScript offline data."""
+    renderer = JSONRenderer()
+    jspath = join(settings.STATIC_ROOT, 'ropeelements.js')
+
+    print("CREATE js data")
+
+    def serialize(lang):
+        translation.activate(lang)
+        queryset = Element._default_manager.all()
+        serializer = ElementSerializer(queryset)
+        list_serializer = ElementListSerializer(queryset, child=serializer)
+        data = list_serializer.data
+        return renderer.render(data)
+
+    def write(fd, lang):
+        data = serialize(lang).replace(b"'", b"\\'").replace(b'\\"', b'\\\\"')
+        fd.write(b"window.localStorage.setItem('ropeelements_" +
+                 bytes(lang, 'ascii') + b"', '" + data + b"');\n")
+
+    with open(jspath, 'bw') as fd:
+        write(fd, 'en')
+        write(fd, 'de')
+
+    with open(join(settings.STATIC_ROOT, 'ropeelements_en.js'), 'bw') as fd:
+        write(fd, 'en')
+
+    with open(join(settings.STATIC_ROOT, 'ropeelements_de.js'), 'bw') as fd:
+        write(fd, 'de')
+
+
 def create_manifest():
     """Create appcache manifest."""
+
+    print("CREATE manifest")
+
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
 
@@ -52,6 +91,9 @@ def create_manifest():
                 manifest += static_file_entry(join('CACHE', 'css', name))
 
     # JavaScripts
+    manifest += static_file_entry('ropeelements_en.js')
+    manifest += static_file_entry('ropeelements_de.js')
+    manifest += static_file_entry('ropeelements.js')
     if settings.COMPRESS_ENABLED:
         for name in os.listdir(join(CACHE_DIR, 'js')):
             manifest += static_file_entry(join('CACHE', 'js', name))
@@ -133,6 +175,8 @@ create_pattern = re.compile(r'# Created .+')
 def touch_manifest():
     """Update timestamp in appcache manifest."""
 
+    print("TOUCH manifest")
+
     with open(MANIFEST_FILE, 'r+t') as fd:
         manifest = fd.read()
         manifest = create_pattern.sub(created(), manifest)
@@ -140,5 +184,10 @@ def touch_manifest():
         fd.write(manifest)
 
 
-def update_manifest(recreate=False):
-    create_manifest() if recreate else touch_manifest()
+def update_appcache(recreate_manifest=False):
+    """(Re-)Create JavaScript offline data and appcache manifest.
+
+    If ``recreate_manifest`` is ``False`` update timestamp in manifest only.
+    """
+    create_js_data()
+    create_manifest() if recreate_manifest else touch_manifest()

@@ -3,20 +3,12 @@
 angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
 .factory('RopeElement', ['$resource', function ($resource) {
     return $resource(
-        '/:language/api/ropeelements',
-        {},
-        {
-            'query':  {
-                method: 'GET',
-                isArray: true,
-                cache: true
-            }
-        }
+        '/:language/api/ropeelements'
     );
 }])
 .controller('RopeElementListController',
-    ['$scope', '$window', '$timeout', 'RopeElement', 'language',
-    function ($scope, $window, $timeout, RopeElement, language) {
+    ['$scope', '$window', '$timeout', 'language',
+    function ($scope, $window, $timeout, language) {
         var storage = $window.sessionStorage,
             kinds_by_id = {},
             elements_by_kind = {},
@@ -116,22 +108,23 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
         var lang = language.getLanguage(),
             ropeelements = lstorage.getItem('ropeelements_' + lang);
 
-        if (ropeelements === null) {
-            console.log("QUERY ropeelements");
+       //  if (ropeelements === null) {
+       //      console.log("QUERY ropeelements");
 
-            RopeElement.query({language: lang}).$promise.then(function (result) {
-                // TODO:
-                // - do in resource/resolve to avoid JSONizing again
-                // - need to empty storage on appcache swap
-                // - could also store elements_by_kind?
-                console.warn("RESULT", result);
-                lstorage.setItem('ropeelements_' + lang, angular.toJson(result));
-                init(result);
-            });
-       } else {
-            console.log("ropeelements from local storage");
+       //      RopeElement.query({language: lang}).$promise.then(function (result) {
+       //          // TODO:
+       //          // - do in resource/resolve to avoid JSONizing again
+       //          // - need to empty storage on appcache swap
+       //          // - could also store elements_by_kind?
+       //          console.warn("RESULT", result);
+       //          lstorage.setItem('ropeelements_' + lang, angular.toJson(result));
+       //          init(result);
+       //      });
+       // } else {
+            console.log("ropeelements from local storage", lang);
             init(angular.fromJson(ropeelements));
-       }
+            // init(angular.fromJson(TEST));
+       // }
 
 
 
