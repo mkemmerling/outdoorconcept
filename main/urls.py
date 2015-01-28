@@ -16,6 +16,7 @@ app_view = TemplateView.as_view(template_name='app.html')
 
 urlpatterns = patterns(
     '',
+    url(r'^$', RedirectView.as_view(url=_('en/ropeelements')), name='app'),
     # Single age application, routing handled by Angular
     url(r'^de/siebert$', app_view, name='siebert'),
     url(r'', include('siebert.urls')),
@@ -23,7 +24,6 @@ urlpatterns = patterns(
 
 urlpatterns += i18n_patterns(
     '',
-    url(r'^$', RedirectView.as_view(url=_('ropeelements')), name='app'),
     # Single age application, routing handled by Angular
     url(_(r'^ropeelements$'), app_view, name='ropeelements'),
     url(r'^ng/ropeelements$', ropeelements, name='ropeelement_list'),

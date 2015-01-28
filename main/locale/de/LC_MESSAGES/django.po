@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 15:52+0100\n"
+"POT-Creation-Date: 2015-01-28 10:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
 "Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: settings.py:109 settings_OFFLIEN.py:109
+#: settings.py:110
 msgid "English"
 msgstr "Englisch"
 
-#: settings.py:110 settings_OFFLIEN.py:110
+#: settings.py:111
 msgid "German"
 msgstr "Deutsch"
 
-#: urls.py:17
-msgid "ropeelements"
-msgstr "seilelemente"
+#: urls.py:19
+msgid "en/ropeelements"
+msgstr "de/seilelemente"
 
 #: urls.py:28
 msgid "^ropeelements$"
