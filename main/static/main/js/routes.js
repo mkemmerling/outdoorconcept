@@ -2,7 +2,7 @@
 
 angular.module('outdoorconcept.routes', ['ngRoute'])
     .config(['$routeProvider', 'languageProvider', function ($routeProvider, languageProvider) {
-        // var en, de;
+        var en, de;
         var default_url;
 
         // TODO: Try templateUrl function instead?
