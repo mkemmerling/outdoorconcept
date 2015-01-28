@@ -142,6 +142,11 @@ def create_manifest():
     # manifest += 'NETWORK:\n'
     # manifest += '*\n'
 
+    manifest += '\n'
+    manifest += 'FALLBACK:\n'
+    # TODO: Get language
+    manifest += '/ /de/seilelemente\n'
+
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
 
