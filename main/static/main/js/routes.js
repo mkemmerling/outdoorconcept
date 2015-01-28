@@ -49,7 +49,7 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
                 controller: 'SiebertFormController'
             })
             .otherwise({
-                redirectTo: '/',
+                redirectTo: '/de/seilelemente',
             });
     }]);
 
