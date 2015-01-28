@@ -1,8 +1,9 @@
 (function ($, undefined) {'use strict';
 
 angular.module('outdoorconcept.routes', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
-        var en, de;
+    .config(['$routeProvider', 'languageProvider', function ($routeProvider, languageProvider) {
+        // var en, de;
+        var default_url;
 
         // // We don't need to inject these values, but calling them on resolve
         // // allows us to set the language.
@@ -27,6 +28,20 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
         //     return window.localStorage.getItem('ropeelements_de');
         // };
 
+        default_url = function (a, b, c) {
+            // console.warn("default_url", a, b, c, window);
+            // console.warn("default_url", languageProvider, languageProvider.$get().getLanguage());
+            // return '/de/seilelemente';
+            var lang = languageProvider.$get().getLanguage();
+            console.log("default_url", lang);
+            if (lang === 'de') {
+                return '/de/seilelemente';
+            } else {
+                return '/en/ropeelements';
+            }
+        };
+
+
         $routeProvider
             .when('/en/ropeelements', {
                 templateUrl: '/en/ng/ropeelements',
@@ -49,7 +64,8 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
                 controller: 'SiebertFormController'
             })
             .otherwise({
-                redirectTo: '/de/seilelemente',
+                // redirectTo: '/de/seilelemente'
+                redirectTo: default_url
             });
     }]);
 

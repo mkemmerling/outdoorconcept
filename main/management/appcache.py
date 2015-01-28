@@ -144,8 +144,8 @@ def create_manifest():
 
     manifest += '\n'
     manifest += 'FALLBACK:\n'
-    # TODO: Get language
-    manifest += '/ /de/seilelemente\n'
+    # TODO: Handled by 'otherwise' route
+    manifest += '/ /en/ropeelements\n'
 
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
