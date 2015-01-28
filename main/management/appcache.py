@@ -70,10 +70,10 @@ def create_manifest():
     manifest += '/de/ng/ropeelements\n'
     manifest += '\n'
 
-    manifest += '# Data\n'
-    manifest += '/en/api/ropeelements\n'
-    manifest += '/de/api/ropeelements\n'
-    manifest += '\n'
+    # manifest += '# Data\n'
+    # manifest += '/en/api/ropeelements\n'
+    # manifest += '/de/api/ropeelements\n'
+    # manifest += '\n'
 
     manifest += '# Static files\n'
 
