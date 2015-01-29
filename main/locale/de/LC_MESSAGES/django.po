@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 10:52+0100\n"
+"POT-Creation-Date: 2015-01-29 07:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
 "Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
@@ -24,6 +24,14 @@ msgstr "Englisch"
 #: settings.py:111
 msgid "German"
 msgstr "Deutsch"
+
+#: templates/app.html:28 templates/app.html.py:29
+msgid "Close"
+msgstr ""
+
+#: templates/app.html:41
+msgid "The page can not be displayed. Please deactivate private surfing."
+msgstr "Die Seite kann nicht angezeigt werden. Bitte deaktivieren Sie privates Surfen."
 
 #: urls.py:19
 msgid "en/ropeelements"

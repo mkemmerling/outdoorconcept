@@ -19,18 +19,28 @@ angular.module('outdoorconcept.base', [])
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     }])
     .factory('language', ['$window', function ($window) {
-        var storage = $window.localStorage;
+        var storage = $window.sessionStorage;
+
+        function setLanguage(language) {
+            try {
+                storage.setItem('language', language);
+            } catch (e) {
+                // Safari sets storage quota to 0 when private surfing is activated,
+                // i.e. 'getItem' works, but getItem' fails.
+                $('#content').hide();
+                $('#storageDisabledAlert').show();
+                return;
+            }
+        }
 
         if (storage.getItem('language') === null) {
-            storage.setItem('language', ($window.navigator.language === 'de') ? 'de' : 'en');
+            setLanguage(($window.navigator.language === 'de') ? 'de' : 'en');
         }
         return {
             getLanguage: function () {
                 return storage.getItem('language');
             },
-            setLanguage: function (language) {
-                storage.setItem('language', language);
-            }
+            setLanguage: setLanguage
         };
     }])
     .controller('AppController', ['$scope', '$window', '$route', 'language',

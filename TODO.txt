@@ -7,7 +7,7 @@ TO DO
   - language switch iOS/Chrome
   - manifest donwload info
   - debug script
-  - Safari: private surfing disables storing in localStorage
+  - Safari
   - Chrome iOS
   - FF
   - IE
