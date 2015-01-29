@@ -48,12 +48,6 @@ def create_js_data():
         write(fd, 'en')
         write(fd, 'de')
 
-    with open(join(settings.STATIC_ROOT, 'ropeelements_en.js'), 'bw') as fd:
-        write(fd, 'en')
-
-    with open(join(settings.STATIC_ROOT, 'ropeelements_de.js'), 'bw') as fd:
-        write(fd, 'de')
-
 
 def create_manifest():
     """Create appcache manifest."""
@@ -63,17 +57,16 @@ def create_manifest():
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
 
-    manifest += '# Templates\n'
-    manifest += '/en/ropeelements\n'
-    manifest += '/de/seilelemente\n'
-    manifest += '/en/ng/ropeelements\n'
-    manifest += '/de/ng/ropeelements\n'
+    manifest += '# Data\n'
+    manifest += static_file_entry('ropeelements.js')
     manifest += '\n'
 
-    # manifest += '# Data\n'
-    # manifest += '/en/api/ropeelements\n'
-    # manifest += '/de/api/ropeelements\n'
-    # manifest += '\n'
+    manifest += '# Templates\n'
+    manifest += '/en/ropeelements\n'
+    manifest += '/en/ng/ropeelements\n'
+    manifest += '/de/seilelemente\n'
+    manifest += '/de/ng/ropeelements\n'
+    manifest += '\n'
 
     manifest += '# Static files\n'
 
@@ -91,9 +84,6 @@ def create_manifest():
                 manifest += static_file_entry(join('CACHE', 'css', name))
 
     # JavaScripts
-    manifest += static_file_entry('ropeelements_en.js')
-    manifest += static_file_entry('ropeelements_de.js')
-    manifest += static_file_entry('ropeelements.js')
     if settings.COMPRESS_ENABLED:
         for name in os.listdir(join(CACHE_DIR, 'js')):
             manifest += static_file_entry(join('CACHE', 'js', name))
@@ -138,14 +128,14 @@ def create_manifest():
         if names:
             manifest += names + '\n'
 
-    # manifest += '\n'
-    # manifest += 'NETWORK:\n'
-    # manifest += '*\n'
-
     manifest += '\n'
     manifest += 'FALLBACK:\n'
-    # TODO: Handled by 'otherwise' route? NOT WORKING
+    # TODO: Handled by 'otherwise' route? NOT WORKING?
     manifest += '/ /en/ropeelements\n'
+
+    manifest += '\n'
+    manifest += 'NETWORK:\n'
+    manifest += '*\n'
 
     with open(MANIFEST_FILE, 'w') as fd:
         fd.write(manifest)
