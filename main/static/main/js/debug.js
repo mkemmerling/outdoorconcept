@@ -10,14 +10,13 @@ cacheStatusValues[4] = 'updateready';
 cacheStatusValues[5] = 'obsolete';
 
 function logEvent(e) {
-    var online, status, type, message;
-    online = (navigator.onLine) ? 'yes' : 'no';
-    status = cacheStatusValues[cache.status];
-    type = e.type;
-    message = 'online: ' + online;
-    message += ', event: ' + type;
-    message += ', status: ' + status;
-    if (type == 'error' && navigator.onLine) {
+    var message = 'online: ' + ((window.navigator.onLine) ? 'yes' : 'no');
+    message += ', event: ' + e.type;
+    message += ', status: ' + cacheStatusValues[cache.status];
+    if (e.type === 'progress' && e.loaded !== undefined) {
+        message += ' (' + e.loaded + ' of ' + e.total + ')';
+    }
+    if (e.type === 'error' && window.navigator.onLine) {
         message += ' (prolly a syntax error in manifest)';
     }
     console.log(message);
@@ -31,18 +30,5 @@ cache.addEventListener('noupdate', logEvent, false);
 cache.addEventListener('obsolete', logEvent, false);
 cache.addEventListener('progress', logEvent, false);
 cache.addEventListener('updateready', logEvent, false);
-
-// window.applicationCache.addEventListener(
-//     'updateready',
-//     function(){
-//         window.applicationCache.swapCache();
-//         console.log('swap cache has been called');
-//     },
-//     false
-// );
-
-// setInterval(function(){
-//     cache.update();
-// }, 10000);
 
 })(window);

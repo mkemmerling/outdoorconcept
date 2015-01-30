@@ -43,12 +43,12 @@ angular.module('outdoorconcept.base', [])
             setLanguage: setLanguage
         };
     }])
-    .controller('AppController', ['$scope', '$window', '$route', 'language',
-            function($scope, $window, $route, language) {
-        $scope.modernizr = Modernizr;
-
+    .controller('AppController', ['$scope', '$window', function($scope, $window) {
         var cacheStatusValues = [],
-            cache = window.applicationCache;
+            cache = window.applicationCache,
+            $updated_popup = $('#appcacheUpdatedPopUp');
+
+        $scope.modernizr = Modernizr;
 
         cacheStatusValues[0] = 'uncached';
         cacheStatusValues[1] = 'idle';
@@ -80,16 +80,16 @@ angular.module('outdoorconcept.base', [])
         cache.addEventListener('updateready', function () {
             console.warn("manifest redownloaded RELOAD ROUTE");
             $scope.debug_msg = "manifest redownloaded";
-            // $window.applicationCache.swapCache();
-
-            // $window.localStorage.removeItem('ropeelements_en');
-            // $window.localStorage.removeItem('ropeelements_de');
-
-            $window.location.reload();
-
-            // $route.reload();
-
+            $('#appcacheUpdatedPopUp').modal();
         }, false);
+
+        $updated_popup.on('hidden.bs.modal', function () {
+            $window.location.reload();
+        }).keypress(function(e) {
+            if(e.keyCode == 13) {
+                $updated_popup.modal('hide');
+            }
+        });
 
     }]);
 
