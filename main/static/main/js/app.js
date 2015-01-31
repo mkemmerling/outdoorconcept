@@ -43,12 +43,24 @@ angular.module('outdoorconcept.base', [])
             setLanguage: setLanguage
         };
     }])
-    .controller('AppController', ['$scope', '$window', function($scope, $window) {
+    .run(['$rootScope', '$location', function ($rootScope, $location) {
+        var history = [];
+
+        $rootScope.$on('$routeChangeSuccess', function() {
+            history.push($location.$$path);
+        });
+
+        $rootScope.goBack = function () {
+            var previous_url = history.length > 1 ? history.splice(-2)[0] : '/';
+            $location.path(previous_url);
+        };
+    }])
+    .controller('AppController', ['$rootScope', '$window', function($rootScope, $window) {
+        $rootScope.modernizr = Modernizr;
+
         var cacheStatusValues = [],
             cache = window.applicationCache,
             $updated_popup = $('#appcacheUpdatedPopUp');
-
-        $scope.modernizr = Modernizr;
 
         cacheStatusValues[0] = 'uncached';
         cacheStatusValues[1] = 'idle';
@@ -57,29 +69,29 @@ angular.module('outdoorconcept.base', [])
         cacheStatusValues[4] = 'updateready';
         cacheStatusValues[5] = 'obsolete';
 
-        $scope.debug_msg = "–––";
+        $rootScope.debug_msg = "–––";
 
         cache.addEventListener('noupdate', function () {
             console.warn("No manifest update");
-            $scope.debug_msg = "No manifest update";
-            $scope.$apply();
+            $rootScope.debug_msg = "No manifest update";
+            $rootScope.$apply();
         }, false);
 
         cache.addEventListener('downloading', function () {
             console.warn("Downloading manifest");
-            $scope.debug_msg = "Downloading manifest";
-            $scope.$apply();
+            $rootScope.debug_msg = "Downloading manifest";
+            $rootScope.$apply();
         }, false);
 
         cache.addEventListener('cached', function () {
             console.warn("manifest cached");
-            $scope.debug_msg = "manifest cached";
-            $scope.$apply();
+            $rootScope.debug_msg = "manifest cached";
+            $rootScope.$apply();
         }, false);
 
         cache.addEventListener('updateready', function () {
             console.warn("manifest redownloaded RELOAD ROUTE");
-            $scope.debug_msg = "manifest redownloaded";
+            $rootScope.debug_msg = "manifest redownloaded";
             $('#appcacheUpdatedPopUp').modal();
         }, false);
 
@@ -90,7 +102,6 @@ angular.module('outdoorconcept.base', [])
                 $updated_popup.modal('hide');
             }
         });
-
     }]);
 
 angular.module('outdoorconcept.app', [

@@ -23,6 +23,12 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
                 templateUrl: '/ng/siebert',
                 controller: 'SiebertFormController'
             })
+            .when('/:lang/offline', {
+                templateUrl: function (params) {
+                    language.setLanguage(params.lang);
+                    return '/' + params.lang + '/ng/offline';
+                }
+            })
             .otherwise({
                 redirectTo: function () {
                     if (language.getLanguage() === 'de') {

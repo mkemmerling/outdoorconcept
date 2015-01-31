@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-30 06:25+0100\n"
+"POT-Creation-Date: 2015-01-31 10:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
 "Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
@@ -25,28 +25,32 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: templates/app.html:29 templates/app.html.py:31
-msgid "Close"
-msgstr ""
-
-#: templates/app.html:33
-msgid "Legend"
-msgstr ""
-
-#: templates/app.html:36
+#: templates/app.html:27
 msgid "The data have been updated."
 msgstr "Die Daten wurden aktualisiert."
 
-#: templates/app.html:47
+#: templates/app.html:32
 msgid "The page can not be displayed. Please deactivate private surfing."
 msgstr ""
 "Die Seite kann nicht angezeigt werden. Bitte deaktivieren Sie privates "
 "Surfen."
 
+#: templates/offline_fallback.html:3
+msgid ""
+"This page is temporarily unavailable. Please make sure youe are connected to "
+"the Internet."
+msgstr ""
+"Diese Seite ist derzeit nicht verfügbar. Bitte stellen Sie sicher, dass Sie "
+"mit dem Internet verbunden sind."
+
+#: templates/offline_fallback.html:6
+msgid "back"
+msgstr "zurück"
+
 #: urls.py:19
 msgid "en/ropeelements"
 msgstr "de/seilelemente"
 
-#: urls.py:28
+#: urls.py:32
 msgid "^ropeelements$"
 msgstr "^seilelemente$"

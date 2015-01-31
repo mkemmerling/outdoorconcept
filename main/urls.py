@@ -17,6 +17,7 @@ app_view = TemplateView.as_view(template_name='app.html')
 urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(url=_('en/ropeelements')), name='app'),
+
     # Single age application, routing handled by Angular
     url(r'^de/siebert$', app_view, name='siebert'),
     url(r'', include('siebert.urls')),
@@ -29,6 +30,10 @@ urlpatterns += i18n_patterns(
     url(r'^ng/ropeelements$', ropeelements, name='ropeelement_list'),
     url(r'^api/ropeelements$', ElementListView.as_view(),
         name='ropeelement-list'),
+
+    url(_(r'^offline$'), app_view, name='offline'),
+    url(r'^ng/offline$', TemplateView.as_view(template_name='offline.html')),
+
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin', RedirectView.as_view(url='admin/')),

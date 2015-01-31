@@ -60,8 +60,10 @@ def create_manifest():
     manifest += '# Templates\n'
     manifest += '/en/ropeelements\n'
     manifest += '/en/ng/ropeelements\n'
+    manifest += '/en/ng/offline\n'
     manifest += '/de/seilelemente\n'
     manifest += '/de/ng/ropeelements\n'
+    manifest += '/de/ng/offline\n'
     manifest += '\n'
 
     manifest += '# Static files\n'
@@ -126,7 +128,8 @@ def create_manifest():
 
     manifest += '\n'
     manifest += 'FALLBACK:\n'
-    # TODO: Handled by 'otherwise' route? NOT WORKING?
+    manifest += '/ng/siebert /de/ng/offline\n'
+    # Handled by 'otherwise' route
     manifest += '/ /en/ropeelements\n'
 
     manifest += '\n'

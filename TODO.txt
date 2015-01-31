@@ -6,9 +6,8 @@ TO DO
   - manifest donwload info
   - Safari
   - Chrome iOS
-  - FF: reload on manifest change not working
+  - FF
   - IE
-  - Fallback for Siebert
   - remove debug script
 
 * image popup width

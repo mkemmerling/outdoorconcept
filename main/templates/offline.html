@@ -1,0 +1,7 @@
+{% load i18n %}
+<div id="offlineFallbackAlert" class="alert alert-danger" role="alert" style="text-align: center;">
+    {% trans "This page is temporarily unavailable. Please make sure youe are connected to the Internet." %}
+</div>
+<p style="text-align: center;">
+  <a ng-click="goBack()" href="#">{% trans "back" %}</a>
+</p>
