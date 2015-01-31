@@ -3,16 +3,15 @@ TO DO
 
 * Appcache
 
-  - http Safari/iOS
-  - language switch iOS/Chrome
   - manifest donwload info
-  - debug script
   - Safari
   - Chrome iOS
-  - FF
+  - FF: reload on manifest change not working
   - IE
   - Fallback for Siebert
+  - remove debug script
 
+* image popup width
 * favicon
 * Icon for Home Bildschirm
 

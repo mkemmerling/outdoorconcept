@@ -1,4 +1,4 @@
-<Files "cache.manifest">
+<Files "oc.appcache">
     ExpiresActive On
     ExpiresDefault "access"
 </Files>

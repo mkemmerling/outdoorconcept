@@ -14,7 +14,7 @@ from ropeelements.models import Element
 from ropeelements.serializers import ElementSerializer, ElementListSerializer
 import siebert
 
-MANIFEST_FILE = os.path.join(settings.STATIC_ROOT, 'cache.manifest')
+MANIFEST_FILE = os.path.join(settings.STATIC_ROOT, 'oc.appcache')
 
 CACHE_DIR = os.path.join(settings.STATIC_ROOT, 'CACHE')
 MAIN_STATIC_DIR = os.path.join(os.path.dirname(main.__file__), 'static')
