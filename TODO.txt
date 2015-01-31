@@ -3,19 +3,12 @@ TO DO
 
 * Appcache
 
-  - Safari
-  - Chrome iOS
-  - FF
-  - IE
   - remove debug script
 
-* image popup width
 * favicon
 * Icon for Home Bildschirm
 
 * Make legend content configurable?
-
-* IE: Pop Up positioning
 
 * Include only required bootstrap js and css.
 

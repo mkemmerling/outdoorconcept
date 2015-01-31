@@ -159,7 +159,6 @@ COLLECT_STATIC_FILES = [
 ]
 
 COLLECT_STATIC_APP_FILES = [
-    'main/js/debug.js',
     'main/images/?*.*',
     'ropeelements/images/?*.*',
     'siebert/images/?*.*',
