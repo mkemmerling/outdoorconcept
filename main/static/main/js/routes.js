@@ -7,7 +7,6 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
         $routeProvider
             .when('/en/ropeelements', {
                 templateUrl: function () {
-                    console.log("ROUTE en");
                     language.setLanguage('en');
                     return '/en/ng/ropeelements';
                 },
@@ -15,7 +14,6 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
             })
             .when('/de/seilelemente', {
                 templateUrl: function () {
-                    console.log("ROUTE de");
                     language.setLanguage('de');
                     return '/de/ng/ropeelements';
                 },
@@ -27,7 +25,6 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
             })
             .otherwise({
                 redirectTo: function () {
-                    console.log("ROUTE default_url", language.getLanguage());
                     if (language.getLanguage() === 'de') {
                         return '/de/seilelemente';
                     } else {
