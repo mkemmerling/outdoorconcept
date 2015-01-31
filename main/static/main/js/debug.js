@@ -31,8 +31,4 @@ cache.addEventListener('obsolete', logEvent, false);
 cache.addEventListener('progress', logEvent, false);
 cache.addEventListener('updateready', logEvent, false);
 
-cache.addEventListener('error', function (e) {
-    console.log(e);
-}, false);
-
 })(window);
