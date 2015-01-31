@@ -106,7 +106,8 @@ angular.module('outdoorconcept.ropeelement.directives', [])
                     // Position pop up right of thumbnail ...
                     left = $thumb.offset().left + $thumb.outerWidth() + 5,
                     // ... and centered relative to the element row
-                    row_center = $row.offset().top + $row.outerHeight() / 2 - $window.scrollY,
+                    // row_center = $row.offset().top + $row.outerHeight() / 2 - $window.scrollY,
+                    row_center = $row.offset().top + $row.outerHeight() / 2,
                     dialog_height, top;
 
                 console.warn("$row.offset()", $row.offset());
