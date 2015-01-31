@@ -7,12 +7,21 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
     );
 }])
 .controller('RopeElementListController',
-    ['$scope', '$window', '$timeout', 'language',
-    function ($scope, $window, $timeout, language) {
-        var storage = $window.sessionStorage,
+    ['$scope', '$window', '$timeout', 'language', function ($scope, $window, $timeout, language) {
+        var lang = language.getLanguage(),
+            storage = $window.sessionStorage,
             kinds_by_id = {},
             elements_by_kind = {},
             boolean_filters, filters, empty_filter;
+
+        $scope.kinds = [];
+        $scope.ropeelements = angular.fromJson($window.localStorage.getItem('ropeelements_' + lang));
+        angular.forEach($scope.ropeelements, function (kind_elements) {
+            $scope.kinds.push(kind_elements.kind);
+            kinds_by_id[kind_elements.kind.id] = kind_elements.kind;
+            elements_by_kind[kind_elements.kind.id] = kind_elements.elements;
+        });
+
 
         boolean_filters = ['child_friendly', 'accessible', 'canope'];
         filters = angular.copy(boolean_filters);
@@ -28,9 +37,6 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             'de': '/de/seilelemente'
         };
         $scope.difficulty_legend = {from: 1, to: 10};
-
-        $scope.kinds = [];
-        $scope.ropeelements = [];
 
         function queryRopeElements() {
             var set_boolean_filters, kinds;
@@ -68,100 +74,30 @@ angular.module('outdoorconcept.ropeelement.controllers', ['ngResource'])
             });
         }
 
-
-        var lstorage = $window.localStorage;
-
-        function init(result) {
-            $scope.ropeelements = result;
-            angular.forEach(result, function (kind_elements) {
-                $scope.kinds.push(kind_elements.kind);
-                kinds_by_id[kind_elements.kind.id] = kind_elements.kind;
-                elements_by_kind[kind_elements.kind.id] = kind_elements.elements;
-            });
-
-            $scope.filter = angular.fromJson(storage.getItem('elementFilter'));
-            if (!$scope.filter) {
-                $scope.filter = empty_filter;
-                storage.setItem('elementFilter', angular.toJson($scope.filter));
-            }
-
-            if (!angular.equals($scope.filter, empty_filter)) {
-                queryRopeElements();
-            }
-
-            angular.forEach(filters, function (name) {
-                $scope.$watch('filter.' + name, function () {
-                    // Prevent query on first watch
-                    if ($scope.loaded) {
-                        queryRopeElements();
-                        storage.setItem('elementFilter', angular.toJson($scope.filter));
-                    }
-                });
-            });
-
-            // Prevent filtering and display of no results message until loaded
-            $timeout(function () {
-                $scope.loaded = true;
-            });
+        $scope.filter = angular.fromJson(storage.getItem('elementFilter'));
+        if (!$scope.filter) {
+            $scope.filter = empty_filter;
+            storage.setItem('elementFilter', angular.toJson($scope.filter));
         }
 
-        var lang = language.getLanguage(),
-            ropeelements = lstorage.getItem('ropeelements_' + lang);
+        angular.forEach(filters, function (name) {
+            $scope.$watch('filter.' + name, function () {
+                // Prevent query on first watch
+                if ($scope.loaded) {
+                    queryRopeElements();
+                    storage.setItem('elementFilter', angular.toJson($scope.filter));
+                }
+            });
+        });
 
-       //  if (ropeelements === null) {
-       //      console.log("QUERY ropeelements");
+        if (!angular.equals($scope.filter, empty_filter)) {
+            queryRopeElements();
+        }
 
-       //      RopeElement.query({language: lang}).$promise.then(function (result) {
-       //          // TODO:
-       //          // - do in resource/resolve to avoid JSONizing again
-       //          // - need to empty storage on appcache swap
-       //          // - could also store elements_by_kind?
-       //          console.warn("RESULT", result);
-       //          lstorage.setItem('ropeelements_' + lang, angular.toJson(result));
-       //          init(result);
-       //      });
-       // } else {
-            console.log("ropeelements from local storage", lang);
-            init(angular.fromJson(ropeelements));
-            // init(angular.fromJson(TEST));
-       // }
-
-
-
-
-        // RopeElement.query({language: language.getLanguage()}).$promise.then(function (result) {
-        //     $scope.ropeelements = result;
-        //     angular.forEach(result, function (kind_elements) {
-        //         $scope.kinds.push(kind_elements.kind);
-        //         kinds_by_id[kind_elements.kind.id] = kind_elements.kind;
-        //         elements_by_kind[kind_elements.kind.id] = kind_elements.elements;
-        //     });
-
-        //     $scope.filter = angular.fromJson(storage.getItem('elementFilter'));
-        //     if (!$scope.filter) {
-        //         $scope.filter = empty_filter;
-        //         storage.setItem('elementFilter', angular.toJson($scope.filter));
-        //     }
-
-        //     if (!angular.equals($scope.filter, empty_filter)) {
-        //         queryRopeElements();
-        //     }
-
-        //     angular.forEach(filters, function (name) {
-        //         $scope.$watch('filter.' + name, function () {
-        //             // Prevent query on first watch
-        //             if ($scope.loaded) {
-        //                 queryRopeElements();
-        //                 storage.setItem('elementFilter', angular.toJson($scope.filter));
-        //             }
-        //         });
-        //     });
-
-        //     // Prevent filtering and display of no results message until loaded
-        //     $timeout(function () {
-        //         $scope.loaded = true;
-        //     });
-        // });
+        // Prevent filtering and display of no results message until loaded
+        $timeout(function () {
+            $scope.loaded = true;
+        });
     }
 ]);
 

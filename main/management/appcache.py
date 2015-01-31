@@ -29,8 +29,6 @@ def create_js_data():
     renderer = JSONRenderer()
     jspath = join(settings.STATIC_ROOT, 'ropeelements.js')
 
-    print("CREATE js data")
-
     def serialize(lang):
         translation.activate(lang)
         queryset = Element._default_manager.all()
@@ -51,8 +49,6 @@ def create_js_data():
 
 def create_manifest():
     """Create appcache manifest."""
-
-    print("CREATE manifest")
 
     manifest = 'CACHE MANIFEST\n'
     manifest += created() + '\n\n'
