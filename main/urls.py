@@ -31,7 +31,6 @@ urlpatterns += i18n_patterns(
     url(r'^api/ropeelements$', ElementListView.as_view(),
         name='ropeelement-list'),
 
-    # url(r'^offline$', app_view, name='offline'),
     url(r'^ng/offline$', TemplateView.as_view(template_name='offline.html')),
 
     # Django admin
