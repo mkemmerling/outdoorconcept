@@ -84,7 +84,7 @@ angular.module('outdoorconcept.base', [])
                 dialog.fadeOut('slow', function () {
                     dialog.modal('hide');
                 });
-            }, 3000);
+            }, 5000);
         }).keypress(hide_modal);
 
         $appcache_updated.on('hidden.bs.modal', function () {
