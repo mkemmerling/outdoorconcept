@@ -55,53 +55,41 @@ angular.module('outdoorconcept.base', [])
             $location.path(previous_url);
         };
     }])
-    .controller('AppController', ['$rootScope', '$window', function($rootScope, $window) {
-        $rootScope.modernizr = Modernizr;
-
+    .controller('AppController', ['$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
         var cacheStatusValues = [],
             cache = window.applicationCache,
-            $updated_popup = $('#appcacheUpdatedPopUp');
+            $appcache_downloaded = $('#appcacheDownloadedPopUp'),
+            $appcache_updated = $('#appcacheUpdatedPopUp'),
+            hide_modal;
 
-        cacheStatusValues[0] = 'uncached';
-        cacheStatusValues[1] = 'idle';
-        cacheStatusValues[2] = 'checking';
-        cacheStatusValues[3] = 'downloading';
-        cacheStatusValues[4] = 'updateready';
-        cacheStatusValues[5] = 'obsolete';
+        $rootScope.modernizr = Modernizr;
 
-        $rootScope.debug_msg = "–––";
-
-        cache.addEventListener('noupdate', function () {
-            console.warn("No manifest update");
-            $rootScope.debug_msg = "No manifest update";
-            $rootScope.$apply();
-        }, false);
-
-        cache.addEventListener('downloading', function () {
-            console.warn("Downloading manifest");
-            $rootScope.debug_msg = "Downloading manifest";
-            $rootScope.$apply();
-        }, false);
+        hide_modal = function (event) {
+            if(event.keyCode == 13) {
+                $(this).modal('hide');
+            }
+        };
 
         cache.addEventListener('cached', function () {
-            console.warn("manifest cached");
-            $rootScope.debug_msg = "manifest cached";
-            $rootScope.$apply();
+            $appcache_downloaded.modal();
         }, false);
 
         cache.addEventListener('updateready', function () {
-            console.warn("manifest redownloaded RELOAD ROUTE");
-            $rootScope.debug_msg = "manifest redownloaded";
-            $('#appcacheUpdatedPopUp').modal();
+            $appcache_updated.modal();
         }, false);
 
-        $updated_popup.on('hidden.bs.modal', function () {
+        $appcache_downloaded.on('shown.bs.modal', function (event) {
+            var dialog = $(this);
+            $timeout(function () {
+                dialog.fadeOut('slow', function () {
+                    dialog.modal('hide');
+                });
+            }, 3000);
+        }).keypress(hide_modal);
+
+        $appcache_updated.on('hidden.bs.modal', function () {
             $window.location.reload();
-        }).keypress(function(e) {
-            if(e.keyCode == 13) {
-                $updated_popup.modal('hide');
-            }
-        });
+        }).keypress(hide_modal);
     }]);
 
 angular.module('outdoorconcept.app', [

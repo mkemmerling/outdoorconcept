@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-31 10:02+0100\n"
+"POT-Creation-Date: 2015-01-31 15:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
 "Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
@@ -25,25 +25,30 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: templates/app.html:27
+#: templates/app.html:26
+msgid "This page is also available offline without internet connection."
+msgstr ""
+"Diese Seite steht Ihnen auch offline ohne Internetverbindung zur Verfügung."
+
+#: templates/app.html:40
 msgid "The data have been updated."
 msgstr "Die Daten wurden aktualisiert."
 
-#: templates/app.html:32
+#: templates/app.html:50
 msgid "The page can not be displayed. Please deactivate private surfing."
 msgstr ""
 "Die Seite kann nicht angezeigt werden. Bitte deaktivieren Sie privates "
 "Surfen."
 
-#: templates/offline_fallback.html:3
+#: templates/offline.html:3
 msgid ""
-"This page is temporarily unavailable. Please make sure youe are connected to "
+"This page is currently unavailable. Please make sure youe are connected to "
 "the Internet."
 msgstr ""
 "Diese Seite ist derzeit nicht verfügbar. Bitte stellen Sie sicher, dass Sie "
 "mit dem Internet verbunden sind."
 
-#: templates/offline_fallback.html:6
+#: templates/offline.html:6
 msgid "back"
 msgstr "zurück"
 
@@ -51,6 +56,6 @@ msgstr "zurück"
 msgid "en/ropeelements"
 msgstr "de/seilelemente"
 
-#: urls.py:32
+#: urls.py:29
 msgid "^ropeelements$"
 msgstr "^seilelemente$"

@@ -16,21 +16,40 @@
   <title>outdoorconcept</title>
 </head>
 <body ng-controller="AppController">
-  <div ng-cloak>DEBUG: {$ debug_msg $}</div>
   <div id="content" class="container-fluid" ng-view></div>
+
+  <div class="modal fade" id="appcacheDownloadedPopUp" tabindex="-1" role="dialog"
+       aria-labelledby="appcacheDownloadedLabel" aria-hidden="true">
+    <div class="modal-dialog" movable>
+      <div class="modal-content alert-success">
+        <div>
+          <h4 id="appcacheDownloadedLabel">{% trans "This page is also available offline without internet connection." %}</h4>
+          <div>
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="appcacheUpdatedPopUp" tabindex="-1" role="dialog"
        aria-labelledby="appcacheUpdatedLabel" aria-hidden="true">
     <div class="modal-dialog" movable>
-      <div class="modal-content alert-danger">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+      <div class="modal-content alert-success">
+        <div>
           <h4 id="appcacheUpdatedLabel">{% trans "The data have been updated." %}</h4>
+          <div>
+            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
   <div id="storageDisabledAlert" class="alert alert-danger" role="alert">
     {% trans "The page can not be displayed. Please deactivate private surfing." %}
   </div>
+
   <script src="{% static 'ropeelements.js' %}"></script>
   {% compress js %}
   <script src="{% static 'modernizr/modernizr.js' %}"></script>
@@ -42,7 +61,6 @@
   <script src="{% static 'angular-route/angular-route.js' %}"></script>
   <script src="{% static 'angular-resource/angular-resource.js' %}"></script>
   <script src="{% static 'angular-sanitize/angular-sanitize.js' %}"></script>
-  <!-- script src="{% static 'bootstrap/js/alert.js' %}"></script -->
   <script src="{% static 'bootstrap/js/modal.js' %}"></script>
   <script src="{% static 'ropeelements/js/directives.js' %}"></script>
   <script src="{% static 'ropeelements/js/controllers.js' %}"></script>
