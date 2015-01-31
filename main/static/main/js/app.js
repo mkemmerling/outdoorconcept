@@ -81,9 +81,9 @@ angular.module('outdoorconcept.base', [])
         $appcache_downloaded.on('shown.bs.modal', function (event) {
             var dialog = $(this);
             $timeout(function () {
-                dialog.fadeOut('slow', function () {
+            //     dialog.fadeOut('slow', function () {
                     dialog.modal('hide');
-                });
+                // });
             }, 5000);
         }).keypress(hide_modal);
 
