@@ -26,6 +26,3 @@ python ${OPENSHIFT_REPO_DIR}manage.py compress
 
 echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py create_appcache'"
 python ${OPENSHIFT_REPO_DIR}manage.py create_appcache
-
-# echo "Executing 'python ${OPENSHIFT_REPO_DIR}manage.py copy_previous_cache'"
-# python ${OPENSHIFT_REPO_DIR}manage.py copy_previous_cache
