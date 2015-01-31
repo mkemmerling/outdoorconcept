@@ -109,6 +109,11 @@ angular.module('outdoorconcept.ropeelement.directives', [])
                     row_center = $row.offset().top + $row.outerHeight() / 2 - $window.scrollY,
                     dialog_height, top;
 
+                console.warn("$row.offset()", $row.offset());
+                console.warn("$row.outerHeight()", $row.outerHeight());
+                console.warn("$window.scrollY", $window.scrollY);
+                console.warn("row_center", row_center);
+
                 $('.modal-body img', $modal).attr('src', trigger.data('image'));
                 $dialog.width(trigger.data('width') + 12);
 
