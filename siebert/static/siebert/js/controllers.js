@@ -1,12 +1,12 @@
 (function ($, undefined) {'use strict';
 
 angular.module('outdoorconcept.siebert.controllers', [])
+.controller('SiebertFormController', ['$scope', '$window', function ($scope, $window) {
 
-    .controller('SiebertFormController', ['$scope', function ($scope) {
+    $scope.pdftest = function () {
+        $window.location.href = '/de/siebert/test.pdf';
+    };
 
-
-
-
-    }]);
+}]);
 
 })(jQuery);

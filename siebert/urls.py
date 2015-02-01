@@ -7,4 +7,5 @@ from . import views
 urlpatterns = patterns(
     '',
     url(r'^ng/siebert$', views.siebert, name='siebert_form'),
+    url(r'de/siebert/test.pdf$', views.test_pdf),
 )
