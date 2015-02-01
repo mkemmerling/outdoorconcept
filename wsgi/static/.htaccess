@@ -1,4 +1,5 @@
 AddType text/cache-manifest .appcache
+ExpiresByType text/cache-manifest "access plus 0 seconds"
 <Files "oc.appcache">
     ExpiresActive On
     ExpiresDefault "access"

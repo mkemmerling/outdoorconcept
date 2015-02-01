@@ -37,12 +37,15 @@
       <td>
         <div class="title">{$ element.title $}</div>
         <div class="details">
-          <div class="thumb">
-            <a data-toggle="modal" data-target="#imagePopUp"
+          <div class="thumb" ng-if="element.thumbnail">
+            <a ng-if="element.image"
+               data-toggle="modal" data-target="#imagePopUp"
                data-image="{$ element.image $}" data-width="{$ element.image_width $}"><img
                ng-src="{$ element.thumbnail $}"
                width="50" height="60"
-               title="{% trans "Enlarge image" %}"/></a></div>
+               title="{% trans "Enlarge image" %}"/></a>
+            <img ng-if="!element.image" ng-src="{$ element.thumbnail $}" width="50" height="60"/>
+          </div>
           <div class="icons">
             <div>
               <span class="icon" ng-class="'{$ element.direction $}'" title="{$ element.direction_title $}"></span>

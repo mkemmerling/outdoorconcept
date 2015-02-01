@@ -3,6 +3,7 @@ TO DO
 
 * Appcache
 
+  - FF
   - remove debug script
 
 * favicon
