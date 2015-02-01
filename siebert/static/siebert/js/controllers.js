@@ -3,8 +3,9 @@
 angular.module('outdoorconcept.siebert.controllers', [])
 .controller('SiebertFormController', ['$scope', '$window', function ($scope, $window) {
 
-    $scope.pdftest = function () {
-        $window.location.href = '/de/siebert/test.pdf';
+    $scope.print = function () {
+        // TODO: Validate required fields
+        $window.location.href = '/de/siebert/siebert.pdf';
     };
 
 }]);

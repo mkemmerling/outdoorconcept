@@ -2,6 +2,7 @@
 	font-weight: bold;
 	div:first-child {
 		float: right;
+		margin-left: 5px;
 		img {
 			display: block;
 			width: 200px;
@@ -16,27 +17,44 @@
 	}
 }
 
+.safety_advice {
+	margin-bottom: 20px;
+	padding: 5px 10px;
+}
+
 form[name=Siebert] {
 	margin-bottom: 20px;
 	.form-horizontal {
-		@media (max-width: 499px) {
+		margin-top: 20px;
+		@media (max-width: 534px) {
 			.col-sm-7 {
 				width: 100%;
 			}
 		}
-		@media (min-width: 500px) {
+		@media (min-width: 535px) {
 			.make-grid(sm);
-
 		    .control-label {
-		      text-align: right;
-		      margin-bottom: 0;
-		      padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+		      	text-align: right;
+		      	margin-bottom: 0;
+		      	padding-top: (@padding-base-vertical + 1); // Default padding plus a border
 		    }
 		}
 	}
+    .form-group > p {
+    	margin-bottom: 5px;
+    	font-weight: bold;
+    }
 	.form-group.variable {
 		label {
 			text-align: left;
+			@media (max-width: 534px) {
+				float: left;
+				margin-top: 7px;
+			}
+			.description {
+				font-weight:normal;
+				white-space: nowrap;
+			}
 		}
 		.input-group {
 			float: left;
@@ -44,7 +62,10 @@ form[name=Siebert] {
 			margin-bottom: 5px;
 			margin-left: 5px;
 			margin-right: 5px;
-			@media (min-width: 500px) {
+			@media (max-width: 534px) {
+				max-width: 170px;
+			}
+			@media (min-width: 535px) {
 				margin-left: 0;
 				margin-right: 0;
 			}
@@ -68,5 +89,28 @@ form[name=Siebert] {
 				vertical-align: middle;
 			}
 		}
+	}
+	.form-group.buttons {
+		margin-top: 20px;
+	}
+	input[type=radio] {
+		margin-top: 0;
+	}
+    #nrPersons {
+    	label {
+    		margin-bottom: 0;
+    		.help-block {
+    			margin-top: 0;
+    			margin-bottom: 5px;
+    			font-weight:normal;
+    		}
+    	}
+    	input {
+    		width: 100px;
+    	}
+    }
+	hr {
+		border-color: #000;
+		margin-bottom: 5px;
 	}
 }

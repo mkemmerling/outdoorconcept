@@ -14,24 +14,27 @@
 
 <br clear="both" />
 
+<p class="alert alert-danger safety_advice" role="alert">Bitte beachten Sie die unten angeführten <a href="#safety_advice">Sicherheitshinweise</a>.</p>
+
 <form name="Siebert">
   <fieldset>
     <div class="form-group">
-      <p style="margin-bottom: 5px; font-weight: bold;>">Handelt es sich um einen Flying Fox (Zipline)?</p>
+      <p>Handelt es sich um einen Flying Fox (Zipline)?</p>
       <label class="radio-inline">
-        <input type="radio" name="flyingFox" id="isFlyingFox" style="margin-top: 0;"> ja
+        <input type="radio" name="flyingFox" id="isFlyingFox"> ja
       </label>
       <label class="radio-inline">
-        <input type="radio" name="flyingFox" id="isNotFlyingFox" style="margin-top: 0;"> nein
+        <input type="radio" name="flyingFox" id="isNotFlyingFox"> nein
       </label>
     </div>
-    <div class="form-group">
-      <label for="nrPersons" style="margin-bottom: 0;">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?</label>
-      <p class="help-block" style="margin-bottom: 5px;">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
-      <input type="number" id="nrPersons" class="form-control" min="1" max="100" style="width: 100px;">
+    <div id="nrPersons" class="form-group">
+      <label for="nrPersons">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?
+        <p class="help-block">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
+      </label>
+      <input type="number" id="nrPersons" class="form-control" min="1" max="100">
     </div>
   </fieldset>
-  <fieldset class="form-horizontal" style="margin-top: 20px;">
+  <fieldset class="form-horizontal">
     <div class="form-group variable">
       <label for="load" class="col-sm-2 control-label">Personenlast</label>
       <div class="col-sm-3 input-group">
@@ -40,9 +43,8 @@
         <span class="input-group-addon">kg</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden.
-Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
-        </div>
+        <p>Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
+      </div>
     </div>
     <div class="form-group variable">
       <label for="weight" class="col-sm-2 control-label">Seilgewicht</label>
@@ -78,9 +80,11 @@ Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
       </div>
     </div>
   </fieldset>
-  <fieldset class="form-horizontal" style="margin-top: 20px;">
+  <fieldset class="form-horizontal">
     <div class="form-group variable">
-      <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br /><span style="font-weight:normal; white-space: nowrap;">(exklusive Faktor)</span></label>
+      <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br />
+        <span class="description">(exklusive Faktor)</span>
+      </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
         <input type="text" id="tensionForceExl" class="form-control" readonly>
@@ -91,7 +95,9 @@ Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
       </div>
     </div>
     <div class="form-group variable">
-      <label for="tensionForceIncl" class="col-sm-2 control-label">Seilzugkraft<br /><span style="font-weight:normal; white-space: nowrap;">(inklusive Faktor)</span></label>
+      <label for="tensionForceIncl" class="col-sm-2 control-label">Seilzugkraft<br />
+        <span class="description">(inklusive Faktor)</span>
+      </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
         <input type="text" id="tensionForceIncl" class="form-control" readonly>
@@ -102,33 +108,33 @@ Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
       </div>
     </div>
   </fieldset>
-  <hr style="border-color: #000; margin-bottom: 5px;" />
+  <hr />
   <p>Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung ausdrucken und zur Zertifizierung einreichen.</p>
-  <fieldset class="form-horizontal" style="margin-top: 20px;">
+  <fieldset class="form-horizontal">
     <div class="form-group">
-      <label for="developer" class="col-sm-2 control-label">Bauträger</label>
-      <div class="col-sm-10">
+      <label for="developer" class="col-sm-3 control-label">Bauträger</label>
+      <div class="col-sm-9">
         <input type="text" id="developer" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="location" class="col-sm-2 control-label">Standort des Seilgartens</label>
-      <div class="col-sm-10">
+      <label for="location" class="col-sm-3 control-label">Standort des Seilgartens</label>
+      <div class="col-sm-9">
         <input type="text" id="location" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="description" class="col-sm-2 control-label">Bezeichnung der Übung</label>
-      <div class="col-sm-10">
+      <label for="description" class="col-sm-3 control-label">Bezeichnung der Übung</label>
+      <div class="col-sm-9">
         <input type="text" id="description" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="number" class="col-sm-2 control-label">Nummer der Übung</label>
+      <label for="number" class="col-sm-3 control-label">Nummer der Übung</label>
       <div class="col-sm-2">
         <input type="number" id="number" class="form-control" min="1">
       </div>
-      <label for="date" class="col-sm-2 control-label">Datum</label>
+      <label for="date" class="col-sm-3 control-label">Datum</label>
       <div class="col-sm-3">
         <input ng-if="modernizr.inputtypes.date" ng-model="date" type="date" id="date" class="form-control">
         <div ng-if="!modernizr.inputtypes.date" class="input-group">
@@ -142,9 +148,25 @@ Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
         </div>
       </div>
     </div>
-
-    <div class="buttons">
-      <button type="submit" class="btn-default btn" accesskey="s" ng-click="pdftest()">Test</button>
+    <div class="form-group buttons">
+      <div class="buttons col-sm-offset-3 col-sm-3">
+        <button type="submit" class="btn-default btn" accesskey="s" ng-click="print()">Formular Drucken</button>
+      </div>
     </div>
-
+  </fieldset>
 </form>
+
+<a name="safety_advice"></a>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h4 class="panel-title">Wichtige Sicherheitshinweise und Anmerkungen</h4>
+  </div>
+  <div class="panel-body">
+    <p>Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei annähernd horizontal liegenden Anschlagpunkten berechnet werden können.</p>
+    <p>Für Berechnungen von nicht horizontalen Verspannungen, seitlichen Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten, Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc. kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959 oder Ihren Statiker.</p>
+    <p>Eine Diskussion zu dieser Formel finden Sie im <a href="http://www.rcforum.cc" target="_blank" title="http://www.rcforum.cc">RopeCourseForum</a>.</p>
+    <p><em>outdoorconcept</em> stellt lediglich diese Berechnungshilfe zur Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung.</p>
+  </div>
+</div>
+
+<p class="colophon">© <a href="http://www.outdoorconcept.at">www.outdoorconcept.at</a> 2013 / Philipp Strasser mit freundlicher Genehmigung von Walter Siebert.</p>

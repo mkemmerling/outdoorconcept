@@ -6,3 +6,45 @@
 @import "global.less";
 @import "ropeelements.less";
 @import "siebert.less";
+
+div[name=set_language] {
+	margin-top:	10px;
+	text-align: right;
+}
+
+#appcacheDownloadedPopUp .modal-dialog,
+#appcacheUpdatedPopUp .modal-dialog {
+	margin-top: 45px;
+	.modal-content {
+		display: table;
+		margin: 0 auto;
+		> div {
+			display: table-row;
+			> * {
+				display: table-cell;
+				padding: 10px;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+#appcacheDownloadedLabel {
+	color: @state-success-text;
+	font-size: ceil((@font-size-base * 1.15));
+}
+#appcacheUpdatedLabel {
+	color: @state-success-text;
+	font-size: ceil((@font-size-base * 1.15));
+}
+
+#offlineFallbackAlert {
+	margin-top: 45px;
+	text-align: center;
+}
+
+#storageDisabledAlert {
+	display: none;
+	width: 500px;
+	margin: 50px auto;
+	text-align: center;
+}

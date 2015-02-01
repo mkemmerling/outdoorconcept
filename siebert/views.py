@@ -15,9 +15,9 @@ def siebert(request):
         }, RequestContext(request))
 
 
-def test_pdf(request):
+def siebert_pdf(request):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="test.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="oc_siebert.pdf"'
 
     buffer = BytesIO()
     p = canvas.Canvas(buffer)
