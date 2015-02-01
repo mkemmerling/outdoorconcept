@@ -100,6 +100,7 @@ def create_manifest():
             join('angular-resource', 'angular-resource.js'))
         manifest += static_file_entry(
             join('angular-sanitize', 'angular-sanitize.js'))
+        manifest += static_file_entry(join('bootstrap', 'js', 'transition.js'))
         manifest += static_file_entry(join('bootstrap', 'js', 'modal.js'))
         manifest += collect_static(RE_STATIC_DIR, join('ropeelements', 'js'))
         manifest += collect_static(SIEBERT_STATIC_DIR, join('siebert', 'js'))
