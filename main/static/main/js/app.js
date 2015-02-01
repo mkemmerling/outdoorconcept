@@ -1,61 +1,62 @@
 (function ($, Modernizr, undefined) {'use strict';
 
 angular.module('outdoorconcept.base', [])
-   .config(['$interpolateProvider', function ($interpolateProvider) {
-        $interpolateProvider.startSymbol('{$');
-        $interpolateProvider.endSymbol('$}');
-    }])
-    .config(['$locationProvider', function ($locationProvider) {
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false
-        });
-    }])
-    .config(['$httpProvider', function ($httpProvider) {
-        // Ensure Django's request.is_ajax() method returns True
-        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        // See e.g. http://stackoverflow.com/questions/18156452/django-csrf-token-angularjs
-        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-    }])
-    .factory('language', ['$window', function ($window) {
-        var storage = $window.sessionStorage;
+.config(['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+}])
+.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+}])
+.config(['$httpProvider', function ($httpProvider) {
+    // Ensure Django's request.is_ajax() method returns True
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    // See e.g. http://stackoverflow.com/questions/18156452/django-csrf-token-angularjs
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+}])
+.factory('language', ['$window', function ($window) {
+    var storage = $window.sessionStorage;
 
-        function setLanguage(language) {
-            try {
-                storage.setItem('language', language);
-            } catch (e) {
-                // Safari sets storage quota to 0 when private surfing is activated,
-                // i.e. 'getItem' works, but getItem' fails.
-                $('#content').hide();
-                $('#storageDisabledAlert').show();
-                return;
-            }
+    function setLanguage(language) {
+        try {
+            storage.setItem('language', language);
+        } catch (e) {
+            // Safari sets storage quota to 0 when private surfing is activated,
+            // i.e. 'getItem' works, but getItem' fails.
+            $('#content').hide();
+            $('#storageDisabledAlert').show();
+            return;
         }
+    }
 
-        if (storage.getItem('language') === null) {
-            setLanguage(($window.navigator.language === 'de') ? 'de' : 'en');
-        }
-        return {
-            getLanguage: function () {
-                return storage.getItem('language');
-            },
-            setLanguage: setLanguage
-        };
-    }])
-    .run(['$rootScope', '$location', function ($rootScope, $location) {
-        var history = [];
+    if (storage.getItem('language') === null) {
+        setLanguage(($window.navigator.language === 'de') ? 'de' : 'en');
+    }
+    return {
+        getLanguage: function () {
+            return storage.getItem('language');
+        },
+        setLanguage: setLanguage
+    };
+}])
+.run(['$rootScope', '$location', function ($rootScope, $location) {
+    var history = [];
 
-        $rootScope.$on('$routeChangeSuccess', function() {
-            history.push($location.$$path);
-        });
+    $rootScope.$on('$routeChangeSuccess', function() {
+        history.push($location.$$path);
+    });
 
-        $rootScope.goBack = function () {
-            var previous_url = history.length > 1 ? history.splice(-2)[0] : '/';
-            $location.path(previous_url);
-        };
-    }])
-    .controller('AppController', ['$rootScope', '$window', '$timeout', function($rootScope, $window, $timeout) {
+    $rootScope.goBack = function () {
+        var previous_url = history.length > 1 ? history.splice(-2)[0] : '/';
+        $location.path(previous_url);
+    };
+}])
+.controller('AppController', ['$rootScope', '$window', '$location', '$timeout',
+    function($rootScope, $window, $location, $timeout) {
         var cacheStatusValues = [],
             cache = window.applicationCache,
             $appcache_downloaded = $('#appcacheDownloadedPopUp'),
@@ -71,7 +72,10 @@ angular.module('outdoorconcept.base', [])
         };
 
         cache.addEventListener('cached', function () {
-            $appcache_downloaded.modal();
+            var path = $location.path();
+            if (path === '/en/ropeelements' || path === '/de/seilelemente') {
+                $appcache_downloaded.modal();
+            }
         }, false);
 
         cache.addEventListener('updateready', function () {
@@ -88,7 +92,8 @@ angular.module('outdoorconcept.base', [])
         $appcache_updated.on('hidden.bs.modal', function () {
             $window.location.reload();
         }).keypress(hide_modal);
-    }]);
+    }
+]);
 
 angular.module('outdoorconcept.app', [
     'ngSanitize',
