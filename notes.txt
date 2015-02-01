@@ -1,0 +1,100 @@
+$ rhc show-app oc
+oc @ http://oc-markusk.rhcloud.com/ (uuid: 54b3b8995973ca923f000023)
+--------------------------------------------------------------------
+  Domain:     markusk
+  Created:    1:05 PM
+  Gears:      1 (defaults to small)
+  Git URL:    ssh://54b3b8995973ca923f000023@oc-markusk.rhcloud.com/~/git/oc.git/
+  SSH:        54b3b8995973ca923f000023@oc-markusk.rhcloud.com
+  Deployment: auto (on git push)
+
+  python-3.3 (Python 3.3)
+  -----------------------
+    Gears: 1 small
+
+
+env | grep JENKINS
+JENKINS_PASSWORD=frUis8yQv_kh
+JENKINS_USERNAME=system_builder
+JENKINS_URL=https://jenkins-markusk.rhcloud.com/
+
+
+Check
+-----
+
+https://blog.openshift.com/openshift-online-march-2014-release-blog/
+https://blog.openshift.com/top-10-openshift-blog-posts-2014/
+
+
+
+Create DB/Sample
+----------------
+
+rhc ssh --command app-root/repo/scripts/create_db
+rhc ssh --command app-root/repo/scripts/sample_db
+
+
+Application Cache
+-----------------
+
+chrome://appcache-internals/
+
+
+Install bower
+-------------
+
+Analogously to (unused) os_install_less script. Need to require older version:
+
+npm install bower@0.6 --prefix $OPENSHIFT_REPO_DIR
+
+
+
+Appcache Problems
+-----------------
+
+* Firefox: See https://bugzilla.mozilla.org/show_bug.cgi?id=830588
+
+
+
+WSGI Configuration
+------------------
+
+* https://github.com/ekkleesia/openshift-origin-cartridge-python_3/blob/master/usr/versions/2.7/etc/conf.d/openshift.conf.erb::
+
+	ServerRoot "<%= ENV['OPENSHIFT_PYTHON_DIR'] %>"
+	DocumentRoot "<%= ENV['OPENSHIFT_PYTHON_DOCUMENT_ROOT'] || "#{ENV['OPENSHIFT_REPO_DIR']}wsgi" %>"
+	Listen <%= ENV['OPENSHIFT_PYTHON_IP'] %>:<%= ENV['OPENSHIFT_PYTHON_PORT'] %>
+	User <%= ENV['OPENSHIFT_GEAR_UUID'] %>
+	Group <%= ENV['OPENSHIFT_GEAR_UUID'] %>
+	<IfVersion >= 2.4>
+	DefaultRuntimeDir "<%= "#{ENV['OPENSHIFT_PYTHON_DIR']}/run"%>"
+	</IfVersion>
+
+	ErrorLog "|tee"
+	CustomLog "|tee" combined
+
+	<Directory "<%= ENV['OPENSHIFT_PYTHON_DOCUMENT_ROOT'] || "#{ENV['OPENSHIFT_REPO_DIR']}wsgi" %>">
+	  AllowOverride all
+	  Options -MultiViews
+	</Directory>
+
+	<% #Backward compatibilty with wsgi/static/ directory
+	  if $SAFE!=2 && (File.directory?("#{ENV['OPENSHIFT_REPO_DIR']}wsgi/static") || File.symlink?("#{ENV['OPENSHIFT_REPO_DIR']}wsgi/static"))
+	    %><%= "Alias /static #{ENV['OPENSHIFT_REPO_DIR']}wsgi/static" %><%
+	  end
+	%>
+
+	WSGIApplicationGroup %{GLOBAL}
+	WSGIScriptAlias / "<%= ENV['OPENSHIFT_PYTHON_WSGI_APPLICATION'] || "#{ENV['OPENSHIFT_REPO_DIR']}wsgi/application" %>"
+	WSGISocketPrefix "/tmp/wsgi"
+	WSGIPassAuthorization On
+	WSGIProcessGroup <%= ENV['OPENSHIFT_GEAR_UUID'] %>
+
+
+* Not working .htaccess::
+
+	RewriteEngine On
+	RewriteRule ^application/media/(.+)$ /static/media/$1 [L]
+
+
+* Serving static files via wsgi: https://github.com/rancavil/django-py3-openshift-quickstart
