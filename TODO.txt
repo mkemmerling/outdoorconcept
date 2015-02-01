@@ -10,5 +10,4 @@ TO DO
 
 * Include only required bootstrap js and css.
 
-* Remove unused libraries:
-  - angular-ui-bootstrap
+* Remove unused libraries

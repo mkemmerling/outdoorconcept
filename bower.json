@@ -8,7 +8,6 @@
     "angular-resource": "",
     "angular-route": "",
     "angular-sanitize": "",
-    "angular-ui-bootstrap": "~0.12.0",
     "bootstrap": "~3.3.1"
   },
   "private": true
