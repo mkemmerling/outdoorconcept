@@ -61,9 +61,16 @@ angular.module('outdoorconcept.base', [])
             cache = window.applicationCache,
             $appcache_downloaded = $('#appcacheDownloadedPopUp'),
             $appcache_updated = $('#appcacheUpdatedPopUp'),
-            hide_modal;
+            show_modal, hide_modal;
 
         $rootScope.modernizr = Modernizr;
+
+        show_modal = function ($modal) {
+            var path = $location.path();
+            if (path === '/en/ropeelements' || path === '/de/seilelemente') {
+                $modal.modal();
+            }
+        };
 
         hide_modal = function (event) {
             if(event.keyCode == 13) {
@@ -72,14 +79,11 @@ angular.module('outdoorconcept.base', [])
         };
 
         cache.addEventListener('cached', function () {
-            var path = $location.path();
-            if (path === '/en/ropeelements' || path === '/de/seilelemente') {
-                $appcache_downloaded.modal();
-            }
+            show_modal($appcache_downloaded);
         }, false);
 
         cache.addEventListener('updateready', function () {
-            $appcache_updated.modal();
+            show_modal($appcache_updated);
         }, false);
 
         $appcache_downloaded.on('shown.bs.modal', function (event) {
