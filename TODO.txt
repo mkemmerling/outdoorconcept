@@ -1,6 +1,10 @@
 TO DO
 =====
 
+* Siebert
+
+  - date field with date picker
+
 * Appcache
 
   - test browsers
