@@ -1,5 +1,5 @@
 """Siebert form views."""
-
+from collections import namedtuple
 import io
 import os
 
@@ -9,6 +9,7 @@ from django.template import RequestContext
 
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
 
 IMAGE_DIR = os.path.abspath(os.path.join(
     __file__, os.pardir, 'static', 'siebert', 'images'))
@@ -24,15 +25,13 @@ def siebert(request):
 # 1 Centimeter = 28,3464567 Points
 # A4: 210 x 297 (595.27 x 841.89)
 
-cm1 = 28.35
-cm1_5 = 42.52
-cm2 = 56.68
-
 # Page borders
-bottom_left = (cm1_5, cm1_5)
-bottom_right = (A4[0] - cm1_5, cm1_5)
-top_left = (cm1_5, A4[1] - cm1_5)
-top_right = (A4[0] - cm1_5, A4[1] - cm1_5)
+Margin = namedtuple('Margin', 'bottom top left right')
+margin = Margin(1.5 * cm, 1.5 * cm, 1.5 * cm, 1.5 * cm)
+
+Border = namedtuple('Border', 'bottom top left right')
+border = Border(
+    margin.bottom, A4[1] - margin.top, margin.left, A4[0] - margin.right)
 
 
 def siebert_pdf(request):
@@ -70,34 +69,33 @@ def metadata(doc, author, title, subject):
 
 def helplines(doc):
     doc.setLineWidth(.3)
-
     pageborder = (
-        bottom_left + bottom_right,
-        bottom_right + top_right,
-        top_right + top_left,
-        top_left + bottom_left,
+        (border.left, border.bottom, border.right, border.bottom),
+        (border.right, border.bottom, border.right, border.top),
+        (border.right, border.top, border.left, border.top),
+        (border.left, border.top, border.left, border.bottom),
     )
     doc.lines(pageborder)
 
 
 def header(doc, title, subject):
-    doc.drawString(cm1_5, 790, title)
-    doc.drawString(cm1_5, 770, subject)
+    doc.drawString(margin.left, 790, title)
+    doc.drawString(margin.left, 770, subject)
     text = "Überarbeitet unter Berücksichtigung der EN 15567:2013"
-    doc.drawString(cm1_5, 755, text)
+    doc.drawString(margin.left, 755, text)
 
     logo = os.path.join(IMAGE_DIR, 'oc_logo.jpeg')
     w_logo, h_logo = 151, 60
-    x, y = top_right[0] - w_logo, top_right[1] - h_logo
+    x, y = border.right - w_logo, border.top - h_logo
     doc.drawImage(logo, x, y, w_logo, h_logo)
 
     schema = os.path.join(IMAGE_DIR, 'siebert_schema.jpeg')
     w, h = 151, 143
-    x, y = top_right[0] - w, top_right[1] - h_logo - h - 5
+    x, y = border.right - w, border.top - h_logo - h - 5
     doc.drawImage(schema, x, y, w, h)
 
     formula = os.path.join(IMAGE_DIR, 'siebert_formula.jpeg')
-    doc.drawImage(formula, cm1_5, 610, 249, 65)
+    doc.drawImage(formula, margin.left, 610, 249, 65)
 
 
 
