@@ -4,6 +4,7 @@ TO DO
 * Siebert
 
   - date field with date picker
+  - commmon strings for html and pdf
 
 * Appcache
 
