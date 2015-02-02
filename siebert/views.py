@@ -10,6 +10,7 @@ from django.template import RequestContext
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
+from reportlab.lib.utils import ImageReader
 
 IMAGE_DIR = os.path.abspath(os.path.join(
     __file__, os.pardir, 'static', 'siebert', 'images'))
@@ -25,10 +26,9 @@ def siebert(request):
 # 1 Centimeter = 28,3464567 Points
 # A4: 210 x 297 (595.27 x 841.89)
 
-# Page borders
+# Page margins and borders
 Margin = namedtuple('Margin', 'bottom top left right')
 margin = Margin(1.5 * cm, 1.5 * cm, 1.5 * cm, 1.5 * cm)
-
 Border = namedtuple('Border', 'bottom top left right')
 border = Border(
     margin.bottom, A4[1] - margin.top, margin.left, A4[0] - margin.right)
@@ -84,20 +84,23 @@ def header(doc, title, subject):
     text = "Überarbeitet unter Berücksichtigung der EN 15567:2013"
     doc.drawString(margin.left, 755, text)
 
-    logo = os.path.join(IMAGE_DIR, 'oc_logo.jpeg')
-    w_logo, h_logo = 151, 60
+    logo = ImageReader(os.path.join(IMAGE_DIR, 'oc_logo.jpeg'))
+    w_logo, h_logo = scale(logo.getSize(), .42)
     x, y = border.right - w_logo, border.top - h_logo
     doc.drawImage(logo, x, y, w_logo, h_logo)
 
-    schema = os.path.join(IMAGE_DIR, 'siebert_schema.jpeg')
-    w, h = 151, 143
-    x, y = border.right - w, border.top - h_logo - h - 5
-    doc.drawImage(schema, x, y, w, h)
+    schema = ImageReader(os.path.join(IMAGE_DIR, 'siebert_schema.jpeg'))
+    w_schema, h_schema = scale(schema.getSize(), .21)
+    x, y = border.right - w_schema, border.top - h_logo - h_schema - .2 * cm
+    doc.drawImage(schema, x, y, w_schema, h_schema)
 
-    formula = os.path.join(IMAGE_DIR, 'siebert_formula.jpeg')
-    doc.drawImage(formula, margin.left, 610, 249, 65)
+    formula = ImageReader(os.path.join(IMAGE_DIR, 'siebert_formula.jpeg'))
+    w, h = scale(formula.getSize(), .29)
+    doc.drawImage(formula, margin.left, y, w, h)
 
 
+def scale(size, factor):
+    return [l * factor for l in size]
 
 
 
