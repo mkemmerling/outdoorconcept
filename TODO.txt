@@ -3,8 +3,14 @@ TO DO
 
 * Siebert
 
+  - add flyingFox and nrPersons fields
+  - mark required fields
+  - validate form
   - date field with date picker
-  - commmon strings for html and pdf
+  - commmon strings for html and pdf?
+  - Siebert formula
+  - omit developer etc. in PDF if not specified?
+
 
 * Appcache
 

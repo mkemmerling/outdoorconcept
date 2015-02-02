@@ -21,17 +21,20 @@
     <div class="form-group">
       <p>Handelt es sich um einen Flying Fox (Zipline)?</p>
       <label class="radio-inline">
-        <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="1" id="isFlyingFox"> ja
+        <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="1" id="isFlyingFox"
+               required ng-change="calculate()"> ja
       </label>
       <label class="radio-inline">
-        <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="0" id="isNotFlyingFox"> nein
+        <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="0" id="isNotFlyingFox"
+               required ng-change="calculate()"> nein
       </label>
     </div>
     <div id="nrPersons" class="form-group">
       <label for="nrPersons">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?
         <p class="help-block">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
       </label>
-      <input type="number" ng-model="siebert.nrPersons" id="nrPersons" class="form-control" min="1" max="100">
+      <input type="number" ng-model="siebert.nrPersons" id="nrPersons" class="form-control"
+             min="1" max="100" required ng-change="calculate()">
     </div>
   </fieldset>
   <fieldset class="form-horizontal">
@@ -50,7 +53,8 @@
       <label for="weight" class="col-sm-2 control-label">Seilgewicht</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">q</span>
-        <input type="number" ng-model="siebert.q" id="weight" class="form-control" min="1" max="100">
+        <input type="number" ng-model="siebert.q" id="weight" class="form-control"
+               min="1" max="100" required  ng-change="calculate()">
         <span class="input-group-addon">g/m</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -61,7 +65,8 @@
       <label for="slack" class="col-sm-2 control-label">Durchhang</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">f</span>
-        <input type="number" ng-model="siebert.f" id="slack" class="form-control" min="1" max="100">
+        <input type="number" ng-model="siebert.f" id="slack" class="form-control"
+               min="1" max="100" required  ng-change="calculate()">
         <span class="input-group-addon">m</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -72,7 +77,8 @@
       <label for="length" class="col-sm-2 control-label">Spannweite</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">l</span>
-        <input type="number" ng-model="siebert.l" id="length" class="form-control" min="1" max="100">
+        <input type="number" ng-model="siebert.l" id="length" class="form-control"
+               min="1" max="100" required  ng-change="calculate()">
         <span class="input-group-addon">m</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -83,7 +89,7 @@
   <fieldset class="form-horizontal">
     <div class="form-group variable">
       <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br />
-        <span class="description">(exklusive Faktor)</span>
+        <span class="description">exklusive Faktor</span>
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
@@ -96,7 +102,7 @@
     </div>
     <div class="form-group variable">
       <label for="tensionForceIncl" class="col-sm-2 control-label">Seilzugkraft<br />
-        <span class="description">(inklusive Faktor)</span>
+        <span class="description">inklusive Faktor</span>
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
@@ -169,4 +175,4 @@
   </div>
 </div>
 
-<p class="colophon">© <a href="http://www.outdoorconcept.at">www.outdoorconcept.at</a> 2013 / Philipp Strasser mit freundlicher Genehmigung von Walter Siebert.</p>
+<p class="colophon">© <a href="http://www.outdoorconcept.at">www.outdoorconcept.at</a> {% now "Y" %} / Philipp Strasser mit freundlicher Genehmigung von Walter Siebert.</p>

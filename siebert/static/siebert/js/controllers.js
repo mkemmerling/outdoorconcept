@@ -1,8 +1,36 @@
 (function ($, undefined) {'use strict';
 
 angular.module('outdoorconcept.siebert.controllers', [])
-.controller('SiebertFormController', ['$scope', '$window', function ($scope, $window) {
+.controller('SiebertFormController', ['$scope', '$window', 'language', function ($scope, $window, language) {
     $scope.siebert = {};
+
+    // TODO:
+    function siebertFormula(p, q, f, l) {
+        var term1 = (q * l * l + 2 * p * l) / (8 * f),
+            term2 = (q * l + p) / 2;
+        return Math.sqrt(term1 * term1 + term2 * term2);
+    }
+
+    // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+    // and http://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-in-javascript
+    function round(num) {
+        return + (Math.round(num + 'e+1')  + 'e-1');
+    }
+
+    $scope.calculate = function () {
+        var values = $scope.siebert,
+            isDefined = angular.isDefined;
+
+        if (isDefined(values.flyingFox) && isDefined(values.nrPersons)) {
+            values.p = 600 - 300 * values.flyingFox + 80 * (values.nrPersons - 1);
+            if (isDefined(values.q) && isDefined(values.f) && isDefined(values.l)) {
+                values.fz_excl = siebertFormula(values.p, values.q, values.f, values.l);
+                // TODO: calculation is still bogus
+                values.fz_excl = round(values.fz_excl / 100);
+                values.fz_incl = round(3 * values.fz_excl);
+            }
+        }
+    };
 
     $scope.print = function () {
         var date_options = {
@@ -21,10 +49,11 @@ angular.module('outdoorconcept.siebert.controllers', [])
             delete params.flyingFox;
         }
         if (angular.isObject(params.date)) {
-            params.date = params.date.toLocaleDateString('de-AT', date_options);
+            params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
         } else {
             delete params.date;
         }
+
         params = $.param(params);
         if (params) {
             url += '?' + params;
