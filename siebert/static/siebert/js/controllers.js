@@ -18,17 +18,26 @@ angular.module('outdoorconcept.siebert.controllers', [])
     }
 
     $scope.calculate = function () {
+
+        // console.log('SiebertFormController', $scope.SiebertForm);
+
         var values = $scope.siebert,
             isDefined = angular.isDefined;
 
         if (isDefined(values.flyingFox) && isDefined(values.nrPersons)) {
             values.p = 600 - 300 * values.flyingFox + 80 * (values.nrPersons - 1);
-            if (isDefined(values.q) && isDefined(values.f) && isDefined(values.l)) {
+            // if (isDefined(values.q) && isDefined(values.f) && isDefined(values.l)) {
+            if ($scope.SiebertForm.$valid) {
+                // console.log("CALCULATE");
                 values.fz_excl = siebertFormula(values.p, values.q, values.f, values.l);
                 // TODO: calculation is still bogus
                 values.fz_excl = round(values.fz_excl / 100);
                 values.fz_incl = round(3 * values.fz_excl);
+            } else {
+                values.fz_excl = values.fz_incl = null;
             }
+        } else {
+            values.p = values.fz_excl = values.fz_incl = null;
         }
     };
 

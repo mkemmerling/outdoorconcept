@@ -29,6 +29,12 @@ a.jslink {
 	cursor: pointer;
 }
 
+.required:after {
+	content: " *";
+	color: @state-danger-text;
+	font-weight: bold;
+}
+
 .panel-body p:last-child {
 	margin-bottom: 0;
 }

@@ -19,7 +19,7 @@
 <form name="SiebertForm" novalidate>
   <fieldset>
     <div class="form-group">
-      <p>Handelt es sich um einen Flying Fox (Zipline)?</p>
+      <p class="required">Handelt es sich um einen Flying Fox (Zipline)?</p>
       <label class="radio-inline">
         <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="1" id="isFlyingFox"
                required ng-change="calculate()"> ja
@@ -30,19 +30,19 @@
       </label>
     </div>
     <div id="nrPersons" class="form-group">
-      <label for="nrPersons">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?
+      <label for="nrPersons"><span class="required">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?</span>
         <p class="help-block">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
       </label>
-      <input type="number" ng-model="siebert.nrPersons" id="nrPersons" class="form-control"
+      <input type="number" name="nrPersons" ng-model="siebert.nrPersons" id="nrPersons" class="form-control"
              min="1" max="100" required ng-change="calculate()">
     </div>
   </fieldset>
   <fieldset class="form-horizontal">
     <div class="form-group variable">
-      <label for="load" class="col-sm-2 control-label">Personenlast</label>
+      <label for="load" class="col-sm-2 control-label required">Personenlast</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">p</span>
-        <input type="number" ng-model="siebert.p" id="load" class="form-control" readonly>
+        <input type="number" name="load" ng-model="siebert.p" id="load" class="form-control" readonly>
         <span class="input-group-addon">kg</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -50,39 +50,51 @@
       </div>
     </div>
     <div class="form-group variable">
-      <label for="weight" class="col-sm-2 control-label">Seilgewicht</label>
-      <div class="col-sm-3 input-group">
+      <label for="weight" class="col-sm-2 control-label required">Seilgewicht</label>
+      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.weight.$error.min || SiebertForm.weight.$error.max}">
         <span class="input-group-addon variable-label">q</span>
-        <input type="number" ng-model="siebert.q" id="weight" class="form-control"
-               min="1" max="100" required  ng-change="calculate()">
-        <span class="input-group-addon">g/m</span>
+        <input type="number" name="weight" ng-model="siebert.q" id="weight" class="form-control"
+               min="0" max="100" required  ng-change="calculate()">
+        <span class="input-group-addon variable-unit">g/m</span>
       </div>
       <div class="col-sm-7 variable-help">
         <p>Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil.</p>
       </div>
+      <div class="help-block has-error" ng-show="SiebertForm.weight.$dirty && SiebertForm.weight.$invalid">
+        <span ng-if="SiebertForm.weight.$error.min">Das Seilgewicht kann nicht negativ sein.</span>
+        <span ng-if="SiebertForm.weight.$error.max">Das Seilgewicht ist zu groß.</span>
+      </div>
     </div>
     <div class="form-group variable">
-      <label for="slack" class="col-sm-2 control-label">Durchhang</label>
-      <div class="col-sm-3 input-group">
+      <label for="slack" class="col-sm-2 control-label required">Durchhang</label>
+      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.slack.$error.min || SiebertForm.slack.$error.max}">
         <span class="input-group-addon variable-label">f</span>
-        <input type="number" ng-model="siebert.f" id="slack" class="form-control"
-               min="1" max="100" required  ng-change="calculate()">
-        <span class="input-group-addon">m</span>
+        <input type="number" name="slack" ng-model="siebert.f" id="slack" class="form-control"
+               min="0" max="100" required  ng-change="calculate()">
+        <span class="input-group-addon variable-unit">m</span>
       </div>
       <div class="col-sm-7 variable-help">
         <p>Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung.</p>
       </div>
+      <div class="help-block has-error" ng-show="SiebertForm.slack.$dirty && SiebertForm.slack.$invalid">
+        <span ng-if="SiebertForm.slack.$error.min">Der Durchhang kann nicht negativ sein.</span>
+        <span ng-if="SiebertForm.slack.$error.max">Der Durchhang ist zu lang.</span>
+      </div>
     </div>
     <div class="form-group variable">
-      <label for="length" class="col-sm-2 control-label">Spannweite</label>
-      <div class="col-sm-3 input-group">
+      <label for="length" class="col-sm-2 control-label required">Spannweite</label>
+      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.length.$error.min || SiebertForm.length.$error.max}">
         <span class="input-group-addon variable-label">l</span>
-        <input type="number" ng-model="siebert.l" id="length" class="form-control"
-               min="1" max="100" required  ng-change="calculate()">
-        <span class="input-group-addon">m</span>
+        <input type="number" name="length" ng-model="siebert.l" id="length" class="form-control"
+               min="0" max="100" required  ng-change="calculate()">
+        <span class="input-group-addon variable-unit">m</span>
       </div>
       <div class="col-sm-7 variable-help">
         <p>Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne).</p>
+      </div>
+      <div class="help-block has-error" ng-show="SiebertForm.length.$dirty && SiebertForm.length.$invalid">
+        <span ng-if="SiebertForm.length.$error.min">Die Spannweite kann nicht negativ sein.</span>
+        <span ng-if="SiebertForm.length.$error.max">Die Spannweite ist zu lang.</span>
       </div>
     </div>
   </fieldset>
@@ -93,7 +105,7 @@
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" ng-model="siebert.fz_excl" id="tensionForceExl" class="form-control" readonly>
+        <input type="number" name="tensionForceExl" ng-model="siebert.fz_excl" id="tensionForceExl" class="form-control" readonly>
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -106,7 +118,7 @@
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" ng-model="siebert.fz_incl" id="tensionForceIncl" class="form-control" readonly>
+        <input type="number" name="tensionForceIncl" ng-model="siebert.fz_incl" id="tensionForceIncl" class="form-control" readonly>
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -120,32 +132,32 @@
     <div class="form-group">
       <label for="developer" class="col-sm-3 control-label">Bauträger</label>
       <div class="col-sm-9">
-        <input type="text" ng-model="siebert.developer" id="developer" class="form-control">
+        <input type="text" name="developer" ng-model="siebert.developer" id="developer" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label for="location" class="col-sm-3 control-label">Standort des Seilgartens</label>
       <div class="col-sm-9">
-        <input type="text" ng-model="siebert.location" id="location" class="form-control">
+        <input type="text" name="location" ng-model="siebert.location" id="location" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label for="description" class="col-sm-3 control-label">Bezeichnung der Übung</label>
       <div class="col-sm-9">
-        <input type="text" ng-model="siebert.description" id="description" class="form-control">
+        <input type="text" name="description" ng-model="siebert.description" id="description" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label for="number" class="col-sm-3 control-label">Nummer der Übung</label>
       <div class="col-sm-2">
-        <input type="number" ng-model="siebert.number" id="number" class="form-control" min="1">
+        <input type="number" name="number" ng-model="siebert.number" id="number" class="form-control" min="1">
       </div>
       <label for="date" class="col-sm-3 control-label">Datum</label>
       <div class="col-sm-3">
-        <input ng-if="modernizr.inputtypes.date" ng-model="siebert.date" type="date" id="date" class="form-control">
+        <input ng-if="modernizr.inputtypes.date" name="date" ng-model="siebert.date" type="date" id="date" class="form-control">
         <div ng-if="!modernizr.inputtypes.date" class="input-group">
           <input date-picker="{changeYear: true, changeMonth: true, yearRange: 'c-2:c+2'}"
-                 ng-model="siebert.date" type="date" id="date" class="form-control">
+                 name="date" ng-model="siebert.date" type="date" id="date" class="form-control">
           <span class="input-group-btn">
             <button class="btn btn-default ui-datepicker-trigger" tabindex="-1" type="button">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -156,7 +168,8 @@
     </div>
     <div class="form-group buttons">
       <div class="buttons col-sm-offset-3 col-sm-3">
-        <button type="submit" class="btn-default btn" accesskey="s" ng-click="print()">Formular Drucken</button>
+        <button type="submit" class="btn-default btn" accesskey="s"
+                ng-click="print()" ng-disabled="!SiebertForm.$valid">Formular Drucken</button>
       </div>
     </div>
   </fieldset>

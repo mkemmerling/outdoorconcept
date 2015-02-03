@@ -89,6 +89,20 @@ form[name=SiebertForm] {
 				vertical-align: middle;
 			}
 		}
+		.has-error {
+			.input-group-addon {
+				color: inherit;
+			}
+			.variable-unit {
+				background-color: @input-group-addon-bg;
+			}
+		}
+	}
+	.help-block.has-error {
+		margin-top: 20px;
+		margin-left: 15px;
+		padding-top: 20px;
+		color: @state-danger-text;
 	}
 	.form-group.buttons {
 		margin-top: 20px;
