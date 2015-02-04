@@ -49,47 +49,33 @@ angular.module('outdoorconcept.siebert.controllers', [])
     };
 
     $scope.print = function () {
-        // TODO: Not working with IE
         var date_options = {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric'
             },
             url = '/de/siebert/siebert.pdf',
-            params, date_param;
+            params = angular.copy($scope.siebert),
+            date_param;
 
-        params = angular.copy($scope.siebert);
-        // console.log('SiebertFormController', params);
         if (params.flyingFox === '0') {
             delete params.flyingFox;
         }
 
-        // if (angular.isObject(params.date)) {
-        //     params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
-        //     console.log('SiebertFormController', params.date, encodeURIComponent(params.date), $.param({date: params.date}));
-        // } else {
-        //     delete params.date;
-        // }
-
+        // Working around strange IE behaviour adding (endoded) quotes when URL endcoding date string
         date_param = (angular.isObject(params.date)) ?
             $.param({date: params.date.toLocaleDateString(language.getLanguage(), date_options)}).replace(/%E2%80%8E/g, '') :
             null;
         delete params.date;
 
-
-
-        params = $.param(params).replace(/%E2%80%8E/g, '');
+        // Cause of required fields (non date) params are always guaranteed to be present.
+        params = $.param(params);
         if (date_param) {
-            params += ((params) ? '&' : '') + date_param;
+            params += '&' + date_param;
         }
+        console.log("****", params, date_param);
 
-
-        if (params) {
-            url += '?' + params;
-        }
-
-        // console.log('SiebertFormController', params);
-        $window.location.href = url;
+        $window.location.href = url + '?' + params;
     };
 
 }]);
