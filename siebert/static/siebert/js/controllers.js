@@ -62,7 +62,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             delete params.flyingFox;
         }
 
-        // Working around strange IE behaviour adding (endoded) quotes when URL endcoding date string
+        // Working around strange IE behaviour adding (endoded) quotes when URL encoding date string.
         date_param = (angular.isObject(params.date)) ?
             $.param({date: params.date.toLocaleDateString(language.getLanguage(), date_options)}).replace(/%E2%80%8E/g, '') :
             null;
@@ -73,7 +73,6 @@ angular.module('outdoorconcept.siebert.controllers', [])
         if (date_param) {
             params += '&' + date_param;
         }
-        console.log("****", params, date_param);
 
         $window.location.href = url + '?' + params;
     };
