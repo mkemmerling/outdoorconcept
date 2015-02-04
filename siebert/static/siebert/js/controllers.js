@@ -75,7 +75,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
         }
 
         console.log('SiebertFormController', url);
-        $window.location.href = url;
+        // $window.location.href = url;
     };
 
 }]);
