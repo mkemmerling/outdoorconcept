@@ -4,6 +4,14 @@ angular.module('outdoorconcept.siebert.controllers', [])
 .controller('SiebertFormController', ['$scope', '$window', 'language', function ($scope, $window, language) {
     $scope.siebert = {};
 
+    $scope.numberPatternMinError = function (field) {
+        return field.$error.number || field.$error.pattern || field.$error.min;
+    };
+
+    $scope.numberMinMaxError = function (field) {
+        return field.$error.number || field.$error.min || field.$error.max;
+    };
+
     // TODO:
     function siebertFormula(p, q, f, l) {
         var term1 = (q * l * l + 2 * p * l) / (8 * f),
@@ -26,7 +34,6 @@ angular.module('outdoorconcept.siebert.controllers', [])
 
         if (isDefined(values.flyingFox) && isDefined(values.nrPersons)) {
             values.p = 600 - 300 * values.flyingFox + 80 * (values.nrPersons - 1);
-            // if (isDefined(values.q) && isDefined(values.f) && isDefined(values.l)) {
             if ($scope.SiebertForm.$valid) {
                 // console.log("CALCULATE");
                 values.fz_excl = siebertFormula(values.p, values.q, values.f, values.l);

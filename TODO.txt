@@ -3,14 +3,14 @@ TO DO
 
 * Siebert
 
-  - validate form
-  - subform for personenlast?
-  - add flyingFox and nrPersons fields
-  (- date field with date picker
+  - Omit developer etc. in PDF if not specified?
+
+  - Add flyingFox and nrPersons fields
+  - Commmon strings for html and pdf?
+
+  - Form validation
   - Siebert formula
-  - commmon strings for html and pdf?
-  - omit developer etc. in PDF if not specified?
-  - test in all browsers
+  - Test in all browsers, esp. date picker
 
 * Appcache
 

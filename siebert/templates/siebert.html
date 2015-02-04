@@ -29,14 +29,20 @@
                required ng-change="calculate()"> nein
       </label>
     </div>
-    <div id="nrPersons" class="form-group">
+
+    <div id="nrPersons" class="form-group" ng-class="{'has-error': numberPatternMinError(SiebertForm.nrPersons) || SiebertForm.nrPersons.$error.max}">
       <label for="nrPersons"><span class="required">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?</span>
         <p class="help-block">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
       </label>
       <input type="number" name="nrPersons" ng-model="siebert.nrPersons" id="nrPersons" class="form-control"
-             min="1" max="100" required ng-change="calculate()">
+             min="1" max="100" required pattern="^\d+$" number-max-length="3" ng-change="calculate()">
+      <div class="help-block">
+        <span ng-if="numberPatternMinError(SiebertForm.nrPersons)">Bitte eine positive Ganzahl eingeben.</span>
+        <span ng-if="SiebertForm.nrPersons.$error.max">Die Anzahl der Personen ist zu groß.</span>
+      </div>
     </div>
   </fieldset>
+
   <fieldset class="form-horizontal">
     <div class="form-group variable">
       <label for="load" class="col-sm-2 control-label required">Personenlast</label>
@@ -49,9 +55,11 @@
         <p>Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
       </div>
     </div>
-    <div class="form-group variable">
+
+    <div class="form-group variable"
+         ng-class="{'has-error': numberMinMaxError(SiebertForm.weight)}">
       <label for="weight" class="col-sm-2 control-label required">Seilgewicht</label>
-      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.weight.$error.min || SiebertForm.weight.$error.max}">
+      <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">q</span>
         <input type="number" name="weight" ng-model="siebert.q" id="weight" class="form-control"
                min="0" max="100" required  ng-change="calculate()">
@@ -60,14 +68,17 @@
       <div class="col-sm-7 variable-help">
         <p>Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil.</p>
       </div>
-      <div class="help-block has-error" ng-show="SiebertForm.weight.$dirty && SiebertForm.weight.$invalid">
+      <div class="help-block">
+        <span ng-if="SiebertForm.weight.$error.number">Bitte eine Zahl eingeben.</span>
         <span ng-if="SiebertForm.weight.$error.min">Das Seilgewicht kann nicht negativ sein.</span>
         <span ng-if="SiebertForm.weight.$error.max">Das Seilgewicht ist zu groß.</span>
       </div>
     </div>
-    <div class="form-group variable">
+
+    <div class="form-group variable"
+         ng-class="{'has-error': numberMinMaxError(SiebertForm.slack)}">
       <label for="slack" class="col-sm-2 control-label required">Durchhang</label>
-      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.slack.$error.min || SiebertForm.slack.$error.max}">
+      <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">f</span>
         <input type="number" name="slack" ng-model="siebert.f" id="slack" class="form-control"
                min="0" max="100" required  ng-change="calculate()">
@@ -76,14 +87,17 @@
       <div class="col-sm-7 variable-help">
         <p>Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung.</p>
       </div>
-      <div class="help-block has-error" ng-show="SiebertForm.slack.$dirty && SiebertForm.slack.$invalid">
+      <div class="help-block has-error">
+        <span ng-if="SiebertForm.slack.$error.number">Bitte eine Zahl eingeben.</span>
         <span ng-if="SiebertForm.slack.$error.min">Der Durchhang kann nicht negativ sein.</span>
         <span ng-if="SiebertForm.slack.$error.max">Der Durchhang ist zu lang.</span>
       </div>
     </div>
-    <div class="form-group variable">
+
+    <div class="form-group variable"
+         ng-class="{'has-error': numberMinMaxError(SiebertForm.length)}">
       <label for="length" class="col-sm-2 control-label required">Spannweite</label>
-      <div class="col-sm-3 input-group" ng-class="{'has-error': SiebertForm.length.$error.min || SiebertForm.length.$error.max}">
+      <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">l</span>
         <input type="number" name="length" ng-model="siebert.l" id="length" class="form-control"
                min="0" max="100" required  ng-change="calculate()">
@@ -92,12 +106,14 @@
       <div class="col-sm-7 variable-help">
         <p>Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne).</p>
       </div>
-      <div class="help-block has-error" ng-show="SiebertForm.length.$dirty && SiebertForm.length.$invalid">
+      <div class="help-block has-error">
+        <span ng-if="SiebertForm.length.$error.number">Bitte eine Zahl eingeben.</span>
         <span ng-if="SiebertForm.length.$error.min">Die Spannweite kann nicht negativ sein.</span>
         <span ng-if="SiebertForm.length.$error.max">Die Spannweite ist zu lang.</span>
       </div>
     </div>
   </fieldset>
+
   <fieldset class="form-horizontal">
     <div class="form-group variable">
       <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br />
@@ -126,8 +142,10 @@
       </div>
     </div>
   </fieldset>
+
   <hr />
   <p>Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung ausdrucken und zur Zertifizierung einreichen.</p>
+
   <fieldset class="form-horizontal">
     <div class="form-group">
       <label for="developer" class="col-sm-3 control-label">Bauträger</label>
@@ -166,10 +184,15 @@
         </div>
       </div>
     </div>
-    <div class="form-group buttons">
-      <div class="buttons col-sm-offset-3 col-sm-3">
-        <button type="submit" class="btn-default btn" accesskey="s"
-                ng-click="print()" ng-disabled="!SiebertForm.$valid">Formular Drucken</button>
+    <div class="form-group buttons col-sm-offset-3 col-sm-9">
+      <div class="row">
+        <div class="col-sm-4">
+          <button type="submit" class="btn-default btn" accesskey="s"
+                  ng-click="print()" ng-disabled="!SiebertForm.$valid">Formular Drucken</button>
+        </div>
+        <div class="col-sm-8" ng-show="!SiebertForm.$valid">
+          Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="required"></span> markierten Felder ausfüllen.
+        </div>
       </div>
     </div>
   </fieldset>

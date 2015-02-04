@@ -67,7 +67,28 @@ angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
         }
     };
 }])
+.directive('numberMaxLength', function() {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function (scope, element, attrs, ngModelController) {
+            var maxlength = Number(attrs.numberMaxLength);
 
+            function userInput(number) {
+                var string_value = String(number);
+
+                if (string_value.length > maxlength) {
+                    string_value = string_value.slice(0, maxlength);
+                    number = Number(string_value);
+                    ngModelController.$setViewValue(string_value);
+                    ngModelController.$render();
+                }
+                return number;
+            }
+            ngModelController.$parsers.push(userInput);
+        }
+    };
+})
 // .config(function() {
 //     $.datepicker.setDefaults({
 //         minDate: new Date(1900, 0, 1),
