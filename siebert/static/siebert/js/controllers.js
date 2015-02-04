@@ -56,26 +56,39 @@ angular.module('outdoorconcept.siebert.controllers', [])
                 year: 'numeric'
             },
             url = '/de/siebert/siebert.pdf',
-            params;
+            params, date_param;
 
         params = angular.copy($scope.siebert);
-        console.log('SiebertFormController', params);
+        // console.log('SiebertFormController', params);
         if (params.flyingFox === '0') {
             delete params.flyingFox;
         }
-        if (angular.isObject(params.date)) {
-            params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
-            console.log('SiebertFormController', params.date, encodeURIComponent(params.date), $.param({date: params.date}));
-        } else {
-            delete params.date;
-        }
+
+        // if (angular.isObject(params.date)) {
+        //     params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
+        //     console.log('SiebertFormController', params.date, encodeURIComponent(params.date), $.param({date: params.date}));
+        // } else {
+        //     delete params.date;
+        // }
+
+        date_param = (angular.isObject(params.date)) ?
+            $.param({date: params.date.toLocaleDateString(language.getLanguage(), date_options)}).replace(/%E2%80%8E/g, '') :
+            null;
+        delete params.date;
+
+
 
         params = $.param(params).replace(/%E2%80%8E/g, '');
+        if (date_param) {
+            params += ((params) ? '&' : '') + date_param;
+        }
+
+
         if (params) {
             url += '?' + params;
         }
 
-        console.log('SiebertFormController', params);
+        // console.log('SiebertFormController', params);
         $window.location.href = url;
     };
 

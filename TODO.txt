@@ -3,6 +3,7 @@ TO DO
 
 * Siebert
 
+  - Date Picker today in IE?
   - Omit developer etc. in PDF if not specified?
 
   - Add flyingFox and nrPersons fields to PDF
