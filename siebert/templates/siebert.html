@@ -48,7 +48,7 @@
       <label for="load" class="col-sm-2 control-label required">Personenlast</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">p</span>
-        <input type="number" name="load" ng-model="siebert.p" id="load" class="form-control" readonly>
+        <input type="number" name="load" ng-model="siebert.p" id="load" class="form-control" readonly tabindex="-1">
         <span class="input-group-addon">kg</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -121,7 +121,8 @@
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" name="tensionForceExl" ng-model="siebert.fz_excl" id="tensionForceExl" class="form-control" readonly>
+        <input type="number" name="tensionForceExl" ng-model="siebert.fz_excl"
+               id="tensionForceExl" class="form-control" readonly tabindex="-1" >
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">
@@ -134,7 +135,8 @@
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" name="tensionForceIncl" ng-model="siebert.fz_incl" id="tensionForceIncl" class="form-control" readonly>
+        <input type="number" name="tensionForceIncl" ng-model="siebert.fz_incl"
+               id="tensionForceIncl" class="form-control" readonly tabindex="-1">
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">

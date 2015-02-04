@@ -65,6 +65,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
         }
         if (angular.isObject(params.date)) {
             params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
+            console.log('SiebertFormController', params.date);
         } else {
             delete params.date;
         }
@@ -75,7 +76,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
         }
 
         console.log('SiebertFormController', url);
-        // $window.location.href = url;
+        $window.location.href = url;
     };
 
 }]);
