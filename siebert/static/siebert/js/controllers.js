@@ -64,13 +64,13 @@ angular.module('outdoorconcept.siebert.controllers', [])
             delete params.flyingFox;
         }
         if (angular.isObject(params.date)) {
-            params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
-            console.log('SiebertFormController', params.date, $.param({date: params}, true));
+            params.date = String(params.date.toLocaleDateString(language.getLanguage(), date_options));
+            console.log('SiebertFormController', params.date, $.param({date: params}));
         } else {
             delete params.date;
         }
 
-        params = $.param(params, true);
+        params = $.param(params);
         if (params) {
             url += '?' + params;
         }
