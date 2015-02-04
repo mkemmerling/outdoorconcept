@@ -49,6 +49,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
     };
 
     $scope.print = function () {
+        // TODO: Not working with IE
         var date_options = {
                 day: '2-digit',
                 month: '2-digit',
@@ -56,9 +57,6 @@ angular.module('outdoorconcept.siebert.controllers', [])
             },
             url = '/de/siebert/siebert.pdf',
             params;
-
-        // TODO: Validate required fields
-        // console.log('SiebertFormController', $scope.siebert);
 
         params = angular.copy($scope.siebert);
         if (params.flyingFox === '0') {
@@ -75,7 +73,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             url += '?' + params;
         }
 
-        // console.log('SiebertFormController', url);
+        console.log('SiebertFormController', url);
         $window.location.href = url;
     };
 

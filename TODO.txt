@@ -5,7 +5,9 @@ TO DO
 
   - Omit developer etc. in PDF if not specified?
 
-  - Add flyingFox and nrPersons fields
+  - Add flyingFox and nrPersons fields to PDF
+  - Fix date formatting
+
   - Commmon strings for html and pdf?
 
   - Form validation
