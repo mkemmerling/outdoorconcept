@@ -70,7 +70,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             delete params.date;
         }
 
-        params = $.param(params);
+        params = $.param(params).replace(/%E2%80%8E/g, '');
         if (params) {
             url += '?' + params;
         }
