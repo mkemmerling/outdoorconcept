@@ -65,12 +65,12 @@ angular.module('outdoorconcept.siebert.controllers', [])
         }
         if (angular.isObject(params.date)) {
             params.date = params.date.toLocaleDateString(language.getLanguage(), date_options);
-            console.log('SiebertFormController', params.date);
+            console.log('SiebertFormController', params.date, $.param({date: params}, true));
         } else {
             delete params.date;
         }
 
-        params = $.param(params);
+        params = $.param(params, true);
         if (params) {
             url += '?' + params;
         }
