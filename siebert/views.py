@@ -117,6 +117,11 @@ def body(doc, data):
     text = doc.beginText()
     text.setTextOrigin(border.left, 500)
 
+    # TODO: flyingFox, nrPersons
+
+    # Es handelt sich um einen Flying Fox (Zipline).
+    # {nrPersons} Personen dürfen dürfen das Element gleichzeitig verwenden
+
     print_value(text, data, 'p', "Personenlast", "p", "kg")
     print_value(text, data, 'q', "Seilgewicht", "q", "g/m")
     print_value(text, data, 'f', "Durchhang", "f", "m")

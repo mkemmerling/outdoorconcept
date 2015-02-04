@@ -59,6 +59,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             params;
 
         params = angular.copy($scope.siebert);
+        console.log('SiebertFormController', params);
         if (params.flyingFox === '0') {
             delete params.flyingFox;
         }
