@@ -7,8 +7,8 @@ angular.module('outdoorconcept.siebert.controllers', [])
     $scope.datePickerOptions = {
         changeYear: true,
         changeMonth: true,
-        yearRange: 'c-2:c+2',
-        defaultDate: new Date()
+        yearRange: 'c-2:c+2'
+        // defaultDate: new Date()
     };
 
     $scope.numberPatternMinError = function (field) {
