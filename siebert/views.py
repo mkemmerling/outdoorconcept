@@ -115,41 +115,58 @@ def header(doc, title1, title2, subject):
 
 def body(doc, data):
     text = doc.beginText()
-    text.setTextOrigin(border.left, 500)
+    text.setTextOrigin(border.left, 530)
 
-    # TODO: flyingFox, nrPersons
+    # ELement properties
+    text.setFont('Helvetica', 12)
+    if data.get('flyingFox', False):
+        content = "Es handelt sich um einen Flying Fox (Zipline)."
+    else:
+        content = ""
+    text.textLine(content)
+    text.moveCursor(0, 5)
+    try:
+        nrPersons = int(data.get('nrPersons', 0))
+    except:
+        content = ""
+    else:
+        if nrPersons == 1:
+            content = ("Das Element darf gleichzeitig nur von 1 Person "
+                       "verwendet werden.")
+        else:
+            content = ("Das Element darf gleichzeitig von {} Personen "
+                       "verwendet werden.".format(nrPersons))
+    text.textLine(content)
+    text.moveCursor(0, 20)
 
-    # Es handelt sich um einen Flying Fox (Zipline).
-    # {nrPersons} Personen dürfen dürfen das Element gleichzeitig verwenden
-
+    # Siebert formula
     print_value(text, data, 'p', "Personenlast", "p", "kg")
     print_value(text, data, 'q', "Seilgewicht", "q", "g/m")
     print_value(text, data, 'f', "Durchhang", "f", "m")
     print_value(text, data, 'l', "Spannweite", "l", "m")
-
     text.moveCursor(0, 14)
-
     print_value(text, data, 'fz_excl', "Seilzugkraft", "Fz", "kN",
                 "exklusive Faktor")
     print_value(text, data, 'fz_incl', "Seilzugkraft", "Fz", "kN",
                 "inklusive Faktor")
 
+    # Developer data
     doc.setLineWidth(.5)
-    doc.line(border.left, 320, border.right, 320)
-    text.setTextOrigin(border.left, 300)
-
+    doc.line(border.left, 290, border.right, 290)
+    text.setTextOrigin(border.left, 270)
     print_text(text, data, 'developer', "Bauträger")
     print_text(text, data, 'location', "Standort des Seilgartens")
     print_text(text, data, 'description', "Bezeichnung der Übung")
     print_text(text, data, 'number', "Nummer der Übung")
 
-    text.setTextOrigin(border.right - 300, 170)
+    # Signature
+    text.setTextOrigin(border.right - 300, 140)
     text.setFont('Helvetica', 10)
     text.textLine("Für die Korrektheit der Angaben:")
-    text.moveCursor(0, 15)
+    text.moveCursor(0, 20)
     text.setFont('Helvetica', 12)
     text.textLine(data.get('date', ''))
-    doc.line(border.right, 140, border.right - 300, 140)
+    doc.line(border.right, 105, border.right - 300, 105)
     text.setFont('Helvetica', 10)
     text.textOut("Datum")
     text.moveCursor(150, 0)
