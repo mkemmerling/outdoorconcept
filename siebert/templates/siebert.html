@@ -190,7 +190,7 @@
       <div class="row">
         <div class="col-sm-4">
           <button type="submit" class="btn-default btn" accesskey="s"
-                  ng-click="print()" ng-disabled="!SiebertForm.$valid && window.navigator.onLine">Formular Drucken</button>
+                  ng-click="print()" ng-disabled="!SiebertForm.$valid || window.navigator.onLine">Formular Drucken</button>
         </div>
         <div class="col-sm-8" ng-show="!SiebertForm.$valid">
           Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="required"></span> markierten Felder ausfüllen.
