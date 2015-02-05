@@ -76,11 +76,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             params += '&' + date_param;
         }
 
-        if ($window.navigator.onLine) {
-            $window.location.href = url + '?' + params;
-        } else {
-            $window.location.href = $window.location.href;
-        }
+        $window.location.href = ($window.navigator.onLine) ? (url + '?' + params) : $window.location.href;
     };
 
 }]);
