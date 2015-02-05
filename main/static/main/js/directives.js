@@ -200,10 +200,11 @@ angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
 
 
                 // TODO:
+                console.log('setUpDatePicker options.defaultDate)', options.defaultDate);
                 if (angular.isDefined(options.defaultDate)) {
-                    options.defaultDate = new Date(options.defaultDate);
+                    // options.defaultDate = new Date(options.defaultDate);
+                    options.defaultDate = new Date();
                 }
-                console.log('setUpDatePicker', options);
 
 
                 element.datepicker(options);
