@@ -1,9 +1,7 @@
-TO DO
+To Do
 =====
 
 * Siebert
-
-  - Omit developer etc. in PDF if not specified?
 
   - Commmon strings for html and pdf?
 
@@ -16,10 +14,34 @@ TO DO
   - test browsers
   - remove debug script
 
-* Better iPhone display?
-
-* Make legend content configurable?
-
 * Include only required bootstrap js and css.
 
 * Remove unused libraries
+
+
+Fragen
+------
+
+* Anzahl Perosnen: Maximum
+
+* Seilgewicht: Int/Float, Min, Max
+
+* Durchhang: Int/Float, Min, Max
+
+* Spannweite: Int/Float, Min, Max
+
+* Nummer: Zahl/Text, Max?
+
+* Formel für Seilzugkraft exklusive Faktor
+
+* Formel für Seilzugkraft inklusive Faktor
+
+* Gestaltung PDF
+
+* Bauträger etc. weglassen, wenn nicht spezifiziert?
+
+* Englische Übersetzung Siebert
+
+* Bessere Dartsellung am iPhone?
+
+* Inhalt Legende konfigurierbar?

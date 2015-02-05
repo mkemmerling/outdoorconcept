@@ -130,6 +130,7 @@ def create_manifest():
     manifest += '\n'
     manifest += 'FALLBACK:\n'
     manifest += '/ng/siebert /de/ng/offline\n'
+    manifest += '/de/siebert/siebert.pdf /de/ng/offline\n'
     # Handled by 'otherwise' route
     manifest += '/ /en/ropeelements\n'
 
