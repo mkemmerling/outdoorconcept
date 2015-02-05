@@ -4,6 +4,13 @@ angular.module('outdoorconcept.siebert.controllers', [])
 .controller('SiebertFormController', ['$scope', '$window', 'language', function ($scope, $window, language) {
     $scope.siebert = {};
 
+    $scope.datePickerOptions = {
+        changeYear: true,
+        changeMonth: true,
+        yearRange: 'c-2:c+2',
+        defaultDate: new Date()
+    };
+
     $scope.numberPatternMinError = function (field) {
         return field.$error.number || field.$error.pattern || field.$error.min;
     };
@@ -26,16 +33,12 @@ angular.module('outdoorconcept.siebert.controllers', [])
     }
 
     $scope.calculate = function () {
-
-        // console.log('SiebertFormController', $scope.SiebertForm);
-
         var values = $scope.siebert,
             isDefined = angular.isDefined;
 
         if (isDefined(values.flyingFox) && isDefined(values.nrPersons)) {
             values.p = 600 - 300 * values.flyingFox + 80 * (values.nrPersons - 1);
             if ($scope.SiebertForm.$valid) {
-                // console.log("CALCULATE");
                 values.fz_excl = siebertFormula(values.p, values.q, values.f, values.l);
                 // TODO: calculation is still bogus
                 values.fz_excl = round(values.fz_excl / 100);
@@ -62,7 +65,7 @@ angular.module('outdoorconcept.siebert.controllers', [])
             delete params.flyingFox;
         }
 
-        // Working around strange IE behaviour adding (endoded) quotes when URL encoding date string.
+        // Working around strange IE behaviour adding (encoded) quotes when URL encoding date string.
         date_param = (angular.isObject(params.date)) ?
             $.param({date: params.date.toLocaleDateString(language.getLanguage(), date_options)}).replace(/%E2%80%8E/g, '') :
             null;

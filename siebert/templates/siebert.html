@@ -176,7 +176,7 @@
       <div class="col-sm-3">
         <input ng-if="modernizr.inputtypes.date" name="date" ng-model="siebert.date" type="date" id="date" class="form-control">
         <div ng-if="!modernizr.inputtypes.date" class="input-group">
-          <input date-picker="{changeYear: true, changeMonth: true, yearRange: 'c-2:c+2'}"
+          <input date-picker="{$ datePickerOptions $}"
                  name="date" ng-model="siebert.date" type="date" id="date" class="form-control">
           <span class="input-group-btn">
             <button class="btn btn-default ui-datepicker-trigger" tabindex="-1" type="button">

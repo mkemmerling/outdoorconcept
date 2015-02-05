@@ -4,10 +4,8 @@ TO DO
 * Siebert
 
   - Date Picker today in IE?
-  - Omit developer etc. in PDF if not specified?
 
-  - Add flyingFox and nrPersons fields to PDF
-  - Fix date formatting
+  - Omit developer etc. in PDF if not specified?
 
   - Commmon strings for html and pdf?
 
