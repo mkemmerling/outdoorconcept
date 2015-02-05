@@ -197,16 +197,6 @@ angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
                 // Remove any previous date picker, to ensure any config changes are picked up
                 element.datepicker('destroy');
                 // Create the new datepicker widget
-
-
-                // TODO:
-                // console.log('setUpDatePicker options.defaultDate', options.defaultDate);
-                // // if (angular.isDefined(options.defaultDate)) {
-                //     // options.defaultDate = new Date(options.defaultDate);
-                //     options.defaultDate = new Date('2015-01-06');
-                // // }
-
-
                 element.datepicker(options);
                 date_format = element.datepicker('option', 'dateFormat');
                 // Render will update the date picker with the date

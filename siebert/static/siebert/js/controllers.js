@@ -8,7 +8,6 @@ angular.module('outdoorconcept.siebert.controllers', [])
         changeYear: true,
         changeMonth: true,
         yearRange: 'c-2:c+2'
-        // defaultDate: new Date()
     };
 
     $scope.numberPatternMinError = function (field) {
