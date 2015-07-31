@@ -1,178 +1,185 @@
 {% load staticfiles %}
+{% load i18n %}
+
+<div class="nav-bar">
+  <a href="{$ ropeelements_url $}" tabindex="-1">{% trans 'Rope Elements' %}</a>
+  {% include "switch_language.html" %}
+</div>
+
 <div class="header">
   <div>
-    <a href="http://www.outdoorconcept.at/overhead/index.htm"><img class="logo" src="{% static 'siebert/images/oc_logo.jpeg' %}"/></a>
+    <a href="http://www.outdoorconcept.at/overhead/index.htm"
+       tabindex="-1"><img class="logo" src="{% static 'siebert/images/oc_logo.jpeg' %}"/></a>
     <img class="schema" src="{% static 'siebert/images/siebert_schema.jpeg' %}"/>
   </div>
   <div>
-    <h1>Berechnung der Seilzugkraft bei horizontal gespannten Seiten</h1>
-    <p>Auf Basis der Siebert-Formel<br />
-    Überarbeitet unter Berücksichtigung der EN 15567:2013</p>
+    <h1>{% trans 'Berechnung der Seilzugkraft bei horizontal gespannten Seiten [en]' %}</h1>
+    <p>{% trans 'Auf Basis der Siebert-Formel<br />Überarbeitet unter Berücksichtigung der EN 15567:2013 [en]' %}</p>
     <img class="formula" src="{% static 'siebert/images/siebert_formula.jpeg' %}"/>
   </div>
 </div>
 
 <br clear="both" />
 
-<p class="alert alert-danger safety_advice" role="alert">Bitte beachten Sie die unten angeführten <a href="#safety_advice">Sicherheitshinweise</a>.</p>
+<p class="alert alert-danger safety_advice" role="alert">{% blocktrans %}Bitte beachten Sie die unten angeführten <a
+   href="#safety_advice" tabindex="-1">Sicherheitshinweise</a>. [en]{% endblocktrans %}</p>
 
 <form name="SiebertForm" novalidate>
   <fieldset>
     <div class="form-group">
-      <p class="required">Handelt es sich um einen Flying Fox (Zipline)?</p>
+      <p class="required">{% trans 'Handelt es sich um einen Flying Fox (Zipline)? [en]' %}</p>
       <label class="radio-inline">
         <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="1" id="isFlyingFox"
-               required ng-change="calculate()"> ja
+               required ng-change="calculate()"> {% trans 'yes' %}
       </label>
       <label class="radio-inline">
         <input type="radio" ng-model="siebert.flyingFox" name="flyingFox" value="0" id="isNotFlyingFox"
-               required ng-change="calculate()"> nein
+               required ng-change="calculate()"> {% trans 'no' %}
       </label>
     </div>
 
-    <div id="nrPersons" class="form-group" ng-class="{'has-error': numberPatternMinError(SiebertForm.nrPersons) || SiebertForm.nrPersons.$error.max}">
-      <label for="nrPersons"><span class="required">Wie viele Personen dürfen dürfen das Element gleichzeitig verwenden?</span>
-        <p class="help-block">Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.</p>
+    <div id="nrPersons" class="form-group" ng-class="{'has-error': SiebertForm.nrPersons.$error.number || SiebertForm.nrPersons.$error.min}">
+      <label for="nrPersons"><span class="required">{% trans 'Wie viele Personen dürfen das Element gleichzeitig verwenden? [en]' %}</span>
+        <p class="help-block">{% trans 'Muss in Beschilderung und Betriebshandbuch wiederzufinden sein. [en]' %}</p>
       </label>
       <input type="number" name="nrPersons" ng-model="siebert.nrPersons" id="nrPersons" class="form-control"
-             min="1" max="100" required pattern="^\d+$" number-max-length="3" ng-change="calculate()">
+             min="0" max="99" required number-max-length="2" ng-change="calculate()">
       <div class="help-block">
-        <span ng-if="numberPatternMinError(SiebertForm.nrPersons)">Bitte eine positive Ganzahl eingeben.</span>
-        <span ng-if="SiebertForm.nrPersons.$error.max">Die Anzahl der Personen ist zu groß.</span>
+        <span ng-if="SiebertForm.nrPersons.$error.number">{% trans 'Please enter a positive integer.' %}</span>
+        <span ng-if="SiebertForm.nrPersons.$error.min">{% trans 'Die Anzahl der Personen kann nicht negativ sein. [en]' %}</span>
       </div>
     </div>
   </fieldset>
 
   <fieldset class="form-horizontal">
     <div class="form-group variable">
-      <label for="load" class="col-sm-2 control-label required">Personenlast</label>
+      <label for="load" class="col-sm-2 control-label required">{% trans 'Personenlast [en]' %}</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">p</span>
-        <input type="number" name="load" ng-model="siebert.p" id="load" class="form-control" readonly tabindex="-1">
+        <input type="text" name="load" ng-model="siebert.p" id="load" class="form-control" readonly tabindex="-1">
         <span class="input-group-addon">kg</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden.</p>
+        <p>{% trans 'Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit 300kg kalkuliert werden. [en]' %}</p>
       </div>
     </div>
 
     <div class="form-group variable"
-         ng-class="{'has-error': numberMinMaxError(SiebertForm.weight)}">
-      <label for="weight" class="col-sm-2 control-label required">Seilgewicht</label>
+         ng-class="{'has-error': SiebertForm.weight.$error.number || SiebertForm.weight.$error.min || siebert.q > 9999}">
+      <label for="weight" class="col-sm-2 control-label required">{% trans 'Seilgewicht [en]' %}</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">q</span>
         <input type="number" name="weight" ng-model="siebert.q" id="weight" class="form-control"
-               min="0" max="100" required  ng-change="calculate()">
+               min="0" max="999999" required number-max-length="6" ng-change="calculate()">
         <span class="input-group-addon variable-unit">g/m</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil.</p>
+        <p>{% trans 'Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil. [en]' %}</p>
       </div>
       <div class="help-block">
-        <span ng-if="SiebertForm.weight.$error.number">Bitte eine Zahl eingeben.</span>
-        <span ng-if="SiebertForm.weight.$error.min">Das Seilgewicht kann nicht negativ sein.</span>
-        <span ng-if="SiebertForm.weight.$error.max">Das Seilgewicht ist zu groß.</span>
+        <span ng-if="SiebertForm.weight.$error.number">{% trans 'Please enter a positive integer.' %}</span>
+        <span ng-if="SiebertForm.weight.$error.min">{% trans 'Das Seilgewicht kann nicht negativ sein. [en]' %}</span>
+        <span ng-if="siebert.q > 9999">{% trans 'Diese Zahl ist außergewöhnlich groß. Bitte überprüfen Sie den Herstellernachweis. [en]' %}</span>
       </div>
     </div>
 
     <div class="form-group variable"
-         ng-class="{'has-error': numberMinMaxError(SiebertForm.slack)}">
-      <label for="slack" class="col-sm-2 control-label required">Durchhang</label>
+         ng-class="{'has-error': SiebertForm.slack.$error.number || SiebertForm.slack.$error.min}">
+      <label for="slack" class="col-sm-2 control-label required">{% trans 'Durchhang [en]' %}</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">f</span>
         <input type="number" name="slack" ng-model="siebert.f" id="slack" class="form-control"
-               min="0" max="100" required  ng-change="calculate()">
+               min="0" step="0.01" required number-max-length="8" ng-change="calculate()">
         <span class="input-group-addon variable-unit">m</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung.</p>
+        <p>{% trans 'Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung. [en]' %}</p>
       </div>
       <div class="help-block has-error">
-        <span ng-if="SiebertForm.slack.$error.number">Bitte eine Zahl eingeben.</span>
-        <span ng-if="SiebertForm.slack.$error.min">Der Durchhang kann nicht negativ sein.</span>
-        <span ng-if="SiebertForm.slack.$error.max">Der Durchhang ist zu lang.</span>
+        <span ng-if="SiebertForm.slack.$error.number">{% trans 'Bitte eine positive Dezimalzahl eingeben. [en]' %}</span>
+        <span ng-if="SiebertForm.slack.$error.min">{% trans 'Der Durchhang kann nicht negativ sein. [en]' %}</span>
       </div>
     </div>
 
     <div class="form-group variable"
-         ng-class="{'has-error': numberMinMaxError(SiebertForm.length)}">
-      <label for="length" class="col-sm-2 control-label required">Spannweite</label>
+         ng-class="{'has-error': SiebertForm.length.$error.number || SiebertForm.length.$error.min || siebert.l > 1000}">
+      <label for="length" class="col-sm-2 control-label required">{% trans 'Spannweite [en]' %}</label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">l</span>
         <input type="number" name="length" ng-model="siebert.l" id="length" class="form-control"
-               min="0" max="100" required  ng-change="calculate()">
+               min="0" step="0.01" required number-max-length="8" ng-change="calculate()">
         <span class="input-group-addon variable-unit">m</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne).</p>
+        <p>{% trans 'Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne). [en]' %}</p>
       </div>
       <div class="help-block has-error">
-        <span ng-if="SiebertForm.length.$error.number">Bitte eine Zahl eingeben.</span>
-        <span ng-if="SiebertForm.length.$error.min">Die Spannweite kann nicht negativ sein.</span>
-        <span ng-if="SiebertForm.length.$error.max">Die Spannweite ist zu lang.</span>
+        <span ng-if="SiebertForm.length.$error.number">{% trans 'Please enter a positive decimal.' %}</span>
+        <span ng-if="SiebertForm.length.$error.min">{% trans 'Die Spannweite kann nicht negativ sein. [en]' %}</span>
+        <span ng-if="siebert.l > 1000">{% trans 'Diese Distanz ist unüblich für Seilgärten. Bitte berücksichtigen Sie gegebenenfalls Windlasten, Schneelasten, etc. [en]' %}</span>
       </div>
     </div>
   </fieldset>
 
   <fieldset class="form-horizontal">
     <div class="form-group variable">
-      <label for="tensionForceExl" class="col-sm-2 control-label">Seilzugkraft<br />
-        <span class="description">exklusive Faktor</span>
+      <label for="tensionForceExl" class="col-sm-2 control-label">{% trans 'Seilzugkraft [en]' %}<br />
+        <span class="description">{% trans 'exklusive Faktor [en]' %}</span>
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" name="tensionForceExl" ng-model="siebert.fz_excl"
+        <input type="text" name="tensionForceExl" ng-model="siebert.fz_excl"
                id="tensionForceExl" class="form-control" readonly tabindex="-1" >
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume, Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor multipliziert werden.</p>
+        <p>{% trans 'Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume, Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor multipliziert werden. [en]' %}</p>
       </div>
     </div>
     <div class="form-group variable">
-      <label for="tensionForceIncl" class="col-sm-2 control-label">Seilzugkraft<br />
-        <span class="description">inklusive Faktor</span>
+      <label for="tensionForceIncl" class="col-sm-2 control-label">{% trans 'Seilzugkraft [en]' %}<br />
+        <span class="description">{% trans 'inklusive Faktor [en]' %}</span>
       </label>
       <div class="col-sm-3 input-group">
         <span class="input-group-addon variable-label">Fz</span>
-        <input type="number" name="tensionForceIncl" ng-model="siebert.fz_incl"
+        <input type="text" name="tensionForceIncl" ng-model="siebert.fz_incl"
                id="tensionForceIncl" class="form-control" readonly tabindex="-1">
         <span class="input-group-addon">kN</span>
       </div>
       <div class="col-sm-7 variable-help">
-        <p>Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil, Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc.</p>
+        <p>{% trans 'Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil, Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc. [en]' %}</p>
       </div>
     </div>
   </fieldset>
 
   <hr />
-  <p>Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung ausdrucken und zur Zertifizierung einreichen.</p>
+  <p>{% trans 'Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung ausdrucken und zur Zertifizierung einreichen. [en]' %}</p>
 
   <fieldset class="form-horizontal">
     <div class="form-group">
-      <label for="developer" class="col-sm-3 control-label">Bauträger</label>
+      <label for="developer" class="col-sm-3 control-label">{% trans 'Bauträger [en]' %}</label>
       <div class="col-sm-9">
-        <input type="text" name="developer" ng-model="siebert.developer" id="developer" class="form-control">
+        <input type="text" name="developer" maxlength="150" ng-model="siebert.developer" id="developer" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="location" class="col-sm-3 control-label">Standort des Seilgartens</label>
+      <label for="location" class="col-sm-3 control-label">{% trans 'Standort des Seilgartens [en]' %}</label>
       <div class="col-sm-9">
-        <input type="text" name="location" ng-model="siebert.location" id="location" class="form-control">
+        <input type="text" name="location" maxlength="150" ng-model="siebert.location" id="location" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="description" class="col-sm-3 control-label">Bezeichnung der Übung</label>
+      <label for="description" class="col-sm-3 control-label">{% trans 'Bezeichnung der Übung [en]' %}</label>
       <div class="col-sm-9">
-        <input type="text" name="description" ng-model="siebert.description" id="description" class="form-control">
+        <input type="text" name="description" maxlength="150" ng-model="siebert.description" id="description" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="number" class="col-sm-3 control-label">Nummer der Übung</label>
+      <label for="number" class="col-sm-3 control-label">{% trans 'Nummer der Übung [en]' %}</label>
       <div class="col-sm-2">
-        <input type="number" name="number" ng-model="siebert.number" id="number" class="form-control" min="1">
+        <input type="text" name="number" maxlength="150" ng-model="siebert.number" id="number" class="form-control" min="1">
       </div>
-      <label for="date" class="col-sm-3 control-label">Datum</label>
+      <label for="date" class="col-sm-3 control-label">{% trans 'Datum [en]' %}</label>
       <div class="col-sm-3">
         <input ng-if="modernizr.inputtypes.date" name="date" ng-model="siebert.date" type="date" id="date" class="form-control">
         <div ng-if="!modernizr.inputtypes.date" class="input-group">
@@ -190,10 +197,10 @@
       <div class="row">
         <div class="col-sm-4">
           <button type="submit" class="btn-default btn" accesskey="s"
-                  ng-click="print()" ng-disabled="!SiebertForm.$valid">Formular Drucken</button>
+                  ng-click="print()" ng-disabled="printDisabled">{% trans 'Formular Drucken [en]' %}</button>
         </div>
-        <div class="col-sm-8" ng-show="!SiebertForm.$valid">
-          Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="required"></span> markierten Felder ausfüllen.
+        <div class="col-sm-8" ng-show="printDisabled">
+          {% trans 'Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="required"></span> markierten Felder ausfüllen. [en]' %}
         </div>
       </div>
     </div>
@@ -203,14 +210,15 @@
 <a name="safety_advice"></a>
 <div class="panel panel-danger">
   <div class="panel-heading">
-    <h4 class="panel-title">Wichtige Sicherheitshinweise und Anmerkungen</h4>
+    <h4 class="panel-title">{% trans 'Wichtige Sicherheitshinweise und Anmerkungen [en]' %}</h4>
   </div>
   <div class="panel-body">
-    <p>Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei annähernd horizontal liegenden Anschlagpunkten berechnet werden können.</p>
-    <p>Für Berechnungen von nicht horizontalen Verspannungen, seitlichen Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten, Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc. kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959 oder Ihren Statiker.</p>
-    <p>Eine Diskussion zu dieser Formel finden Sie im <a href="http://www.rcforum.cc" target="_blank" title="http://www.rcforum.cc">RopeCourseForum</a>.</p>
-    <p><em>outdoorconcept</em> stellt lediglich diese Berechnungshilfe zur Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung.</p>
+    <p>{% trans 'Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei annähernd horizontal liegenden Anschlagpunkten berechnet werden können. [en]' %}</p>
+    <p>{% trans 'Für Berechnungen von nicht horizontalen Verspannungen, seitlichen Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten, Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc. kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959 oder Ihren Statiker. [en]' %}</p>
+    <p>{% blocktrans %}Eine Diskussion zu dieser Formel finden Sie im
+    <a href="http://www.rcforum.cc" target="_blank" title="http://www.rcforum.cc" tabindex="-1">RopeCourseForum</a>. [en]{% endblocktrans %}</p>
+    <p>{% trans '<em>outdoorconcept</em> stellt lediglich diese Berechnungshilfe zur Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung. [en]' %}</p>
   </div>
 </div>
 
-<p class="colophon">© <a href="http://www.outdoorconcept.at">www.outdoorconcept.at</a> {% now "Y" %} / Philipp Strasser mit freundlicher Genehmigung von Walter Siebert.</p>
+<p class="colophon">© <a href="http://www.outdoorconcept.at" tabindex="-1">www.outdoorconcept.at</a> {% now "Y" %} / {% trans 'Philipp Strasser by courtesy of Walter Siebert. [en]' %}</p>

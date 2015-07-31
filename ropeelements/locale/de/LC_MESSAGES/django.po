@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-02 18:20+0100\n"
+"POT-Creation-Date: 2015-07-30 12:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
 "Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
@@ -21,138 +21,150 @@ msgstr ""
 msgid "outdoordconcept Administration"
 msgstr "outdoordconcept Verwaltung"
 
-#: admin.py:62
+#: admin.py:74
 msgid "Delete"
 msgstr "Löschen"
 
 #: apps.py:8
 msgid "Rope Elements"
-msgstr "Seillemente"
+msgstr "Seilelemente"
 
 #: django_messages.py:5
 #, python-format
 msgid "%(app)s administration"
 msgstr "%(app)s Verwaltung"
 
-#: models.py:13
+#: models.py:15
 msgid "Variable"
 msgstr "Variable"
 
-#: models.py:14
+#: models.py:16
 msgid "Text"
 msgstr "Text"
 
-#: models.py:18 models.py:19
+#: models.py:20 models.py:21
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: models.py:27 models.py:76
-msgid "Title"
-msgstr "Titel"
-
-#: models.py:31 models.py:74 templates/ropeelements.html:8
-msgid "Kind"
-msgstr "Art"
-
 #: models.py:32
-msgid "Kinds"
-msgstr "Arten"
+msgid "Identifier"
+msgstr "Bezeichnung"
 
-#: models.py:56
-msgid "one way downhill"
-msgstr "Einbahn abwärts"
+#: models.py:34
+msgid "from"
+msgstr "von"
 
-#: models.py:57
-msgid "one way vertically down"
-msgstr "Einbahn vertikal abwärts"
-
-#: models.py:58
-msgid "vertically two way"
-msgstr "Element vertikal in beiden Richtungen benutzbar"
-
-#: models.py:59
-msgid "two way up or down"
-msgstr "in beiden Richtungen geneigt auf- und abwärts benutzbar"
-
-#: models.py:60
-msgid "two way horizontally or little acclivity"
-msgstr "horizontal oder mit leichter Steigung in beiden Richtungen benutzbar"
-
-#: models.py:61
-msgid "two way horizontally"
-msgstr "horizontal benutzbar in beiden Richtungen"
-
-#: models.py:62
-msgid "one way horizontally"
-msgstr "horizontal benutzbar in eine Richtung"
-
-#: models.py:68
-msgid "no"
-msgstr "nein"
-
-#: models.py:69
-msgid "yes"
-msgstr "ja"
-
-#: models.py:70
-msgid "with POWERFAN"
-msgstr "mit POWERFAN"
-
-#: models.py:78
-msgid "Description"
-msgstr "Beschreibung"
-
-#: models.py:80
-msgid "Image"
-msgstr "Bild"
-
-#: models.py:83
-msgid "Thumbnail"
-msgstr "Miniatur"
-
-#: models.py:86
-msgid "Direction"
-msgstr "Laufrichtung"
-
-#: models.py:89
-msgid "Difficulty"
-msgstr "Schwierigkeit"
-
-#: models.py:91
+#: models.py:36 models.py:120
 msgid "to"
 msgstr "bis"
 
-#: models.py:93 templates/ropeelements.html:17
-#: templates/ropeelements.html.py:50
+#: models.py:40 models.py:117 templates/ropeelements.html:22
+msgid "Difficulty"
+msgstr "Schwierigkeit"
+
+#: models.py:41
+msgid "Difficulties"
+msgstr "Schwierigkeiten"
+
+#: models.py:53 models.py:104
+msgid "Title"
+msgstr "Titel"
+
+#: models.py:57 models.py:102 templates/ropeelements.html:13
+msgid "Kind"
+msgstr "Art"
+
+#: models.py:58
+msgid "Kinds"
+msgstr "Arten"
+
+#: models.py:86
+msgid "one way downhill"
+msgstr "Einbahn abwärts"
+
+#: models.py:87
+msgid "one way vertically down"
+msgstr "Einbahn vertikal abwärts"
+
+#: models.py:88
+msgid "vertically two way"
+msgstr "Element vertikal in beiden Richtungen benutzbar"
+
+#: models.py:89
+msgid "two way up or down"
+msgstr "in beiden Richtungen geneigt auf- und abwärts benutzbar"
+
+#: models.py:90
+msgid "two way horizontally or little acclivity"
+msgstr "horizontal oder mit leichter Steigung in beiden Richtungen benutzbar"
+
+#: models.py:91
+msgid "two way horizontally"
+msgstr "horizontal benutzbar in beiden Richtungen"
+
+#: models.py:92
+msgid "one way horizontally"
+msgstr "horizontal benutzbar in eine Richtung"
+
+#: models.py:96
+msgid "no"
+msgstr "nein"
+
+#: models.py:97
+msgid "yes"
+msgstr "ja"
+
+#: models.py:98
+msgid "with POWERFAN"
+msgstr "mit POWERFAN"
+
+#: models.py:106
+msgid "Description"
+msgstr "Beschreibung"
+
+#: models.py:108
+msgid "Image"
+msgstr "Bild"
+
+#: models.py:111
+msgid "Thumbnail"
+msgstr "Miniatur"
+
+#: models.py:114
+msgid "Direction"
+msgstr "Laufrichtung"
+
+#: models.py:122 templates/ropeelements.html:33
+#: templates/ropeelements.html.py:70
 msgid "best for kids"
 msgstr "kinderfreundlich"
 
-#: models.py:95 templates/ropeelements.html:20
-#: templates/ropeelements.html.py:48
+#: models.py:124 templates/ropeelements.html:36
+#: templates/ropeelements.html.py:68
 msgid "best for handicapped"
 msgstr "behindertenfreundlich"
 
-#: models.py:96 templates/ropeelements.html:23
+#: models.py:125 templates/ropeelements.html:39
 msgid "Canope walk"
 msgstr "Canope Walk"
 
-#: models.py:98
+#: models.py:127
 msgid "SSB"
 msgstr "SSB"
 
-#: models.py:104
+#: models.py:133
 msgid "Element"
 msgstr "Element"
 
-#: models.py:105
+#: models.py:134
 msgid "Elements"
 msgstr "Elemente"
 
-#: models.py:115
+#: models.py:144
 msgid "The 'from' value for the difficulty is missing."
 msgstr "Der 'von' Wert für die Schwierigkeit fehlt."
 
-#: models.py:118
+#: models.py:147
 msgid ""
 "The 'to' value of the difficulty must be greater or equal its 'form' value."
 msgstr ""
@@ -160,31 +172,35 @@ msgstr ""
 "Wert sein."
 
 #: templates/ropeelements.html:4
+msgid "Siebert Formula"
+msgstr "Siebert Formel"
+
+#: templates/ropeelements.html:8
 msgid "Ropes Course Elements"
 msgstr "Elemente für Seilwege und Seilgärten"
 
-#: templates/ropeelements.html:13
+#: templates/ropeelements.html:18 templates/ropeelements.html.py:27
 msgid "––– all –––"
 msgstr "––– alle –––"
 
-#: templates/ropeelements.html:31 templates/ropeelements.html.py:98
+#: templates/ropeelements.html:48 templates/ropeelements.html.py:118
 msgid "Legend"
 msgstr "Legende"
 
-#: templates/ropeelements.html:44
+#: templates/ropeelements.html:62
 msgid "Enlarge image"
 msgstr "Bild vergrößern"
 
-#: templates/ropeelements.html:60
+#: templates/ropeelements.html:80
 msgid "Grade of difficulty in use"
 msgstr "Schwierigkeitsgrad"
 
-#: templates/ropeelements.html:70
+#: templates/ropeelements.html:90
 msgid "No rope course elements for selected filter."
-msgstr "Keine Seillemente zu ausgewähltem Filter."
+msgstr "Keine Seilelemente zu ausgewähltem Filter."
 
-#: templates/ropeelements.html:78 templates/ropeelements.html.py:79
-#: templates/ropeelements.html:94 templates/ropeelements.html.py:96
-#: templates/ropeelements.html:108
+#: templates/ropeelements.html:98 templates/ropeelements.html.py:99
+#: templates/ropeelements.html:114 templates/ropeelements.html.py:116
+#: templates/ropeelements.html:128
 msgid "Close"
 msgstr "Schließen"

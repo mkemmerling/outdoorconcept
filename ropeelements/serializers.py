@@ -6,6 +6,14 @@ from rest_framework import serializers
 from . import models
 
 
+class DifficultySerializer(serializers.ModelSerializer):
+    """Rope element difficulty serializer."""
+
+    class Meta:
+        model = models.Difficulty
+        fields = ('id', 'identifier', 'range')
+
+
 class KindSerializer(serializers.ModelSerializer):
     """Rope element kind serializer."""
 

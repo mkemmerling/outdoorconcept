@@ -1,16 +1,15 @@
 To Do
 =====
 
+* ropeelements/migrations/0002_difficulty.py löschen
+
 * Siebert
 
-  - Commmon strings for html and pdf?
-
-  - Form validation
-  - Siebert formula
-  - Test in all browsers, esp. date picker
+  - Test in all browsers, esp. date picker (IE!)
 
 * Appcache
 
+  - Siebert (in appcache.py)
   - test browsers
   - remove debug script
 
@@ -18,30 +17,170 @@ To Do
 
 * Remove unused libraries
 
+* Documentation
+
+
 
 Fragen
 ------
 
-* Anzahl Perosnen: Maximum
+* [DONE] Suche nach Schwierigkeit, von-bis, konfigurierbar: leicht, mittel, schwer
 
-* Seilgewicht: Int/Float, Min, Max
+* [DONE] Anzahl Personen: Min: 0 --> Personenlast 0; Max: 99;
 
-* Durchhang: Int/Float, Min, Max
+* [CLARIFY] Seilgewicht: Int, Min: 0, Max: 9999 (999999);
+  Warnung über 9999?: "Diese Zahl ist außergewöhnlich groß. Bitte überprüfen Sie den Herstellernachweis."
 
-* Spannweite: Int/Float, Min, Max
+* [DONE] Durchhang: Float, 2-stellig [step only]; Min: 0,01 [0], Max: unbeschränkt
 
-* Nummer: Zahl/Text, Max?
+* [DONE/CLARIFY] Spannweite: Float, 2-stellig; Min: ohne?, Max: unbeschränkt
+  Warnung über 1.000m: "Diese Distanz ist unüblich für Seilgärten. Bitte berücksichtigen Sie gegebenenfalls Windlasten, Schneelasten, etc."
 
-* Formel für Seilzugkraft exklusive Faktor
+* [DONE] Nummer: Text
 
-* Formel für Seilzugkraft inklusive Faktor
+* [i18n DONE] PDF: i18n
 
-* Gestaltung PDF
+* [DONE] PDF: Formatierung Dezimalpunkt
 
-* Bauträger etc. weglassen, wenn nicht spezifiziert?
+* [DONE] PDF: NaN, wenn Durchang == 0 (Drucken nicht zulassen)
 
-* Englische Übersetzung Siebert
 
-* Bessere Dartsellung am iPhone?
+Gestaltung PDF
+--------------
 
-* Inhalt Legende konfigurierbar?
+* [DONE] linker Rand: 2,5cm
+
+* [DONE]  Schrift kann kleiner sein (11 pt)
+
+* [DONE] Text bei Seilzugkraft inkl. Faktor/Wert: fett
+
+* [DONE] Beschreibungen der Parameter
+
+* [DONE] Sicherheitshinweise unten
+
+* [DONE] Maximale Länge für Bauträger etc.
+
+* [DONE] Localize date picker (clean up)
+
+* [NOPE] Bauträger etc. weglassen, wenn nicht spezifiziert: nein
+
+* [PHILIPP] Englische Übersetzung Siebert
+
+* [NOPE] Bessere Darstellung am iPhone: nicht notwendig
+
+* [NOPE] Inhalt Legende konfigurierbar: nein
+
+
+Accounts
+--------
+
+* PW für XLS/OpenShift: lmolm[1]
+
+office@outdoorconcept.com
+
+app-outdoorconcept.rhccloud.com
+
+
+
+
+Formel aus XLS
+--------------
+
+* Formel für Seilzugkraft ohne Faktor:
+
+  = Seilzugkraft mit Faktor / 3
+
+* Formel für Seilzugkraft mit Faktor
+
+  if Durchhang == 0 -> 0
+  else calculate
+
+-----
+
+B8 = B7 * A8
+
+B7 = E18
+
+A8 = 3
+
+E18 = Wurzel(E17)
+
+E17 = Summe(E5:E16)       = E7 + E16
+                          = ( ((q * (1/101.97) / 1000) * l ) / 2 +  (p  * (1/101.97)) / 2 ) ** 2 +
+                            ((p * (1/101.97) * l) / 4  +  (q * (1/101.97) / 1000  *  l ** 2) / 8) / f) ** 2
+
+
+E7 = D6 * D6              = ( (q * (1/101.97) / 1000) * l  +  p  * (1/101.97)) / 2 ) ** 2
+
+E16 = D15 * D15           = ((p * (1/101.97) * l) / 4  +  (q * (1/101.97) / 1000  *  l ** 2) / 8) / f) ** 2
+
+D6 = Summe(D4:D5)         = ((q * (1/101.97) / 1000) * l) / 2 + (p  * (1/101.97)) / 2
+
+D4 = D2/2                 = ((q * (1/101.97) / 1000) * l) / 2
+
+D5 = B4/2                 = (p  * (1/101.97)) / 2
+
+D2 = B2 * B6              = (q * (1/101.97) / 1000) * l
+
+B4 = B3 * G5              = p * (1/101.97)
+
+B2 = B1 * G5 / 1000       = q * (1/101.97) / 1000
+
+B6 = eingabe!C13          = Spannweite (l)
+
+B3 = =eingabe!C7          = Personenlast (p)
+
+B1 = =eingabe!C9          = Seilgewicht (q)
+
+G5 = G4 / G3
+
+G4 = 1
+
+G3 = 101.97
+
+
+D15 = D14 / B5            = ((p * (1/101.97) * l) / 4  +  (q * (1/101.97) / 1000  *  l ** 2) / 8) / f
+
+D14 = C14 + A14           = (p * (1/101.97) * l) / 4  +  (q * (1/101.97) / 1000  *  l ** 2) / 8
+
+C14 = C13 / 4             = (p * (1/101.97) * l) / 4
+
+C13 = C11 * C12           = p * (1/101.97) * l
+
+C11 = B4                  = p * (1/101.97)
+
+C12 = B6                  = l
+
+A14 = A13 / 8             = (q * (1/101.97) / 1000  *  l ** 2) / 8
+
+A13 = A11 * A12           = q * (1/101.97) / 1000  *  l ** 2
+
+A11 = B2                  = q * (1/101.97) / 1000
+
+A12 = B6 * B6             = l ** 2
+
+B5 = eingabe!C11          = Durchhang (f)
+
+
+
+SQRT((((q*l**2/8) + (p*l/4)) / f) ** 2 + ((q * l) / 2 + p/2) ** 2)
+
+SQRT(((q * l**2 + 2 * p * l) / (8 * f)) ** 2 + ((q * l + p) / 2) ** 2)
+
+
+SQRT(((q * l**2 + 2 * p * l) / (8 * f)) ** 2 + ((q * l + p) / 2) ** 2)
+
+
+
+3 * SQRT(((p * (1/101.97) * l) / 4  +  ((q * (1/101.97) / 1000  *  l ** 2) / 8) / f) ** 2 +
+         ( ((q * (1/101.97) / 1000) * l ) / 2 +  (p  * (1/101.97)) / 2 ) ** 2)
+
+Q = q / 1000
+NF = 1/101.97
+
+3 * SQRT(((p * NF * l) / 4  +  ((Q * NF  *  l ** 2) / 8) / f) ** 2 +
+         ( (Q * NF * l ) / 2 +  (p  * NF) / 2 ) ** 2)
+
+3 * SQRT((Q * l ** 2 + 2 * p * l) * (NF / (8 * f)) ** 2 +
+         ((Q * l + p) * (NF / 2)) ** 2)
+

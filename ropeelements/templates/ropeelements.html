@@ -1,28 +1,44 @@
 {% load i18n %}
 
-{% include "switch_language.html" %}
+<div class="nav-bar">
+  <a href="{$ siebert_url $}">{% trans 'Siebert Formula' %}</a>
+  {% include "switch_language.html" %}
+</div>
 
 <h1>{% trans "Ropes Course Elements" %}</h1>
 
 <div class="ropeelements-filter form-inline">
-  <div class="form-group">
-    <label for="filter_kind">{% trans "Kind" %}:</label>
-    <select id="filter_kind"
-            class="form-control"
-            ng-model="filter.kind"
-            ng-options="kind.title for kind in kinds track by kind.id">
-      <option value="">{% trans '––– all –––' %}</option>
-    </select>
+  <div class="select-widgets">
+    <div class="form-group">
+      <label for="filter_kind">{% trans "Kind" %}:</label>
+      <select id="filter_kind"
+              class="form-control"
+              ng-model="filter.kind"
+              ng-options="kind.title for kind in kinds track by kind.id">
+        <option value="">{% trans '––– all –––' %}</option>
+      </select>
+    </div>
+    <div class="form-group" ng-init="difficulties = {{ difficulties }}">
+      <label for="filter_difficulty">{% trans "Difficulty" %}:</label>
+      <select id="filter_difficulty"
+              class="form-control"
+              ng-model="filter.difficulty"
+              ng-options="difficulty.identifier for difficulty in difficulties track by difficulty.id">
+        <option value="">{% trans '––– all –––' %}</option>
+      </select>
+    </div>
   </div>
-  <label class="checkbox">
-    <input type="checkbox" id="filter_child_friendly" ng-model="filter.child_friendly"> {% trans "best for kids" %}
-  </label>
-  <label class="checkbox">
-    <input type="checkbox" id="filter_accessible" ng-model="filter.accessible"> {% trans "best for handicapped" %}
-  </label>
-  <label class="checkbox">
-    <input type="checkbox" id="filter_canope" ng-model="filter.canope"> {% trans "Canope walk" %}
-  </label>
+  <div class="form-group">
+    <label class="checkbox">
+      <input type="checkbox" id="filter_child_friendly" ng-model="filter.child_friendly"> {% trans "best for kids" %}
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" id="filter_accessible" ng-model="filter.accessible"> {% trans "best for handicapped" %}
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" id="filter_canope" ng-model="filter.canope"> {% trans "Canope walk" %}
+    </label>
+  </div>
 </div>
 
 <table class="ropeelements" ng-if="ropeelements.length">

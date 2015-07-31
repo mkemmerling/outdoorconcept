@@ -1,0 +1,139 @@
+Berechnung der Seilzugkraft bei horizontal gespannten Seiten
+
+
+
+Auf Basis der Siebert-Formel
+Überarbeitet unter Berücksichtigung der EN 15567:2013
+
+
+
+Bitte beachten Sie die unten angeführten Sicherheitshinweise.
+
+
+
+Handelt es sich um einen Flying Fox (Zipline)?
+
+
+
+Wie viele Personen dürfen das Element gleichzeitig verwenden?
+Muss in Beschilderung und Betriebshandbuch wiederzufinden sein.
+
+Bitte eine positive Ganzahl eingeben.
+Die Anzahl der Personen kann nicht negativ sein.
+
+
+
+Personenlast
+
+Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede
+weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit
+300kg kalkuliert werden.
+
+
+
+Seilgewicht
+
+Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil.
+
+Das Seilgewicht kann nicht negativ sein.
+Diese Zahl ist außergewöhnlich groß. Bitte überprüfen Sie den Herstellernachweis.
+
+
+
+Durchhang
+
+Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden
+Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung.
+
+Bitte eine positive Dezimalzahl eingeben.
+Der Durchhang kann nicht negativ sein.
+
+
+
+Spannweite
+
+Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne).
+
+Die Spannweite kann nicht negativ sein.
+
+Diese Distanz ist unüblich für Seilgärten. Bitte berücksichtigen Sie
+gegebenenfalls Windlasten, Schneelasten, etc.
+
+
+
+Seilzugkraft
+exklusive Faktor
+
+Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume,
+Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor
+multipliziert werden.
+
+
+
+Seilzugkraft
+inklusive Faktor
+
+Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil,
+Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc.
+
+
+
+Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung
+ausdrucken und zur Zertifizierung einreichen.
+
+
+
+Bauträger
+
+Standort des Seilgartens
+
+Bezeichnung der Übung
+
+Nummer der Übung
+
+
+Formular Drucken
+
+Um das Formular auszudrucken, müssen Sie zunächst alle mit * markierten Felder ausfüllen.
+
+
+
+Wichtige Sicherheitshinweise und Anmerkungen
+
+Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei
+annähernd horizontal liegenden Anschlagpunkten berechnet werden können.
+
+
+
+Für Berechnungen von nicht horizontalen Verspannungen, seitlichen
+Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten,
+Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc.
+kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959
+oder Ihren Statiker.
+
+
+
+Eine Diskussion zu dieser Formel finden Sie im RopeCourseForum.
+
+
+
+outdoorconcept stellt lediglich diese Berechnungshilfe zur
+Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung.
+
+
+
+Es handelt sich um einen Flying Fox (Zipline).
+
+
+
+Das Element darf gleichzeitig maximal von 1 Person verwendet werden.
+
+
+
+Das Element darf gleichzeitig maximal von 5 Personen verwendet werden.
+
+
+
+Für die Korrektheit der Angaben:
+
+

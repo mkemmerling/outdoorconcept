@@ -47,6 +47,18 @@ class ConfigAdmin(OrderedModelAdmin, TranslationAdmin):
 admin.site.register(models.Config, ConfigAdmin)
 
 
+class DifficultyAdmin(OrderedModelAdmin, TranslationAdmin):
+
+    class Media:
+        js = _common_js
+        css = _common_css
+
+    list_display = ('identifier', 'lower_bound', 'upper_bound',
+                    'move_up_down_links')
+
+admin.site.register(models.Difficulty, DifficultyAdmin)
+
+
 class KindAdmin(OrderedModelAdmin, TranslationAdmin):
 
     class Media:

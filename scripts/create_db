@@ -20,3 +20,4 @@ $APP_DIR/manage.py migrate --noinput
 echo "from main.factories import create_superuser; create_superuser()" | ./manage.py shell
 echo "from main.factories import create_staff; create_staff()" | ./manage.py shell
 echo "from ropeelements.factories import create_config; create_config()" | ./manage.py shell
+echo "from ropeelements.factories import create_difficulties; create_difficulties()" | ./manage.py shell

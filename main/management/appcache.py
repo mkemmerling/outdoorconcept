@@ -129,7 +129,8 @@ def create_manifest():
 
     manifest += '\n'
     manifest += 'FALLBACK:\n'
-    manifest += '/ng/siebert /de/ng/offline\n'
+    manifest += '/en/ng/siebert /en/ng/offline\n'
+    manifest += '/de/ng/siebert /de/ng/offline\n'
     # Handled by 'otherwise' route
     manifest += '/ /en/ropeelements\n'
 
@@ -169,8 +170,6 @@ create_pattern = re.compile(r'# Created .+')
 
 def touch_manifest():
     """Update timestamp in appcache manifest."""
-
-    print("TOUCH manifest")
 
     with open(MANIFEST_FILE, 'r+t') as fd:
         manifest = fd.read()

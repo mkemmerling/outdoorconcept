@@ -11,6 +11,7 @@ from ordered_model.models import OrderedModel
 
 class Config(models.Model):
     """Rope element configuration."""
+
     variable = models.CharField(max_length=50, verbose_name=_('Variable'))
     text = models.CharField(max_length=1000, verbose_name=_('Text'))
     url = models.URLField(verbose_name='URL')
@@ -21,6 +22,30 @@ class Config(models.Model):
 
     def __str__(self):
         return self.variable
+
+
+class Difficulty(OrderedModel):
+    """Rope element difficulty search configuration."""
+
+    DIFFICULTIES = tuple([(i, i) for i in range(1, 11)])
+
+    identifier = models.CharField(max_length=50, verbose_name=_('Identifier'))
+    lower_bound = models.SmallIntegerField(
+        choices=DIFFICULTIES, default=1, verbose_name=_('from'))
+    upper_bound = models.SmallIntegerField(
+        choices=DIFFICULTIES, default=10, verbose_name=_('to'))
+
+    class Meta:
+        ordering = ('order',)
+        verbose_name = _('Difficulty')
+        verbose_name_plural = _('Difficulties')
+
+    @property
+    def range(self):
+        return (self.lower_bound, self.upper_bound)
+
+    def __str__(self):
+        return self.identifier
 
 
 class Kind(OrderedModel):
@@ -67,8 +92,6 @@ class Element(OrderedModel):
         ('owh', _('one way horizontally')),
     )
 
-    DIFFICULTIES = tuple([(i, i) for i in range(1, 11)])
-
     SSB = (
         ('no', _('no')),
         ('yes', _('yes')),
@@ -90,10 +113,11 @@ class Element(OrderedModel):
         max_length=100, choices=DIRECTIONS, blank=True,
         verbose_name=_('Direction'))
     difficulty_from = models.SmallIntegerField(
-        null=True, blank=True, choices=DIFFICULTIES,
+        null=True, blank=True, choices=Difficulty.DIFFICULTIES,
         verbose_name=_('Difficulty'))
     difficulty_to = models.SmallIntegerField(
-        null=True, blank=True, choices=DIFFICULTIES, verbose_name=_('to'))
+        null=True, blank=True, choices=Difficulty.DIFFICULTIES,
+        verbose_name=_('to'))
     child_friendly = models.BooleanField(
         default=False, verbose_name=_('best for kids'))
     accessible = models.BooleanField(

@@ -1,4 +1,6 @@
 """Rope element views."""
+import json
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import translation
@@ -25,10 +27,15 @@ def ropeelements(request, **kwargs):
     ssb_config = models.Config.objects.get(variable='ssb')
     powerfan_config = models.Config.objects.get(variable='powerfan')
 
+    difficulties = [
+        serializers.DifficultySerializer(difficulty).data
+        for difficulty in models.Difficulty.objects.order_by('order')]
+
     translation.activate(request.path.split('/')[1])
 
     return render_to_response(
         'ropeelements.html', {
+            'difficulties': json.dumps(difficulties),
             'contact_url': contact.url,
             'ssb_url': ssb_config.url,
             'ssb_title': ssb_config.text,

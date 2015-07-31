@@ -1,0 +1,320 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-30 18:18+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Markus Kemmerling <kemmerling@gmx.at>\n"
+"Language-Team: Markus Kemmerling <kemmerling@gmx.at>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/siebert.html:6
+msgid "Rope Elements"
+msgstr "Seilelemente"
+
+#: templates/siebert.html:17
+msgid "Berechnung der Seilzugkraft bei horizontal gespannten Seiten [en]"
+msgstr "Berechnung der Seilzugkraft bei horizontal gespannten Seiten"
+
+#: templates/siebert.html:18
+msgid ""
+"Auf Basis der Siebert-Formel<br />Überarbeitet unter Berücksichtigung der EN "
+"15567:2013 [en]"
+msgstr ""
+"Auf Basis der Siebert-Formel<br />Überarbeitet unter Berücksichtigung der EN "
+"15567:2013"
+
+#: templates/siebert.html:25
+msgid ""
+"Bitte beachten Sie die unten angeführten <a\n"
+"   href=\"#safety_advice\" tabindex=\"-1\">Sicherheitshinweise</a>. [en]"
+msgstr ""
+"Bitte beachten Sie die unten angeführten <a\n"
+"   href=\"#safety_advice\" tabindex=\"-1\">Sicherheitshinweise</a>."
+
+#: templates/siebert.html:31
+msgid "Handelt es sich um einen Flying Fox (Zipline)? [en]"
+msgstr "Handelt es sich um einen Flying Fox (Zipline)?"
+
+#: templates/siebert.html:34
+msgid "yes"
+msgstr "ja"
+
+#: templates/siebert.html:38
+msgid "no"
+msgstr "nein"
+
+#: templates/siebert.html:43
+msgid "Wie viele Personen dürfen das Element gleichzeitig verwenden? [en]"
+msgstr "Wie viele Personen dürfen das Element gleichzeitig verwenden?"
+
+#: templates/siebert.html:44
+msgid "Muss in Beschilderung und Betriebshandbuch wiederzufinden sein. [en]"
+msgstr "Muss in Beschilderung und Betriebshandbuch wiederzufinden sein."
+
+#: templates/siebert.html:49 templates/siebert.html.py:81
+msgid "Please enter a positive integer."
+msgstr "Bitte eine positive Ganzahl eingeben."
+
+#: templates/siebert.html:50
+msgid "Die Anzahl der Personen kann nicht negativ sein. [en]"
+msgstr "Die Anzahl der Personen kann nicht negativ sein."
+
+#: templates/siebert.html:57 views.py:270
+msgid "Personenlast [en]"
+msgstr "Personenlast"
+
+#: templates/siebert.html:64
+msgid ""
+"Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede "
+"weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit "
+"300kg kalkuliert werden. [en]"
+msgstr ""
+"Laut EN 15567:2013 müssen hier 600kg für die erste Person und 80kg für jede "
+"weitere Person berechnet werden. Ausnahme: Bei Flying Fox (Zipline) muss mit "
+"300kg kalkuliert werden."
+
+#: templates/siebert.html:70 views.py:272
+msgid "Seilgewicht [en]"
+msgstr "Seilgewicht"
+
+#: templates/siebert.html:78
+msgid ""
+"Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil. [en]"
+msgstr "Das Seilgewicht finden Sie auf den Herstellerangaben zu Ihrem Seil."
+
+#: templates/siebert.html:82
+msgid "Das Seilgewicht kann nicht negativ sein. [en]"
+msgstr "Das Seilgewicht kann nicht negativ sein."
+
+#: templates/siebert.html:83
+msgid ""
+"Diese Zahl ist außergewöhnlich groß. Bitte überprüfen Sie den "
+"Herstellernachweis. [en]"
+msgstr ""
+"Diese Zahl ist außergewöhnlich groß. Bitte überprüfen Sie den "
+"Herstellernachweis."
+
+#: templates/siebert.html:89 views.py:274
+msgid "Durchhang [en]"
+msgstr "Durchhang"
+
+#: templates/siebert.html:97
+msgid ""
+"Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden "
+"Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung. "
+"[en]"
+msgstr ""
+"Distanz, zwischen der gedachten horizontalen Linie zwischen den beiden "
+"Anschlagpunkten (Sehne) und dem tiefsten Punkt des Seiles unter Belastung."
+
+#: templates/siebert.html:100
+msgid "Bitte eine positive Dezimalzahl eingeben. [en]"
+msgstr "Bitte eine positive Dezimalzahl eingeben."
+
+#: templates/siebert.html:101
+msgid "Der Durchhang kann nicht negativ sein. [en]"
+msgstr "Der Durchhang kann nicht negativ sein."
+
+#: templates/siebert.html:107 views.py:276
+msgid "Spannweite [en]"
+msgstr "Spannweite"
+
+#: templates/siebert.html:115
+msgid "Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne). [en]"
+msgstr "Direkte Distanz zwischen den beiden Anschlagpunkten (Sehne)."
+
+#: templates/siebert.html:118
+msgid "Please enter a positive decimal."
+msgstr "Bitte eine positive Dezimalzahl eingeben."
+
+#: templates/siebert.html:119
+msgid "Die Spannweite kann nicht negativ sein. [en]"
+msgstr "Die Spannweite kann nicht negativ sein."
+
+#: templates/siebert.html:120
+msgid ""
+"Diese Distanz ist unüblich für Seilgärten. Bitte berücksichtigen Sie "
+"gegebenenfalls Windlasten, Schneelasten, etc. [en]"
+msgstr ""
+"Diese Distanz ist unüblich für Seilgärten. Bitte berücksichtigen Sie "
+"gegebenenfalls Windlasten, Schneelasten, etc."
+
+#: templates/siebert.html:127 templates/siebert.html.py:141 views.py:279
+#: views.py:281
+msgid "Seilzugkraft [en]"
+msgstr "Seilzugkraft"
+
+#: templates/siebert.html:128 views.py:280
+msgid "exklusive Faktor [en]"
+msgstr "exklusive Faktor"
+
+#: templates/siebert.html:137
+msgid ""
+"Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume, "
+"Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor "
+"multipliziert werden. [en]"
+msgstr ""
+"Dient der Tragwerkskalkulation. Je nach Art des Tragwerks (z.B. Bäume, "
+"Stahl- oder Betonkonstruktion etc.) muss hier mit dem jeweiligen Faktor "
+"multipliziert werden."
+
+#: templates/siebert.html:142 views.py:282
+msgid "inklusive Faktor [en]"
+msgstr "inklusive Faktor"
+
+#: templates/siebert.html:151
+msgid ""
+"Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil, "
+"Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc. [en]"
+msgstr ""
+"Minimale Bruchlast der Elemente der Sicherheitsführung, wie etwa Stahlseil, "
+"Stahlseiklemmen, Verpressungen, Rapidglieder, Schäkel etc."
+
+#: templates/siebert.html:157
+msgid ""
+"Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung "
+"ausdrucken und zur Zertifizierung einreichen. [en]"
+msgstr ""
+"Füllen Sie die Felder unterhalb dieser Linie aus, wenn Sie die Berechnung "
+"ausdrucken und zur Zertifizierung einreichen."
+
+#: templates/siebert.html:161 views.py:288
+msgid "Bauträger [en]"
+msgstr "Bauträger"
+
+#: templates/siebert.html:167 views.py:289
+msgid "Standort des Seilgartens [en]"
+msgstr "Standort des Seilgartens"
+
+#: templates/siebert.html:173 views.py:290
+msgid "Bezeichnung der Übung [en]"
+msgstr "Bezeichnung der Übung"
+
+#: templates/siebert.html:179 views.py:291
+msgid "Nummer der Übung [en]"
+msgstr "Nummer der Übung"
+
+#: templates/siebert.html:183
+msgid "Datum [en]"
+msgstr "Datum"
+
+#: templates/siebert.html:201
+msgid "Formular Drucken [en]"
+msgstr "Formular Drucken"
+
+#: templates/siebert.html:204
+msgid ""
+"Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="
+"\"required\"></span> markierten Felder ausfüllen. [en]"
+msgstr ""
+"Um das Formular auszudrucken, müssen Sie zunächst alle mit <span class="
+"\"required\"></span> markierten Felder ausfüllen."
+
+#: templates/siebert.html:214 views.py:377
+msgid "Wichtige Sicherheitshinweise und Anmerkungen [en]"
+msgstr "Wichtige Sicherheitshinweise und Anmerkungen"
+
+#: templates/siebert.html:217
+msgid ""
+"Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei "
+"annähernd horizontal liegenden Anschlagpunkten berechnet werden können. [en]"
+msgstr ""
+"Bitte beachten Sie, dass mit dieser Formel lediglich Kräfte zwischen zwei "
+"annähernd horizontal liegenden Anschlagpunkten berechnet werden können."
+
+#: templates/siebert.html:218
+msgid ""
+"Für Berechnungen von nicht horizontalen Verspannungen, seitlichen "
+"Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten, "
+"Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc. "
+"kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959 "
+"oder Ihren Statiker. [en]"
+msgstr ""
+"Für Berechnungen von nicht horizontalen Verspannungen, seitlichen "
+"Abspannungen, vertikalen Lasten, Geschwindigkeiten von Zipline Fahrten, "
+"Holzbelastbarkeit oder für Belastungstests von diversen Komponeneten etc. "
+"kontaktieren Sie bitte office(at)outdoorconcept.at Tel. +43 676 43 13 959 "
+"oder Ihren Statiker."
+
+#: templates/siebert.html:219
+msgid ""
+"Eine Diskussion zu dieser Formel finden Sie im\n"
+"    <a href=\"http://www.rcforum.cc\" target=\"_blank\" title=\"http://www."
+"rcforum.cc\" tabindex=\"-1\">RopeCourseForum</a>. [en]"
+msgstr ""
+"Eine Diskussion zu dieser Formel finden Sie im\n"
+"    <a href=\"http://www.rcforum.cc\" target=\"_blank\" title=\"http://www."
+"rcforum.cc\" tabindex=\"-1\">RopeCourseForum</a>."
+
+#: templates/siebert.html:221
+msgid ""
+"<em>outdoorconcept</em> stellt lediglich diese Berechnungshilfe zur "
+"Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung. "
+"[en]"
+msgstr ""
+"<em>outdoorconcept</em> stellt lediglich diese Berechnungshilfe zur "
+"Verfügung und haftet nicht für die korrekte Anwendung oder Datenerhebung."
+
+#: templates/siebert.html:225
+msgid "Philipp Strasser by courtesy of Walter Siebert. [en]"
+msgstr "Philipp Strasser mit freundlicher Genehmigung von Walter Siebert."
+
+#: views.py:168
+msgid "Berechnung der Seilzugkraft [en]"
+msgstr "Bezeichnung der Seilzugkraft"
+
+#: views.py:169
+msgid "bei horizontal gespannten Seiten [en]"
+msgstr "bei horizontal gespannten Seiten"
+
+#: views.py:170
+msgid "Auf Basis der Siebert-Formel [en]"
+msgstr "Auf Basis der Siebert-Formel"
+
+#: views.py:216
+msgid "Überarbeitet unter Berücksichtigung der EN 15567:2013 [en]"
+msgstr "Überarbeitet unter Berücksichtigung der EN 15567:2013"
+
+#: views.py:249
+msgid "Es handelt sich um einen Flying Fox (Zipline). [en]"
+msgstr "Es handelt sich um einen Flying Fox (Zipline)."
+
+#: views.py:260
+msgid ""
+"Das Element darf gleichzeitig maximal von 1 Person verwendet werden. [en]"
+msgstr "Das Element darf gleichzeitig maximal von 1 Person verwendet werden."
+
+#: views.py:263
+#, python-brace-format
+msgid ""
+"Das Element darf gleichzeitig maximal von {nrPersons} Personen verwendet "
+"werden. [en]"
+msgstr ""
+"Das Element darf gleichzeitig maximal von {nrPersons} Personen verwendet "
+"werden."
+
+#: views.py:296
+msgid "Für die Korrektheit der Angaben: [en]"
+msgstr "Für die Korrektheit der Angaben:"
+
+#: views.py:302
+msgid "Date"
+msgstr "Datum"
+
+#: views.py:304
+msgid "Signature"
+msgstr "Unterschrift"
+
+#: views.py:423
+msgid "Philipp Strasser by courtesy of Walter Siebert."
+msgstr "Philipp Strasser mit freundlicher Genehmigung von Walter Siebert."

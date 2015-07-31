@@ -89,12 +89,7 @@ angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
         }
     };
 })
-// .config(function() {
-//     $.datepicker.setDefaults({
-//         minDate: new Date(1900, 0, 1),
-//         maxDate: new Date(2200, 0, 1)
-//     });
-// })
+
 .directive('datePicker', ['$timeout', function ($timeout) {
     return {
         require: 'ngModel',
@@ -121,22 +116,6 @@ angular.module('outdoorconcept.directives', ['outdoorconcept.base'])
                 }
                 return date;
             }
-
-            /* Throw error if date lower than min date or greater than max date. */
-            // function verifyMinMaxDate(date) {
-            //     var inst, minDate, maxDate;
-            //     if (date) {
-            //         inst = $.datepicker._getInst(element[0]);
-            //         minDate = $.datepicker._getMinMaxDate(inst, "min");
-            //         if (minDate && date < minDate) {
-            //             throw new Error('Year too small');
-            //         }
-            //         maxDate = $.datepicker._getMinMaxDate(inst, "max");
-            //         if (maxDate && date > maxDate) {
-            //             throw new Error('Year too large');
-            //         }
-            //     }
-            // }
 
             /* Set date on model and date picker.
              *

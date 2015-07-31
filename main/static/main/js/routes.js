@@ -19,8 +19,18 @@ angular.module('outdoorconcept.routes', ['ngRoute'])
                 },
                 controller: 'RopeElementListController'
             })
+            .when('/en/siebert', {
+                templateUrl: function () {
+                    language.setLanguage('en');
+                    return '/en/ng/siebert';
+                },
+                controller: 'SiebertFormController'
+            })
             .when('/de/siebert', {
-                templateUrl: '/ng/siebert',
+                templateUrl: function () {
+                    language.setLanguage('de');
+                    return '/de/ng/siebert';
+                },
                 controller: 'SiebertFormController'
             })
             .when('/:lang/offline', {

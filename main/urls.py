@@ -11,16 +11,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView, TemplateView
 
 from ropeelements.views import ropeelements, ElementListView
+from siebert.views import siebert_pdf
 
 app_view = TemplateView.as_view(template_name='app.html')
 
 urlpatterns = patterns(
     '',
     url(r'^$', RedirectView.as_view(url=_('en/ropeelements')), name='app'),
-
-    # Single age application, routing handled by Angular
-    url(r'^de/siebert$', app_view, name='siebert'),
-    url(r'', include('siebert.urls')),
 )
 
 urlpatterns += i18n_patterns(
@@ -30,6 +27,12 @@ urlpatterns += i18n_patterns(
     url(r'^ng/ropeelements$', ropeelements, name='ropeelement_list'),
     url(r'^api/ropeelements$', ElementListView.as_view(),
         name='ropeelement-list'),
+
+    # Single age application, routing handled by Angular
+    url(_(r'^siebert$'), app_view, name='siebert'),
+    url(r'^ng/siebert$', TemplateView.as_view(template_name='siebert.html'),
+        name='siebert_form'),
+    url(r'^siebert/siebert.pdf$', siebert_pdf),
 
     url(r'^ng/offline$', TemplateView.as_view(template_name='offline.html')),
 

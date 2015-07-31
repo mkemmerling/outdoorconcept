@@ -10,6 +10,12 @@ class ConfigTranslationOptions(TranslationOptions):
 translator.register(models.Config, ConfigTranslationOptions)
 
 
+class DifficultyTranslationOptions(TranslationOptions):
+    fields = ('identifier',)
+
+translator.register(models.Difficulty, DifficultyTranslationOptions)
+
+
 class KindTranslationOptions(TranslationOptions):
     fields = ('title',)
 

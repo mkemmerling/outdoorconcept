@@ -18,15 +18,26 @@ def load(name):
 
 
 class ConfigFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = models.Config
+    class Meta:
+        model = models.Config
 
 
 def create_config():
     [ConfigFactory.create(**data) for data in load('config')]
 
 
+class DifficultyFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Difficulty
+
+
+def create_difficulties():
+    [DifficultyFactory.create(**data) for data in load('difficulties')]
+
+
 class KindFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = models.Kind
+    class Meta:
+        model = models.Kind
 
     title_en = 'Seilrutschen'
     title_de = 'Zip Lines & Downward'
@@ -48,7 +59,8 @@ def image_path(filename):
 
 
 class ElementFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = models.Element
+    class Meta:
+        model = models.Element
 
     image = factory.django.ImageField()
     thumbnail = factory.django.ImageField()
