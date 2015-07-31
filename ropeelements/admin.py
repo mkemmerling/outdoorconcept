@@ -13,10 +13,8 @@ admin.site.site_header = _('outdoordconcept Administration')
 
 
 _common_js = (
-    # 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
-    'jquery/dist/jquery.js',
-    # 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
-    'jquery-ui/jquery-ui.min.js',
+    'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
+    'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
     'modeltranslation/js/tabbed_translation_fields.js',
 )
 _common_css = {
