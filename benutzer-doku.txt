@@ -1,0 +1,106 @@
+Inhalte bearbeiten
+==================
+
+Bei Admin Interface als User 'admin' anmelden:
+
+https://oc-markusk.rhcloud.com/admin/
+
+
+Arten
+-----
+
+Englische und deutsche Namen der Arten, nach welchen die einzelnen Seilelemente
+angezeigt werden. Die Arten scheinen auch im Filter-Menü für die Arten auf.
+
+Es können beliebige neue Arten erfasst werden und auch bestehende Arten
+gelöscht werden. Wird eine Art gelöscht, werden auch alle zugehörigen
+Seilelemente gelöscht.
+
+Es sollte immer der englische und der deutsche Name einer Art eingegeben
+werden.
+
+Die erfassten Arten können in der Liste der Arten umsortiert werden.
+
+
+Elemente
+--------
+
+Die von der Anwendung angezeigten Seilelemente können bearbeitet oder auch
+gelöscht werden. Neue Seilelemente können hinzugefügt werden.
+
+Ein Element muss immer einer Art zugewiesen werden. Für jedes Element sollte
+die ein Bild sowie ein Thumbnail hochgeladen werden. Das Bild wird bei Klick
+auf den Thumbnail angezeigt.
+
+Es sollten immer alle Felder ausgefüllt werden, Titel und Beschreibung
+sollten sowohl in deutsch als auch in englisch erfasst werden.
+
+Die Checkbox 'Canope Walk' beeinflusst nur die Filterfunktion, ihr ist kein
+eigenes Icon in der Anzeige der Seilelemente zugewiesen. Die Icons für 'ssb'
+bzw. ssb 'mit POWERFAN' sind mit ihrer Beschreibung verlinkt. Die URLs der
+Beschreibung lönnen unter 'Konfiguration' angepasst werden.
+
+Die Elemente können innerhalb ihrer Art in der Listenansicht verschoben
+werden, um die Reihenfolge zu ändern, in der sie angezeigt werden.
+
+
+Schwierigkeiten
+---------------
+
+Legen die Einträge im Dropdown-Menü für den Schwierigkeiten-Filter fest.
+
+Die Einträge werden im Menü entsprechend der Sortierung im Admin Interface
+angezeigt.
+
+Es können beliebige Schwierigkeiten erstellt werden. Bei Auswahl eines
+Eintrags im Filter-Menü, wird die Anzeige auf jene Seilelemente eingeschränkt,
+für welche zumindest ein Schwierigkeitsgrad (1-10) in dem durch 'von' und
+'bis' spezifizierten Bereich liegt.
+
+Beispiel 1: Ein Schwierigkeitgrad für jeden Schwierigkeitsgrad (Von = Bis)
+
+Beispiel 2::
+
+ sehr leicht    1–2
+ leicht         3–4
+ mittel         5–6
+ schwer         7–8
+ sehr schwer    9–10
+
+Die Schwierigkeitsgrade der einzelnen Einträge können sich auch überschneiden,
+zum Beispiel::
+
+ leicht         1–4
+ mittel         4–7
+ schwer         7–10
+
+Es sollte immer die englische und die deutsche Bezeichnung eingegeben werden,
+mit welcher die Schwierigkeit im Filter-Menü angezeigt werden.
+
+
+Konfiguration
+-------------
+
+Es gibt 3 Konfigurationsvariablen, die gegebenenfalls geändert werden können,
+aber nicht gelöscht werden solten. Es macht keinen Sinn, weitere hinzuzufügen.
+
+* powerfan: Bei Seilelementen, für welche im Auswahlmenü SSB 'mit POWERFAN'
+  gewählt wurde, wird ein entsprechendes Icon angezeigt. Das Icon ist mit der
+  hier eingebenen URL verknüpft. Der hier eingebenen text wird bei Mouse Over
+  des Icons angezeigt.
+
+* ssb: analog zu 'powerfan'. Bei Seilelementen, für welche im Auswahlmenü SSB
+  'ja' gewählt wurde, wird ein entsprechendes Icon angezeigt. Das Icon ist mit
+  der hier eingebenen URL verknüpft. Der hier eingebenen text wird bei Mouse
+  Over des Icons angezeigt.
+
+* contact: Die URL zum in der Legende angezeigten Link zum Konatktformular.
+  Das Text-Feld wird nicht benutzt.
+
+Es sollten immer die Felder für beide Sprachen ausgefüllt werden.
+
+
+Authentifizierung und Autorisierung
+-----------------------------------
+
+Die Anwendung verwendet ausschließlich den 'admin' User, daher: Finger weg!

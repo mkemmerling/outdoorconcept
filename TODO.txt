@@ -1,21 +1,13 @@
 To Do
 =====
 
-* OS: admin jquery/jqueryui
-
-* Siebert
-
-  - Test in all browsers, esp. date picker (IE!)
-
 * Appcache
 
-  - Siebert (in appcache.py)
-  - test browsers
-  - remove debug script
+  - remove debug script (?)
 
 * Include only required bootstrap js and css.
 
-* Remove unused libraries
+* Remove unused libraries (any?)
 
 * Documentation
 
